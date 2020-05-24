@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="/static/css/ebook.css" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <img src="/static/images/logo.png" style="height: 30px; width: auto;">
+    <a class="navbar-brand" href="/dashboard">Atlas Library System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/app/browse">Browse <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/app/account">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="/users/logout" class="btn btn-secondary">Logout</a>
+      </div>
+    </div>
+</nav>
+<ol class="breadcrumb" style="margin-top: 15px;">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Access/ E-Book/ <span id="prdid"><%= data.product_id %></span> </li>
+  </ol>
+  <!-- This is the book details -->
+<div class="row">
+  <div class="col-2"></div>
+  <div class="jumbotron col-8">
+    <h1 class="display-4"><%= data.book_title %></h1>
+    <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
+    <div class=""><img style="height: 450px; width: auto; display: block;" 
+      src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
+    <p class="lead mt-3"><%= data.book_desc %></p>
+    <hr class="my-4">
+    <div class="card-footer mb-3">
+      Book Pages: <%= data.book_pages %>
+   </div>
+   <div class="card-footer">
+    Catrgory : <%= data.genres %>
+ </div>
+  </div>
+  <div class="col-2"></div>
+</div>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="jumbotron col-8">
+    <h2 class="display-5 mb-3">E-Book</h2>
+    <button type="button" class="btn btn-primary" id="showbook">Show E-Book</button>
+    <div class="mainbook">
+      <div class="err"></div>
+    <div class="top-bar">
+      <button class="new-btn btn-primary" id="prev-page">
+        <i class="fas fa-arrow-circle-left"></i> Prev Page
+      </button>
+      <button class="new-btn btn-primary" id="next-page">
+        Next Page <i class="fas fa-arrow-circle-right"></i>
+      </button>
+      <span class="page-info">
+        Page <span id="page-num"></span> of <span id="page-count"></span>
+      </span>
+    </div>
+    <p id="loading"><strong>Please wait while the PDF loads...</strong></p>
+
+    <canvas id="pdf-render" width="860px"></canvas>
+    </div>
+  </div>
+</div>
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script src="/static/javascripts/ebook.js"></script>
+  

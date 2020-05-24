@@ -1,0 +1,17 @@
+<% for(var i=0; i < count; i++) { %>
+    <div class="card mb-3 col-4" style="height: 570px;">
+        <h3 class="card-header" id="title"><%= data[i].book_title%></h3>
+        <div class="card-body">
+          <h5 class="card-title" id="author"><%= data[i].book_authors%></h5>
+          <h6 class="card-subtitle text-muted">Rented on: <%= data[i].date%> <br> Days: <%= data[i].days%> </h6>
+        </div>
+        <img style="height: 300px; width: 199px; display: block; align-self: center;" 
+            src= "<%= data[i].image_url%>" alt="Card image" id="img">
+        <div class="card-body" style="align-self: center;">
+          <a href="/app/ebook/<%= data[i].product_id%>" id="link<%= [i] %>" class="btn btn-primary">Read</a>
+        </div>
+        <div class="card-footer text-muted">
+           Book Pages: <%= data[i].book_pages%>
+        </div>
+      </div>
+      <% } %>

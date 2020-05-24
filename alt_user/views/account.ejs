@@ -1,0 +1,114 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <img src="/static/images/logo.png" style="height: 30px; width: auto;">
+    <a class="navbar-brand" href="/dashboard">Atlas Library System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/app/browse">Browse</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/app/account">Account <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="/users/logout" class="btn btn-secondary">Logout</a>
+      </div>
+    </div>
+  </nav>
+  <% include ./partials/messages %>  
+  <div class="jumbotron mt-3">
+    <h1 class="display-5">Hello, <%= user.name %></h1>
+  </div>
+  
+  <div class="row">
+    <div class="card border-primary mb-3 col-6 px-2 py-2">
+        <div class="card-header">Account details</div>
+        <div class="card-body">
+          <h4 class="card-title">Name: <%= user.name %> </h4>
+          <h4 class="card-title">Email: <%= user.email %> </h4>
+          <h4 class="card-title">Joined on: <%= user.date %> </h4>
+          <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+        </div>
+      </div>
+      <div class="card border-primary mb-3 col-6 px-2 py-2">
+        <div class="card-header">Ethereum Account details</div>
+        <div class="card-body">
+          <h4 class="card-title">Ethereum address:</h4>
+          <h5><%= user.ethaddress%></h5>
+          <h4 class="card-title">Token Balance:</h4>
+          <h5> &#9830; <span id="balance"></span> ALT</h5>
+        </div>
+      </div>
+  </div>
+  <div class="row"><div class="card border-primary col-6 px-3 py-4">
+    <form action="/app/purchase" method="POST">
+        <fieldset>
+          <legend>Buy More Tokens</legend>
+          <div class="form-group">
+            <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before purchasing.</label>
+            <label for="staticEmail" class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
+            <h5>Please place the order in Indian Rupees.</h5>
+          </div>
+          <div class="form-group">
+          <fieldset disabled="">
+            <label class="control-label" for="email">Email address</label>
+            <input class="form-control" id="email" name="email" type="text" value= "<%= user.email%>" readonly>
+            <small id="emailHelp" class="form-text text-muted">We'll email you the purchase reciept.</small>
+          </fieldset>
+        </div>
+          <div class="form-group">
+          <fieldset disabled="">
+            <label class="control-label" for="ethaddress">Ethereum address</label>
+            <input class="form-control" id="ethaddress" name="ethaddress" type="text" value= "<%= user.ethaddress%>" readonly>
+          </fieldset>
+        </div>
+          <div class="form-group">
+            <label for="token">Amount</label>
+            <input type="number" class="form-control" name="token" id="token" placeholder="Amount">
+          </div>
+          <div class="form-group">
+            <label for="token2">Confirm Amount</label>
+            <input type="number" class="form-control" name="token2" id="token2" placeholder="Confirm Amount">
+          </div>
+          <button type="submit" class="btn btn-primary">Purchase</button> 
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Info</button> -->
+        </fieldset>
+      </form>
+  </div>
+  <div class="card border-primary col-6 px-3 py-4">
+    <div class="card-header">Past Transaction details</div>
+    <div class="card-body">
+      <% include ./partials/transactions %>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Placeholder for Payment Gateway</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>This is a demo version of the ALT web app. <br>
+          In future release upon clicking purchase you will be redirected to a payment gateway to complete the payment. The tokens will be added to your account only upon successful payment.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/static/javascripts/account.js"></script>
