@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="/dashboard">ADMIN - Atlas Library System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">Upload <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/account">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <a href="/users/logout" class="btn btn-danger">Logout</a>
+    </div>
+  </div>
+</nav>
+<ol class="breadcrumb" style="margin-top: 15px;">
+  <li class="breadcrumb-item"><a href="#">About</a></li>
+  <li class="breadcrumb-item active">Atlas Library</li>
+</ol>
+<div class="jumbotron mt-3">
+  <h1 class="display-3">Hello, <%= user.displayName %></h1>
+  <h2 class="display-4"> We are Atlas Library System.</h2>
+  <hr class="my-4">
+  <h3 class="display-5"> Our Purpose.</h3>
+  <p class="lead">The purpose of this DeFi app is to help all users rent or buy books through an easy to use platform that ensures transparent and fair payment to authors.</p>
+  <h3 class="display-5"> Tech under the hood.</h3>
+  <p class="lead">All the transactions happen on the Goerli Test Network with our custom ERC20 token - Atlas Library Token or ALT. The status of the book rental is also stored on the chain to ensure transparency. We are powered by BlockVigil's powerful EthVigil API.</p>
+</div>
+
+
+<div class="jumbotron mt-3">
+  <blockquote class="blockquote text-right">
+    <p class="mb-0">Blockchain technologies will change transactions in a broad way.</p>
+    <footer class="blockquote-footer">Brad Garlinghouse,<cite title="Source Title"> CEO, Ripple</cite></footer>
+  </blockquote>
+</div>

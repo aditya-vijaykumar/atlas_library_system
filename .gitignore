@@ -1,0 +1,4 @@
+alt_user/node_modules
+alt_admin/node_modules
+alt_user/.env
+alt_admin/.env
