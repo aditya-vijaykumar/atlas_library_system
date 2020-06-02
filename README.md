@@ -2,6 +2,8 @@
 
 A blockchain based hassle-free library rental system built around the concept of ERC20 tokens powered by EthVigil API.
 
+[Checkout the Live Demo](https://atlas-library-system.herokuapp.com/)
+
 ### The Blockchain Dev
 
 There is the primary smart contract to which the web app makes write calls using the EthVigil API, to transfer tokens and temporarily hold them before being redirected to the authors.&nbsp; <br>
