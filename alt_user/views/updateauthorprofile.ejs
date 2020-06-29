@@ -1,0 +1,142 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">Author - Atlas Library System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/dashboard">Upload <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/account">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <a href="/author/logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="row mt-3">
+    <div class="col-3"></div>
+    <div class="card border-primary col-6 px-3 py-4">
+        <form action="/author/updateprofile" name="authorProfile" id="authorProfile" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Create your Author Profile</legend>
+                <div class="form-group">
+                    <h5>Please crosscheck all your details.</h5>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="fullName">Full Name</label>
+                    <input class="form-control" id="fullName" name="fullName" type="text" placeholder="Your Full Name"
+                        value="<%= user.name %>">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="fullName">Email</label>
+                    <input class="form-control" id="email" name="email" type="email"
+                        value="<%= user.email %>" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="fullName">Username</label>
+                    <input class="form-control" id="username" name="username" type="text"
+                        placeholder="Enter a short username">
+                        <small id="twitterHelp" class="form-text text-muted">Username has to be lowercase, alphanumeric with '.' or '_' as the only special characters.</small>
+                </div>
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea class="form-control" id="bio" name="bio" rows="3"
+                        placeholder="Tell us a bit about yourself..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="location">Location</label>
+                    <input class="form-control" id="location" name="location" type="text" placeholder="Location">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="twitter">Twitter</label>
+                    <input class="form-control" id="twitter" name="twitter" type="text"
+                        placeholder="Your twitter handle name" aria-describedby="twitterHelp">
+                    <small id="twitterHelp" class="form-text text-muted">Please mention only your twitter account
+                        username and not the entire url.</small>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="website">Website</label>
+                    <input class="form-control" id="website" name="website" type="text" placeholder="Website URL">
+                </div>
+                <div class="form-group display-image">
+                    <label class="control-label" for="image_url">Your Profile Pic</label><br>
+                    <img src="" id="profilePic" class="rounded-circle img-fluid" alt="your profile image"
+                        style="max-width: 10rem; height: auto;">
+                </div>
+                <div class="form-group">
+                    <label for="profileImage">Upload a profile photo</label>
+                    <input type="file" class="form-control-file" accept="image/*" id="profileImage" name="profileImage">
+                    <!-- <small id="fileHelp" class="form-text text-muted">This will directly uploaded onto decentralized
+                        servers.</small> -->
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const internalapi = 'http://localhost:3000/author/details';
+        $.get(internalapi, function (data) {
+            const account = data.user_id;
+           console.log('deets:'+account);
+           $("#profileImage").change(function (event) {
+            var input = event.target;
+                input.files[0].name = 'AGOFHFOH';
+                console.log(input.files[0].name);
+        });
+        });
+
+        $('.display-image').hide();
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                $('.display-image').show();
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profilePic').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#profileImage").change(function (event) {
+            readURL(this);
+        });
+
+        $("#authorProfile").validate({
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                fullName: "required",
+                bio: "required",
+
+            },
+            // Specify validation error messages
+            messages: {
+                fullName: "Please enter your Full Name.",
+                bio: "Please write a little bit about yourself in the bio field.",
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
+    })
+
+</script>

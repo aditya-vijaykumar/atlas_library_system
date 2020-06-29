@@ -1,10 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { ensureAuthenticated } = require('../config/auth');
 require("dotenv").config();
 const skynet = require('@nebulous/skynet');
 const fs = require('fs');
+
+const secured = (req, res, next) => {
+    if (req.user && req.user.role != "author") {
+        return next();
+    }
+    req.session.returnTo = req.originalUrl;
+    res.redirect("/");
+};
 
 // mongoose data models
 const model = require('../models/User');
@@ -28,14 +35,14 @@ let headers = {
 };
 
 // Browse Books Page
-router.get('/browse', ensureAuthenticated, (req, res) => {
+router.get('/browse', secured, (req, res) => {
     books.find().then(data => {
         res.render('browse', { data });
     });
 });
 
 //For dashboard bookaccess check
-router.get('/getbookid', ensureAuthenticated, (req, res) => {
+router.get('/getbookid', secured, (req, res) => {
     const email = req.user._json.email;
     rental.find({ email: email })
         .then(data => {
@@ -47,7 +54,7 @@ router.get('/getbookid', ensureAuthenticated, (req, res) => {
 });
 
 //for ebook rendering
-router.get('/altload/:id', ensureAuthenticated, (req, res) => {
+router.get('/altload/:id', secured, (req, res) => {
     let ebookid = req.params.id;
     const email = req.user._json.email;
     User.find({ email: email })
@@ -67,7 +74,7 @@ router.get('/altload/:id', ensureAuthenticated, (req, res) => {
 });
 
 //to get ethereum address across multiple pages
-router.get('/geteth', ensureAuthenticated, (req, res) => {
+router.get('/geteth', secured, (req, res) => {
     const email = req.user._json.email;
     User.find({ email: email })
         .then(data => {
@@ -80,7 +87,7 @@ router.get('/geteth', ensureAuthenticated, (req, res) => {
 
 
 //Individual Book page
-router.get('/book/:id', ensureAuthenticated, (req, res) => {
+router.get('/book/:id', secured, (req, res) => {
     let prdid = req.params.id;
     const email = req.user._json.email;
     User.findOne({ email: email })
@@ -103,7 +110,7 @@ router.get('/book/:id', ensureAuthenticated, (req, res) => {
 });
 
 //Individual EBook page
-router.get('/ebook/:id', ensureAuthenticated, (req, res) => {
+router.get('/ebook/:id', secured, (req, res) => {
     let prdid = req.params.id;
     const email = req.user._json.email;
     User.findOne({ email: email })
@@ -136,7 +143,7 @@ router.get('/ebook/:id', ensureAuthenticated, (req, res) => {
 });
 
 // Account page
-router.get('/account', ensureAuthenticated, (req, res) => {
+router.get('/account', secured, (req, res) => {
     const email = req.user._json.email;
     User.findOne({ email: email })
         .then(returndata => {
@@ -153,10 +160,10 @@ router.get('/account', ensureAuthenticated, (req, res) => {
 });
 
 // Redirect page
-router.get('/redirect', ensureAuthenticated, (req, res) => res.render('redirect'));
+router.get('/redirect', secured, (req, res) => res.render('redirect'));
 
 //Rental transactions
-router.post('/rent', ensureAuthenticated, (req, res) => {
+router.post('/rent', secured, (req, res) => {
     const email = req.user._json.email;
     const cost = req.body.token;
     const days = req.body.days2;
@@ -257,7 +264,7 @@ router.post('/rent', ensureAuthenticated, (req, res) => {
 });
 
 //purchasing tokens
-router.post('/purchase', ensureAuthenticated, (req, res) => {
+router.post('/purchase', secured, (req, res) => {
     const email = req.user._json.email;
     const token = req.body.token;
     const token2 = req.body.token2;

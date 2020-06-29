@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <img src="/static/images/logo.png" style="height: 30px; width: auto;">
+    <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/author/dashboard">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/author/updateprofile">Update Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="/author/logout" class="btn btn-secondary">Logout</a>
+      </div>
+    </div>
+  </nav>
+  <% include ./partials/messages %>
+  <div class="jumbotron mt-3">
+    <h1 class="display-3">Hello, <%= user.name %></h1>
+    <h2 class="display-6">Welcome to ALT Author family.</h2>
+    <hr class="my-4">
+    <div class="row">
+    </div>
+  </div>
