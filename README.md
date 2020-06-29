@@ -1,6 +1,6 @@
 # Atlas Library System - Author Dashboard
 
-This branch is the development of the Authir's Dashboard for the Atlas Library System.
+This branch is the development of the Author's Dashboard for the Atlas Library System.
 
 ### Login & Registration
 
