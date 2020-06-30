@@ -1,6 +1,6 @@
 # Atlas Library System - Author Dashboard
 
-This branch is the development of the Authir's Dashboard for the Atlas Library System.
+This branch is the development of the Author's Dashboard for the Atlas Library System.
 
 ### Login & Registration
 
@@ -9,6 +9,6 @@ Email Verification using SendGrid has been implemented. The verification link ex
 Reset Password Feature is included as well.<br>
 
 ### Author Profile
-
-Work in Progress.<br>
-Basic Form for updating the Author Profile details have been implemented.
+Author can view and edit his profile.<br>
+Using the set author username, the author's profile can be publicly accessed.<br><br>
+Existing username check yet to be added.

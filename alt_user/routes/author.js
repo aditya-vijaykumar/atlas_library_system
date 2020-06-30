@@ -53,13 +53,6 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-const uploadf = multer({
-    storage: storage,
-    fileFilter: fileFilter
-});
-const profileUpload = upload.fields([{ name: 'profileImage', maxCount: 1 }]);
-
-
 // Login Page
 router.get('/login', forwardAuthenticated, (req, res) => res.render('authorLogin'));
 
@@ -387,14 +380,41 @@ router.post('/reset/:token', (req, res) => {
     });
 });
 
+router.get('/profile', ensureAuthenticated, (req, res) => {
+    AuthorProfile.findOne({ email : req.user.email }, function (err, user) {
+        if (!user) {
+            req.flash('error_msg', 'Unable to access author profile.');
+            return res.redirect('/author/dashboard');
+        }
+        res.render('authorProfile', { user: req.user, profile : user });
+    });
+});
+
+
 router.get('/updateprofile', ensureAuthenticated, (req, res) => {
-    console.log(req.user);
-    res.render('updateauthorprofile', { user: req.user });
+    AuthorProfile.findOne({ email : req.user.email }, function (err, user) {
+        if (!user) {
+            req.flash('error_msg', 'Unable to access author profile.');
+            return res.redirect('/author/dashboard');
+        }
+        res.render('updateauthorprofile', { user: req.user, profile : user });
+    });
+});
+
+router.get('/book', ensureAuthenticated, (req, res) => {
+   res.render('authorBooks', { user: req.user });   
+});
+router.get('/account', ensureAuthenticated, (req, res) => {
+    res.render('authorAccount', { user: req.user});
 });
 
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.render('authorDashboard', { user: req.user });
+});
+
+router.get('/about', ensureAuthenticated, (req, res) => {
+    res.render('authorAbout', { user: req.user });
 });
 
 // Login

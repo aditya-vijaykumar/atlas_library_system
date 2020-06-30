@@ -20,6 +20,9 @@ const books = model.Books;
 const User = model.User;
 const rental = model.Rentals;
 const transaction = model.Transactions;
+//Mongoose data models
+const models = require('../models/Author');
+const AuthorProfile = models.AuthorProfile;
 
 //api values
 let contract_address = "0xd65608ebffe1c417dd5ec845a6011013e602cc7c";
@@ -155,5 +158,16 @@ router.get("/callback", (req, res, next) => {
     });
   })(req, res, next);
 });
+
+router.get('/:username', (req, res) => {
+  AuthorProfile.findOne({ username : req.params.username }, function (err, user) {
+    if (!user) {
+        req.flash('error_msg', 'Unable to access author profile.');
+        return res.redirect('/author/login');
+    }
+    res.render('profile', {profile : user });
+});
+});
+
 
 module.exports = router;

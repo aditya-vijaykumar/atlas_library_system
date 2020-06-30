@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;">
+      <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/author/dashboard">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/author/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/author/book">Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/author/account">Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/author/about">About</a>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <a href="/author/logout" class="btn btn-danger">Logout</a>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron mt-3">
+      <h1 class="display-5">Hello, <%= user.name %></h1>
+    </div>
+    
+    <div class="row">
+      <div class="card border-primary mb-3 col-6 px-2 py-2">
+          <div class="card-header">Account details</div>
+          <div class="card-body">
+            <h4 class="card-title">Name: <%= user.name %> </h4>
+            <h4 class="card-title">Email: <%= user.email %> </h4>
+            
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          </div>
+        </div>
+  
+        <div class="card border-primary col-6 px-3 py-4">
+          <form action="/payment" method="POST">
+              <fieldset>
+                <legend>Payment for Authors</legend>
+                <div class="form-group">
+                  <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before proceeding.</label>
+                  <label for="staticEmail" class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
+                </div>
+                <div class="form-group">
+                <fieldset>
+                  <label class="control-label" for="email">Email address</label>
+                  <input class="form-control" id="email" name="email" type="text" placeholder= "Email Address">
+                  <small id="emailHelp" class="form-text text-muted">We'll email the author payment reciept.</small>
+                </fieldset>
+              </div>
+                <div class="form-group">
+                <fieldset>
+                  <label class="control-label" for="address">Author's Ethereum address</label>
+                  <input class="form-control" id="address" name="address" type="text" placeholder= "Author's Ethereum address" >
+                </fieldset>
+              </div>
+                <div class="form-group">
+                  <label for="token">Amount</label>
+                  <input type="number" class="form-control" name="token" id="token" placeholder="Amount" min="0" step="0.0001">
+                </div>
+                <div class="form-group">
+                  <label for="token2">Confirm Amount</label>
+                  <input type="number" class="form-control" name="token2" id="token2" placeholder="Confirm Amount" min="0" step="0.0001">
+                </div>
+                <button type="submit" class="btn btn-primary">Purchase</button> 
+              </fieldset>
+            </form>
+        </div>
+    </div>

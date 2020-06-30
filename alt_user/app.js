@@ -34,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //public folder
 app.use('/static', express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 
 // Express session Have to change
