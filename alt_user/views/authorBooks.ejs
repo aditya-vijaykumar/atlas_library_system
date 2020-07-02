@@ -1,38 +1,124 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <img src="/static/images/logo.png" style="height: 30px; width: auto;">
-    <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/author/dashboard">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/author/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/author/book">Books</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/author/account">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/author/about">About</a>
-        </li>
-      </ul>
-      <div class="form-inline my-2 my-lg-0">
-        <a href="/author/logout" class="btn btn-danger">Logout</a>
+<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
+  <div class="container">
+      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+      <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
+          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+              class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
+              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
+                      href="/author/logout">Logout</a></li>
+          </ul>
       </div>
-    </div>
-  </nav>
-  <% include ./partials/messages %>
-  <div class="jumbotron mt-3">
-    <h1 class="display-3">Hello, <%= user.name %></h1>
-    <h2 class="display-6">Welcome to ALT Author family.</h2>
-    <hr class="my-4">
-    <div class="row">
-    </div>
   </div>
+</nav>
+<% include ./partials/messages %>
+<div class="jumbotron mt-3">
+  <h1>Hello, user</h1>
+  <p>This section allows you to have a look at all the draft books, books sent for approval as well as all the books
+    approved.</p>
+</div>
+<section style="margin: 16px 0px;">
+  <h3>Approved Books</h3>
+  <div class="table-responsive bg-secondary">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name of the Book</th>
+          <th>Genre</th>
+          <th>Date</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cell 1</td>
+          <td>Cell 2</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+        </tr>
+        <tr>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section style="margin: 16px 0px;">
+  <h3>Books sent for review</h3>
+  <div class="table-responsive bg-secondary">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name of the Book</th>
+          <th>Genre</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cell 1</td>
+          <td>Cell 2</td>
+          <td>Cell 3</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+        </tr>
+        <tr>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+          <td>Cell 3</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section style="margin: 16px 0px;">
+  <div class="row">
+    <div class="col">
+      <h3>Draft Books</h3>
+    </div>
+    <div class="col-auto"><a class="btn btn-primary d-lg-flex justify-content-lg-end" role="button"
+        href="/author/newdraft">New Draft</a></div>
+  </div>
+  <div class="table-responsive bg-secondary" style="margin-top: 10px;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name of the Book</th>
+          <th>Genre</th>
+          <th>E-Book PDF</th>
+          <th>Date</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cell 1</td>
+          <td>Cell 2</td>
+          <td>Cell 3</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+        </tr>
+        <tr>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+          <td>Cell 3</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

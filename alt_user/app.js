@@ -11,7 +11,7 @@ const app = express();
 
 // Passport Config
 require('./config/auth0')(passport);
-require('./config/author_local')(passport);
+require('./config/local')(passport);
 
 // DB Config
 const db = 'mongodb://localhost:27017/test';
@@ -75,6 +75,7 @@ app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
 app.use('/app', require('./routes/dapp.js'));
 app.use('/author', require('./routes/author.js'));
+app.use('/admin', require('./routes/admin.js'));
 
 const PORT = process.env.PORT || 3000;
 

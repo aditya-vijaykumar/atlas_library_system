@@ -3,7 +3,9 @@ const bcrypt = require('bcryptjs');
 
 // Load User model
 const model = require('../models/Author');
+const model2 = require('../models/Admin');
 const Author = model.Author;
+const Admin = model2.Admin;
 
 function SessionConstructor(userId, userGroup, details) {
     this.userId = userId;
@@ -39,15 +41,37 @@ module.exports = function(passport) {
     })
   );
 
+  passport.use('admin', new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+    // Match user
+    Admin.findOne({
+      email: email
+    }).then(user => {
+      if (!user) {
+        return done(null, false, { message: 'That email is not registered' });
+      }
+
+      // Match password
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+        if (isMatch) {
+          return done(null, user);          
+        } else {
+          return done(null, false, { message: 'Password incorrect' });
+        }
+      });
+    });
+  })
+);
+
   passport.serializeUser(function (userObject, done) {
-    // userObject could be a Model1 or a Model2... or Model3, Model4, etc.
+    // userObject could be a Author or Admin
     let userGroup = "Author";
     let userPrototype =  Object.getPrototypeOf(userObject);
 
     if (userPrototype === Author.prototype) {
       userGroup = "Author";
-    } else if (userPrototype === Resident.prototype) {
-      userGroup = "model2";
+    } else if (userPrototype === Admin.prototype) {
+      userGroup = "Admin";
     }
 
     let sessionConstructor = new SessionConstructor(userObject.id, userGroup, '');
@@ -63,7 +87,14 @@ module.exports = function(passport) {
       }, '-localStrategy.password', function (err, user) { // When using string syntax, prefixing a path with - will flag that path as excluded.
           done(err, user);
       });
-    }
+    } else if (sessionConstructor.userGroup == 'Admin') {
+      Admin.findOne({
+          _id: sessionConstructor.userId
+      }, '-localStrategy.password', function (err, user) { // When using string syntax, prefixing a path with - will flag that path as excluded.
+          done(err, user);
+      });
+    } 
+
   });
 
 };

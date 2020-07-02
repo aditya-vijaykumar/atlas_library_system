@@ -1,33 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <img src="/static/images/logo.png" style="height: 30px; width: auto;">
-      <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/author/dashboard">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/author/profile">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/author/book">Books</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/author/account">Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/author/about">About</a>
-          </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <a href="/author/logout" class="btn btn-danger">Logout</a>
+<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
+    <div class="container">
+        <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+        <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
+            class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
+                <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
+                        href="/author/logout">Logout</a></li>
+            </ul>
         </div>
-      </div>
-    </nav>
+    </div>
+  </nav>
 <div class="row mt-3">
     <div class="col-3"></div>
     <div class="card border-primary col-6 px-3 py-4">

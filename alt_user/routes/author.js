@@ -417,6 +417,10 @@ router.get('/about', ensureAuthenticated, (req, res) => {
     res.render('authorAbout', { user: req.user });
 });
 
+router.get('/newdraft', ensureAuthenticated, (req, res) => {
+    res.render('authorNewDraft', {user : req.user});
+});
+
 // Login
 router.post('/login', (req, res, next) => {
     passport.authenticate('author-signup', {

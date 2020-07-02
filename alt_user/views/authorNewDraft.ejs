@@ -1,0 +1,92 @@
+<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
+    <div class="container">
+        <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+        <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
+            class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
+                <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
+                        href="/author/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<% include ./partials/messages %>
+<section style="margin: 16px 0px;">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col">
+            <h3 class="text-center">Draft Book</h3>
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">Upload Book</h4> -->
+                    <!-- <h6 class="text-muted card-subtitle mb-2">Subtitle</h6> -->
+                    <!-- <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
+                        ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p> -->
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <fieldset>
+                            <legend>Upload Book</legend>
+                            <div class="form-group">
+                                <!-- <label class="col-sm-8 col-form-label">Ensure you cross check.</label> -->
+                                <h5>Please crosscheck twice before uploading.</h5>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="title">Title of the Book</label>
+                                <input class="form-control" id="title" name="title" type="text" placeholder="Title of the Book">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="author">Name of the Author</label>
+                                <input class="form-control" id="author" name="author" type="text" placeholder="Name of the Author">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description of the Book</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"
+                                    placeholder="Description..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="genre">Genres of the Books</label>
+                                <input class="form-control" id="genre" name="genre" type="text" placeholder="Genres of the Books">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="pages">Number of Pages</label>
+                                <input class="form-control" id="pages" name="pages" type="number" placeholder="Number of Pages"
+                                    step="1" min="1">
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label" for="image_url">URL of the cover image
+                                  confirmation</label>
+                              <input class="form-control" id="image_url" name="image_url" type="text" placeholder="URL of the cover image">
+                          </div>
+                            <div class="form-group">
+                                <label for="bookpdf">Upload PDF version of the Book</label>
+                                <input type="file" class="form-control-file" id="bookpdf" name="bookpdf"
+                                    aria-describedby="fileHelp">
+                                <small id="fileHelp" class="form-text text-muted">This will directly uploaded onto decentralized
+                                    servers.</small>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="form-row justify-content-end">
+                                <div class="col-auto">
+                                    <a class="btn btn-success" role="button">Send for Approval
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary" type="button">Save Draft</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</section>

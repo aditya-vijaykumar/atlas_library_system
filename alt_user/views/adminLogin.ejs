@@ -7,41 +7,39 @@
       <div class="collapse navbar-collapse" id="navcol-1"></div>
   </div>
 </nav>
-  <div class="row mt-5">
+<div class="row mt-5">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
-      <h2 class="text-center mb-3">Forgot Password</h2>
+      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> ALT Admin Login</h1>
       <% include ./partials/messages %>
-      <form action="/author/reset/<%= token%>" method="POST">
+      <form action="/admin/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
-          <input class="form-control" id="email" name="email" type="text" value= "<%= user.email%>" readonly>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter Email"
+          >
         </div>
         <div class="form-group">
-          <label for="email">Password</label>
+          <label for="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             class="form-control"
-            placeholder="Enter New Password"
+            placeholder="Enter Password"
           >
         </div>
-        <div class="form-group">
-          <label for="email">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="form-control"
-            placeholder="Re-enter New Password"
-          >
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>
-      <p class="lead mt-4">
-        No Account? <a href="/author/register">Register</a>
-      </p>
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <a href="/admin/forgot" class="btn btn-outline-warning" >Forgot Password?</a>
+        </div>
+      </div>      
     </div>
   </div>
 </div>
