@@ -5,13 +5,7 @@ require("dotenv").config();
 const skynet = require('@nebulous/skynet');
 const fs = require('fs');
 
-const secured = (req, res, next) => {
-    if (req.user && req.user.role != "author") {
-        return next();
-    }
-    req.session.returnTo = req.originalUrl;
-    res.redirect("/");
-};
+const { secured} = require('../config/auth');
 
 // mongoose data models
 const model = require('../models/User');

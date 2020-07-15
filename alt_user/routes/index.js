@@ -3,16 +3,13 @@ const router = express.Router();
 const passport = require('passport');
 const sha3 = require('js-sha3');
 const axios = require('axios');
+const sgMail = require('@sendgrid/mail');
+const crypto = require('crypto');
 const privateToAccount = require('ethjs-account').privateToAccount;
 const {forwardAuthenticated } = require('../config/auth');
 require("dotenv").config();
-const secured = (req, res, next) => {
-  if (req.user) {
-    return next();
-  }
-  req.session.returnTo = req.originalUrl;
-  res.redirect("/users/login");
-};
+
+const { secured} = require('../config/auth');
 
 // Load mongoose data models
 const model = require('../models/User');
@@ -23,36 +20,32 @@ const transaction = model.Transactions;
 //Mongoose data models
 const models = require('../models/Author');
 const AuthorProfile = models.AuthorProfile;
+const Author = models.Author;
+const Token = models.Token;
 
 //api values
 let contract_address = "0xd65608ebffe1c417dd5ec845a6011013e602cc7c";
 let api_key = process.env.ETHVIGIL_API_KEY;
 let rest_api_endpoint = 'https://beta-api.ethvigil.com/v0.1';
 let headers = {headers: {'accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': api_key}};
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Welcome Page
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 
 // Dashboard Page
 router.get('/dashboard', secured, (req, res) =>{
-  const email = req.user._json.email;  
-  User.findOne({ email: email })
-  .then(returndata => {
-    const ethaddress = returndata.ethaddress;
-    rental.find({email: email})
-    .then(data => { 
-        res.render('dashboard', {data : data, user : req.user, count : data.length, ethaddress: ethaddress});
-      })
-    .catch(error =>{
-        console.log(error);
-        req.flash('error_tx', 'Invalid request, please try again later.');
-        res.redirect('/app/browse');
-      });
-  }).catch(error =>{
-    console.log(error);
-    req.flash('error_tx', 'Invalid request, please try again later.');
-    res.redirect('/app/browse');
-  });
+  const email = req.user._json.email;
+  const ethaddress = req.session.user.ethaddress;  
+  rental.find({email: email})
+  .then(data => { 
+      res.render('dashboard', {data : data, user : req.session.user, count : data.length, ethaddress: ethaddress});
+    })
+  .catch(error =>{
+      console.log(error);
+      req.flash('error_tx', 'Invalid request, please try again later.');
+      res.redirect('/app/browse');
+    });
 });
 
 // About Page
@@ -60,6 +53,83 @@ router.get('/about', secured, (req, res) =>
   res.render('about', {
     user: req.user
   }));
+
+router.get('/author-signup', secured, (req, res) => res.render('becomeAuthor', {user : req.session.user}));
+
+router.get('/author-enroll', (req, res) => {
+   Author.findOne({email : req.session.email}).then(author => {
+     if (author){
+      if(author.isVerified){
+        req.flash(
+          'success_msg',
+          'You have stumbled upon the wrong page, you are already an author.'
+      );
+      res.redirect('/author-signup');
+       } else{
+        req.flash(
+          'success_msg',
+          'Your author profile request has already been recieved. Please confirm with the link sent to your email or request for a new one.'
+      );
+      res.redirect('/author-signup');
+       }
+     } else{
+      let ethaddress = req.session.user.ethaddress;
+      let name = req.session.user.name;
+      let email = req.session.user.email;
+      const newAuthor = new Author({
+          name,
+          email,
+          ethaddress
+      });
+      //address generation
+      newAuthor.save()
+      .then(user => {
+        console.log('Successfully created and stored author account');
+        const token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+        token
+          .save()
+          .then(token => {
+            const msg= {
+            to: user.email,
+            from:'aditya.devsandbox@gmail.com',
+            subject: 'Author Account Confirmation',
+            html: '<strong>Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
+                 '.\n</strong><br>Please note this link expires in 12 hours.',
+            };
+            sgMail.send(msg);
+            req.flash(
+              'success_msg', 
+              'Your author account creation process has been recieved. Please complete it by clicking on the link sent to your email.'
+            );
+            res.redirect('/author-signup');
+          })
+          .catch(err => {console.error(err);
+            req.flash(
+              'error_msg',
+              'There was some error, please try again later.'
+          );
+          res.redirect('/author-signup');
+        });
+      })
+      .catch(err => {console.error(err);
+        req.flash(
+          'error_msg',
+          'There was some error, please try again later.'
+      );
+      res.redirect('/author-signup');
+    });
+    
+  }     
+   })
+   .catch(err => {console.error(err);
+    req.flash(
+      'error_msg',
+      'There was some error, please try again later.'
+  );
+  res.redirect('/author-signup');
+  });
+});
+
 
 //auth0 callback with ethereum address generation
 router.get("/callback", (req, res, next) => {
@@ -84,6 +154,7 @@ router.get("/callback", (req, res, next) => {
           const returnTo = req.session.returnTo;
           delete req.session.returnTo;
           res.locals.user = req.user;
+          req.session.user = user;
           res.redirect(returnTo || "/dashboard");
         }else {
           let user_id = Date.now();
@@ -122,6 +193,7 @@ router.get("/callback", (req, res, next) => {
                       const returnTo = req.session.returnTo;
                       delete req.session.returnTo;
                       res.locals.user = req.user;
+                      req.session.user = user;
                       res.redirect(returnTo || "/dashboard");
                     })
                     .catch(err => console.log(err));
@@ -168,6 +240,5 @@ router.get('/:username', (req, res) => {
     res.render('profile', {profile : user });
 });
 });
-
 
 module.exports = router;

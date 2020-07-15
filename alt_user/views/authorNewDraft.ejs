@@ -29,7 +29,7 @@
                     <!-- <h6 class="text-muted card-subtitle mb-2">Subtitle</h6> -->
                     <!-- <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus
                         ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p> -->
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <form action="/author/bookapproval" method="POST" enctype="multipart/form-data">
                         <fieldset>
                             <legend>Upload Book</legend>
                             <div class="form-group">
@@ -37,12 +37,19 @@
                                 <h5>Please crosscheck twice before uploading.</h5>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="title">Title of the Book</label>
-                                <input class="form-control" id="title" name="title" type="text" placeholder="Title of the Book">
+                                <label class="control-label" for="author">Name of the Author</label>
+                                <input class="form-control" id="author" name="author" type="text" placeholder="Name of the Author" value="<%= profile.name%>">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="author">Name of the Author</label>
-                                <input class="form-control" id="author" name="author" type="text" placeholder="Name of the Author">
+                                <label class="control-label" for="Email">Email of the Author</label>
+                                <input class="form-control" id="Email" name="Email" type="text" placeholder="Email of the Author" value="<%= user.email%>" disabled>
+                            </div><div class="form-group">
+                                <label class="control-label" for="username">Username of the Author</label>
+                                <input class="form-control" id="username" name="username" type="text" placeholder="Username of the Author" value="<%= profile.username%>" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="title">Title of the Book</label>
+                                <input class="form-control" id="title" name="title" type="text" placeholder="Title of the Book">
                             </div>
                             <div class="form-group">
                                 <label for="description">Description of the Book</label>
@@ -59,26 +66,25 @@
                                     step="1" min="1">
                             </div>
                             <div class="form-group">
-                              <label class="control-label" for="image_url">URL of the cover image
-                                  confirmation</label>
-                              <input class="form-control" id="image_url" name="image_url" type="text" placeholder="URL of the cover image">
+                                <label class="control-label" for="rental">Rental Rate</label>
+                                <input class="form-control" id="rental" name="rental" type="rental" placeholder="Rental Rate"
+                                    step="0.0001" min="0">
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label" for="image_url">Upload cover image</label>
+                                  <input type="file" class="form-control-file" id="coverimage" name="coverimage"  accept="image/*">
                           </div>
                             <div class="form-group">
                                 <label for="bookpdf">Upload PDF version of the Book</label>
                                 <input type="file" class="form-control-file" id="bookpdf" name="bookpdf"
-                                    aria-describedby="fileHelp">
-                                <small id="fileHelp" class="form-text text-muted">This will directly uploaded onto decentralized
-                                    servers.</small>
+                                    aria-describedby="fileHelp"  accept="application/pdf">
+                                <small id="fileHelp" class="form-text text-muted">This will be stored in temporary folders and might get deleted unless, you send for approval.</small>
                             </div>
                         </fieldset>
                         <div class="form-group">
                             <div class="form-row justify-content-end">
                                 <div class="col-auto">
-                                    <a class="btn btn-success" role="button">Send for Approval
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <button class="btn btn-primary" type="button">Save Draft</button>
+                                    <button class="btn btn-success" type="submit">Send for Approval</button>
                                 </div>
                             </div>
                         </div>

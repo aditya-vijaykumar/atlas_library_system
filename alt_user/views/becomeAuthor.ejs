@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;">
+    <a class="navbar-brand" href="/dashboard">Atlas Library System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/browse">Browse</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/account">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <a href="/users/logout" class="btn btn-secondary">Logout</a>
+        </div>
+    </div>
+</nav>
+<% include ./partials/messages %>
+
+<div class="jumbotron mt-3">
+    <img src="https://s7.gifyu.com/images/loader.gif" class="rounded mx-auto d-block">
+    <h3 class="display-5" style="text-align: center;"> Are you sure you want to upgrade to Author's account?</h3>
+    <p class="lead" style="text-align: center;">With an author's account you can upload books and make money when users rent it. 
+        <br>Click on the button below if you wish to do so, and we will email you a confirmation link to complete the process.<br>
+        <a href="/dashboard" class="btn btn-primary">Bak to Dashboard</a> &nbsp; &nbsp;  <a href="/author-enroll" class="btn btn-success">Sign Up!</a>
+        </p>
+    <br>
+    
+</div>

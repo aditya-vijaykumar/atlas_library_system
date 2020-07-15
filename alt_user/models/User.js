@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
   user_id: {
     type: Number
   },
+  role:{
+    type: String,
+    default: "user" 
+  },
   date: {
     type: Date,
     default: Date.now
@@ -119,6 +123,12 @@ const BookSchema = new mongoose.Schema({
   },
   book_location :{
     type: String
+  },
+  author_email : {
+    type : String
+  },
+  book_rental : {
+    type : Number
   }
 }, {
   collection: 'newbooks'

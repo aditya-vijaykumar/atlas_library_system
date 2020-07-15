@@ -21,13 +21,19 @@
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
+        <% if(user.role == 'user') { %>
+        <a href="/author-signup" id="author-signup" class="btn btn-success">Become an author</a>
+        <% } %> 
+        <% if(user.role == 'author') { %>
+        <a href="/author/dashboard" id="author-switch" class="btn btn-success">Switch to Author</a>
+        <% } %>
         <a href="/users/logout" class="btn btn-secondary">Logout</a>
       </div>
     </div>
   </nav>
   <% include ./partials/messages %>
   <div class="jumbotron mt-3">
-    <h1 class="display-3">Hello, <%= user.displayName %></h1>
+    <h1 class="display-3">Hello, <%= user.name %></h1>
     <h2 class="display-6">Welcome to ALT family.</h2>
     <p class="lead">**DISCLAIMER** <br>All the data of the books are obtained via open source licenses, purely for demonstration purposes.</p>
     <hr class="my-4">

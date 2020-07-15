@@ -8,7 +8,12 @@ require("dotenv").config();
 
 // Load User model
 const model = require('../models/Admin');
+const modelA = require('../models/Author');
+const modelU = require('../models/User');
 const Admin = model.Admin;
+const DraftBook = modelA.DraftBook;
+const Books = modelU.Books;
+
 //SENDGRID EMAIL API KEY
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -121,6 +126,14 @@ router.post('/register', (req, res) => {
 
 router.get('/dashboard', ensureAdmin,(req, res) => {
     res.render('adminDashboard', {user : req.user});
+});
+
+router.get('/review', ensureAdmin, (req, res) => {
+    DraftBook.find({ admin_approve_request : true})
+    .then(data => {
+        res.render('adminReview', { data : data})
+    })
+    .catch(err => console.error(err));
 });
 
 module.exports = router;

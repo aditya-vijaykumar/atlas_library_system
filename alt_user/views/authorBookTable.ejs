@@ -19,10 +19,12 @@
 </nav>
 <% include ./partials/messages %>
 <div class="jumbotron mt-3">
-  <h1>Hello, user</h1>
-  <p>This section allows you to have a look at all the draft books, books sent for approval as well as all the books
+  <h1>Hello, <%= user.name %> </h1>
+  <p>This section allows you to have a look at all the books sent for approval as well as all the books
     approved.</p>
 </div>
+
+<% if(books.length != 0) { %>
 <section style="margin: 16px 0px;">
   <h3>Approved Books</h3>
   <div class="table-responsive bg-secondary">
@@ -33,64 +35,29 @@
           <th>Genre</th>
           <th>Date</th>
           <th>Option</th>
-        </tr>
+        </tr> 
       </thead>
       <tbody>
+        <% for(var i=0; i < books.length; i++) { %>
         <tr>
-          <td>Cell 1</td>
-          <td>Cell 2</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
+          <td><%= book[i].book_title %></td>
+          <td><%= book[i].genres %></td>
+          <td><%= book[i].date %></td>
+          <td><a class="btn btn-primary d-lg-flex justify-content-lg-end" role="button" href="/author/<%= book[i]._id %>">View</a></td>
         </tr>
-        <tr>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-        </tr>
+        <% } %>
       </tbody>
     </table>
   </div>
 </section>
-<section style="margin: 16px 0px;">
-  <h3>Books sent for review</h3>
-  <div class="table-responsive bg-secondary">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name of the Book</th>
-          <th>Genre</th>
-          <th>Message</th>
-          <th>Date</th>
-          <th>Option</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cell 1</td>
-          <td>Cell 2</td>
-          <td>Cell 3</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-        </tr>
-        <tr>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-          <td>Cell 3</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+<% } %>
 <section style="margin: 16px 0px;">
   <div class="row">
     <div class="col">
-      <h3>Draft Books</h3>
+      <h3>Books sent for review</h3>
     </div>
     <div class="col-auto"><a class="btn btn-primary d-lg-flex justify-content-lg-end" role="button"
-        href="/author/newdraft">New Draft</a></div>
+        href="/author/newdraft">New Book</a></div>
   </div>
   <div class="table-responsive bg-secondary" style="margin-top: 10px;">
     <table class="table">
@@ -98,27 +65,48 @@
         <tr>
           <th>Name of the Book</th>
           <th>Genre</th>
-          <th>E-Book PDF</th>
           <th>Date</th>
           <th>Option</th>
         </tr>
       </thead>
       <tbody>
+        <% for(var i=0; i < drafts.length; i++) { %>
         <tr>
-          <td>Cell 1</td>
-          <td>Cell 2</td>
-          <td>Cell 3</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
+          <td><%= drafts[i].book_title %></td>
+          <td><%= drafts[i].genres %></td>
+          <td><%= drafts[i].date %></td>
+          <td><a class="btn btn-outline-primary" role="button" href="/author/<%= drafts[i]._id %>">View</a></td>
         </tr>
-        <tr>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-          <td>Cell 3</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td>
-        </tr>
+        <% } %>
       </tbody>
     </table>
   </div>
 </section>
+
+<% if(books.length != 0) { %>
+<section style="margin: 16px 0px;">
+  <h3>Books Reverted</h3>
+  <div class="table-responsive bg-secondary">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name of the Book</th>
+          <th>Genre</th>
+          <th>Date</th>
+          <th>Option</th>
+        </tr> 
+      </thead>
+      <tbody>
+        <% for(var i=0; i < books.length; i++) { %>
+        <tr>
+          <td>Cell 1</td>
+          <td>Cell 2</td>
+          <td>Cell 3</td>
+          <td>Cell 4</td> 
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<% } %>

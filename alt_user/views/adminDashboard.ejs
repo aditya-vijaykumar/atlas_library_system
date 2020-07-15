@@ -7,13 +7,19 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/dashboard">Upload <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/admin/dashboard">Dashboard <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/account">Account</a>
+          <a class="nav-link" href="/admin/review">Review</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" href="/admin/approved">Approved</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/rejected">Rejected</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/revenue">Revenue</a>
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
@@ -30,50 +36,7 @@
   <div class="row">
     <div class="col-3"></div>
     <div class="card border-primary col-6 px-3 py-4">
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Upload Book</legend>
-                <div class="form-group">
-                    <!-- <label class="col-sm-8 col-form-label">Ensure you cross check.</label> -->
-                    <h5>Please crosscheck twice before uploading.</h5>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="title">Title of the Book</label>
-                    <input class="form-control" id="title" name="title" type="text" placeholder="Title of the Book">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="author">Name of the Author</label>
-                    <input class="form-control" id="author" name="author" type="text" placeholder="Name of the Author">
-                </div>
-                <div class="form-group">
-                    <label for="description">Description of the Book</label>
-                    <textarea class="form-control" id="description" name="description" rows="3"
-                        placeholder="Description..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="genre">Genres of the Books</label>
-                    <input class="form-control" id="genre" name="genre" type="text" placeholder="Genres of the Books">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="pages">Number of Pages</label>
-                    <input class="form-control" id="pages" name="pages" type="number" placeholder="Number of Pages"
-                        step="1" min="1">
-                </div>
-                <div class="form-group">
-                  <label class="control-label" for="image_url">URL of the cover image
-                      confirmation</label>
-                  <input class="form-control" id="image_url" name="image_url" type="text" placeholder="URL of the cover image">
-              </div>
-                <div class="form-group">
-                    <label for="bookpdf">Upload PDF version of the Book</label>
-                    <input type="file" class="form-control-file" id="bookpdf" name="bookpdf"
-                        aria-describedby="fileHelp">
-                    <small id="fileHelp" class="form-text text-muted">This will directly uploaded onto decentralized
-                        servers.</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </fieldset>
-        </form>
+       <h5>Please head over to Review section and review the pending books.</h5>
     </div>
 </div>
   
