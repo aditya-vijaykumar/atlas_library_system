@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="/static/css/ebook.css" >
+<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
+  <div class="container">
+      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+      <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
+          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+              class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/book">Approved</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/account">Rejected</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/about">Revenue</a></li>
+              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
+                      href="/admin/logout">Logout</a></li>
+          </ul>
+      </div>
+  </div>
+</nav>
+<ol class="breadcrumb" style="margin-top: 15px;">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Review / <%= data.book_location%></li>
+  </ol>
+  <!-- This is the book details -->
+<div class="row">
+  <div class="col-2"></div>
+  <div class="jumbotron col-8">
+    <h1 class="display-4"><%= data.book_title %></h1>
+    <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
+    <h3 class="display-5 mb-3"><a href="/<%= data.author_username%>"><i class="fa fa-0.5x fa-user" aria-hidden="true"></i>&nbsp;@<%= data.author_username %></a></h3>
+    <div class=""><img style="height: 450px; width: auto; display: block;" 
+      src= "http://localhost:3000/<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
+    <p class="lead mt-3"><%= data.book_desc %></p>
+    <hr class="my-4">
+    <div class="card-footer mb-3">
+      Book Pages: <%= data.book_pages %>
+   </div>
+   <div class="card-footer mb-3">
+    Catrgory : <%= data.genres %>
+ </div>
+ <div class="card-footer mb-3">
+  Rental Price : <%= data.book_rental_price %>
+</div>
+<div class="card-footer mb-3">
+  Date : <%= data.date %>
+</div>
+  </div>
+  <div class="col-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-2"></div>
+  <div class="jumbotron col-8">
+    <h2 class="display-5 mb-3">E-Book</h2>
+    <div class="mainbook">
+      <div class="err"></div>
+    <div class="top-bar">
+      <button class="new-btn btn-primary" id="prev-page">
+        <i class="fas fa-arrow-circle-left"></i> Prev Page
+      </button>
+      <button class="new-btn btn-primary" id="next-page">
+        Next Page <i class="fas fa-arrow-circle-right"></i>
+      </button>
+      <span class="page-info">
+        Page <span id="page-num"></span> of <span id="page-count"></span>
+      </span>
+    </div>
+    <p id="loading"><strong>Please wait while the PDF loads...</strong></p>
+
+    <canvas id="pdf-render" width="860px"></canvas>
+    </div>
+  </div>
+  
+  <div class="col-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-2"></div>
+  <div class="jumbotron col-8">
+    <h1 class="display-4 mb-3">Approval By Admin</h1>
+    <h2 class="display-5 mb-3"><%= data.book_title %></h2>
+    <div class="card border-primary col-10 px-3 py-4">
+    <form action="/admin/approve" method="POST">
+      <fieldset>
+      <div class="form-group">
+        <fieldset>
+          <label class="control-label" for="bookid">Book Entry Id</label>
+          <input class="form-control" id="bookid" name="bookid" type="text" value="<%= data._id %>" readonly>
+        </fieldset>
+      </div>
+        <div class="form-group">
+        <fieldset>
+          <label class="control-label" for="revertMessage">Revert Message</label><textarea class="form-control" name="revertMessage" rows="4"
+          placeholder="Please specify the reason for rejecting the book."></textarea>
+        </fieldset>
+      </div>
+      <div class="form-group">
+        <div class="form-row justify-content-end">
+            <div class="col-auto">
+                <button class="btn btn-success" formaction="/admin/approve" type="submit">Approve</button>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-danger" formaction="/admin/reject" type="submit">Reject</button>
+          </div>
+        </div>
+    </div>
+      </fieldset>
+    </form>
+  </div>
+  </div>
+  <div class="col-2"></div>
+</div>
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script src="/static/javascripts/internalBook.js"></script>

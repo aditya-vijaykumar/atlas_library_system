@@ -252,7 +252,7 @@ router.post('/bookapproval', ensureAuthenticated, uploadDrafts.fields([{
             genres : req.body.genre, 
             image_url : req.files.coverimage[0].path,
             author_email : req.session.user.email,
-            author_username : req.body.username,
+            author_username : req.session.user.username,
             book_url : req.files.bookpdf[0].path,
             book_location : req.body.title.replace(/\s/g, ''),
             book_rental_price : req.body.rental,

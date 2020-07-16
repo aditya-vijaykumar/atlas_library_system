@@ -72,11 +72,18 @@ const DraftBookSchema = new mongoose.Schema({
   book_rental_price : {
     type : Number
   },
+  author_ethaddress : {
+    type : String
+  },
   admin_approve_request :{
     type: Boolean,
     default : false
   },
   admin_revert :{
+    type: Boolean, 
+    default : false
+  },
+  admin_approved :{
     type: Boolean, 
     default : false
   },

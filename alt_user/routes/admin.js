@@ -4,6 +4,8 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const sgMail = require('@sendgrid/mail');
+const skynet = require('@nebulous/skynet');
+const fs = require('fs-extra');
 require("dotenv").config();
 
 // Load User model
@@ -135,5 +137,111 @@ router.get('/review', ensureAdmin, (req, res) => {
     })
     .catch(err => console.error(err));
 });
+
+router.get('/:bookid', ensureAdmin, (req, res) => {
+    DraftBook.findOne({ _id : req.params.bookid})
+    .then(data => {
+        console.log(data);
+        res.render('adminBook', {data})
+    })
+    .catch(err => console.error(err));
+});
+
+router.get('/pdf/:bookid', (req, res) => {
+    DraftBook.findOne({ _id : req.params.bookid})
+    .then(data => res.send({location : data.book_url}))
+    .catch(err => console.error(err));
+});
+
+router.post('/reject', ensureAdmin, (req,res) => {
+    book_id = req.body.bookid;
+    console.log(book_id);
+    DraftBook.findOne({ _id : book_id})
+    .then(book => {
+        book.admin_approve_request = false;
+        book.admin_revert = true;
+        book.admin_revert_msg = req.body.revertMessage;
+        book.save()
+        .then(data => {
+            console.log('Successfully rejected the book');
+            req.flash('success_msg', 'Your request has been successfully processed.');
+            res.redirect('/admin/review');
+        })
+    })
+    .catch(err => {
+        req.flash('error_msg', 'There was some error in processing your request.');
+        res.redirect('/admin/review');
+    })
+});
+
+router.post('/approve', ensureAdmin, (req,res) => {
+    book_id = req.body.bookid;
+    console.log(book_id);
+    DraftBook.findOne({ _id : book_id})
+    .then(book => {
+        console.log('found the book');
+        let product_id = Date.now();
+        let image_url = book.image_url.slice(12, book.image_url.length);
+            const newBook = new Books({
+                book_authors : book.book_authors,
+                book_desc : book.book_desc,
+                book_pages : book.book_pages,
+                book_title : book.book_title,
+                genres : book.genres,
+                image_url,
+                product_id,
+                book_url : book.book_url,
+                book_location :book.book_location,
+                author_email : book.author_email,
+                book_rental : book.book_rental,
+                author_ethaddress : book.author_ethaddress
+            });
+            newBook.save()
+            .then(book => {
+                console.log('Saved Book in the database.');
+            })
+            .catch(err => console.error(err));
+            fs.remove(book.book_url, err => {
+                if (err) return console.error(err)
+                console.log('success!');
+            });
+            fs.copy(book.image_url, 'uploads' + image_url, err => {
+                if (err) return console.error(err)
+                console.log('successfully copied file!')
+              });
+            fs.remove(book.image_url, err => {
+                if (err) return console.error(err)
+                console.log('successfully deleted copy of image!');
+            });
+            book.image_url = image_url;
+            book.admin_approved = true;
+            book.admin_approve_request = false;
+            book.save()
+            .then( done => {
+                req.flash('success_msg', 'Your request has been successfully processed.');
+                res.redirect('/admin/review');
+            })
+            .catch(err => console.error(err));      
+       /* uploadFile(book.book_url)
+        .then(link => {
+            let book_url = link.slice(6, link.length);           
+      })
+      .catch(err => console.error(err)); */
+    })
+    .catch(err => {
+        req.flash('error_msg', 'There was some error in processing your request.');
+        res.redirect('/admin/review');
+    })
+});
+
+async function uploadFile(ref) {
+    console.log('Beginning upload of file to Sia Skynet')
+    const skylink = await skynet.UploadFile(
+      ref,
+      skynet.DefaultUploadOptions
+    );
+    console.log(`Upload successful, skylink: ${skylink}`);
+    return skylink;
+  }
 
 module.exports = router;

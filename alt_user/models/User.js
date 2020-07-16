@@ -129,6 +129,9 @@ const BookSchema = new mongoose.Schema({
   },
   book_rental : {
     type : Number
+  },
+  author_ethaddress : {
+    type : String
   }
 }, {
   collection: 'newbooks'
