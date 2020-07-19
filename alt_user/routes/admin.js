@@ -181,6 +181,11 @@ router.get('/book/:id', ensureAdmin, (req, res) => {
         });
 });
 
+router.get('/revenue', ensureAdmin,(req, res) => {
+    res.render('adminRevenue', {user : req.user});
+});
+
+
 router.post('/reject', ensureAdmin, (req,res) => {
     book_id = req.body.bookid;
     console.log(book_id);

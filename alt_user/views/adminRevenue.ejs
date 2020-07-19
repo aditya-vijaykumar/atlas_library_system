@@ -1,20 +1,18 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
   <div class="container">
       <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
+      <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
           class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
               class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                href="/dashboard">Switch to User</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
               <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/users/logout">Logout</a></li>
+                      href="/admin/logout">Logout</a></li>
           </ul>
       </div>
   </div>
@@ -25,16 +23,9 @@
     
     <div class="row">
       <div class="card border-primary mb-3 col-6 px-2 py-2">
-          <div class="card-header">Account details</div>
+          <div class="card-header">Revenue details</div>
           <div class="card-body">
-            <h4 class="card-title">Name: <%= user.name %> </h4>
-            <h4 class="card-title">Email: <%= user.email %> </h4>
-          </div>
-          <div class="card-header">Ethereum Account details</div>
-          <div class="card-body">
-            <h4 class="card-title">Ethereum address:</h4>
-            <h5><%= user.ethaddress%></h5>
-            <h4 class="card-title">Token Balance:</h4>
+            <h4 class="card-title">Revenue Balance:</h4>
             <h5> &#9830; <span id="balance"></span> ALT</h5>
           </div>
           
@@ -74,4 +65,4 @@
             </form>
         </div>
     </div>
-    <script src="/static/javascripts/authorAccount.js"></script>
+    <script src="/static/javascripts/adminRevenue.js"></script>

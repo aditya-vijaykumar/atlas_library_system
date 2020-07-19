@@ -131,7 +131,8 @@ const BookSchema = new mongoose.Schema({
     type : Number
   },
   author_ethaddress : {
-    type : String
+    type : String,
+    default : "0xaec6c58eb29b121b8795a1f3d267da9cc45d5ed3"
   }
 }, {
   collection: 'newbooks'

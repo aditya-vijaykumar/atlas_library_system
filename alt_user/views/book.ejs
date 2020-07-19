@@ -102,16 +102,22 @@
             <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before purchasing.</label>
           </div>
           <div class="form-group">
-          <fieldset disabled="">
+          <fieldset>
             <label class="control-label" for="email">Email address</label>
             <input class="form-control" id="email" name="email" type="text" value= "<%= user.email%>" readonly>
             <small id="emailHelp" class="form-text text-muted">We'll email you the purchase reciept.</small>
           </fieldset>
         </div>
           <div class="form-group">
-          <fieldset disabled="">
+          <fieldset>
             <label class="control-label" for="ethaddress">Ethereum address</label>
             <input class="form-control" id="ethaddress" name="ethaddress" type="text" value= "<%= user.ethaddress%>" readonly >
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <fieldset>
+            <label class="control-label" for="ethaddress">Author Ethereum address</label>
+            <input class="form-control" id="author_ethaddress" name="author_ethaddress" type="text" value= "<%= data.author_ethaddress%>" readonly >
           </fieldset>
         </div>
         <div class="form-group">

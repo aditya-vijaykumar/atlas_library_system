@@ -15,8 +15,10 @@ const rental = model.Rentals;
 const transaction = model.Transactions;
 
 // api values
-const contract_address = "0xd65608ebffe1c417dd5ec845a6011013e602cc7c";
-const mint_address = "0x5ee296ebf2a8fa0e875677453510aa5a16c513dc";
+const old_contract_address = "0xd65608ebffe1c417dd5ec845a6011013e602cc7c";
+const contract_address = "0xb94960eab249ae05cbdef5c45268c092b0ca15f5";
+const old_mint_address = "0x5ee296ebf2a8fa0e875677453510aa5a16c513dc";
+const mint_address = "0x5040e5ea53774f0c5b5c873661449ad4cf425ec9";
 const book_address = "0x58c08716a36d33bb25a91161ace368a1c5dafd23";
 const api_key = process.env.ETHVIGIL_API_KEY;
 const rest_api_endpoint = 'https://beta-api.ethvigil.com/v0.1';
@@ -154,20 +156,20 @@ router.get('/redirect', secured, (req, res) => res.render('redirect'));
 
 //Rental transactions
 router.post('/rent', secured, (req, res) => {
-    const email = req.user._json.email;
+    const email = req.session.user.email;
     const cost = req.body.token;
     const days = req.body.days2;
     const product_id = req.body.prdid;
-    User.findOne({ email: email })
-        .then(returndata => {
-            const ethaddress = returndata.ethaddress;
-            let token = cost * 10000;
-            let method_args = {
+    const author_ethaddress = req.body.author_ethaddress;
+    const ethaddress = req.session.user.ethaddress;
+    let token = cost * 10000;
+    let method_args = {
                 'User': ethaddress,
-                'amount': token
-            };
-            let method_api_endpoint = rest_api_endpoint + '/contract/' + contract_address + '/DeductBal';
-            axios.post(method_api_endpoint, method_args, headers)
+                'amount': token,
+                'Author' : author_ethaddress
+    };
+    let method_api_endpoint = rest_api_endpoint + '/contract/' + contract_address + '/DeductBal';
+    axios.post(method_api_endpoint, method_args, headers)
                 .then((response) => {
                     //BookAccess write
                     let method_args2 = {
@@ -249,7 +251,7 @@ router.post('/rent', secured, (req, res) => {
                     req.flash('error_tx', 'Your rental of book failed, please try again later.');
                     res.redirect('/dashboard');
                 });
-        })
+
 
 });
 
