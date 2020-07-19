@@ -11,8 +11,10 @@
               <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
               <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
               <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
+              <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
+                href="/dashboard">Switch to User</a></li>
               <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/author/logout">Logout</a></li>
+                      href="/users/logout">Logout</a></li>
           </ul>
       </div>
   </div>
@@ -40,10 +42,10 @@
       <tbody>
         <% for(var i=0; i < books.length; i++) { %>
         <tr>
-          <td><%= book[i].book_title %></td>
-          <td><%= book[i].genres %></td>
-          <td><%= book[i].date %></td>
-          <td><a class="btn btn-primary d-lg-flex justify-content-lg-end" role="button" href="/author/<%= book[i]._id %>">View</a></td>
+          <td><%= books[i].book_title %></td>
+          <td><%= books[i].genres %></td>
+          <td><%= books[i].date %></td>
+          <td><a class="btn btn-outline-primary" role="button" href="/app/ebook/<%= books[i].admin_product_id %>">View</a></td>
         </tr>
         <% } %>
       </tbody>
@@ -71,19 +73,21 @@
       </thead>
       <tbody>
         <% for(var i=0; i < drafts.length; i++) { %>
-        <tr>
+          <% if(drafts[i].admin_approve_request) { %>
+          <tr>
           <td><%= drafts[i].book_title %></td>
           <td><%= drafts[i].genres %></td>
           <td><%= drafts[i].date %></td>
           <td><a class="btn btn-outline-primary" role="button" href="/author/<%= drafts[i]._id %>">View</a></td>
         </tr>
         <% } %>
+        <% } %>
       </tbody>
     </table>
   </div>
 </section>
 
-<% if(books.length != 0) { %>
+<% if(drafts.length != 0) { %>
 <section style="margin: 16px 0px;">
   <h3>Books Reverted</h3>
   <div class="table-responsive bg-secondary">
@@ -91,19 +95,21 @@
       <thead>
         <tr>
           <th>Name of the Book</th>
-          <th>Genre</th>
           <th>Date</th>
+          <th>Msg</th>
           <th>Option</th>
         </tr> 
       </thead>
       <tbody>
-        <% for(var i=0; i < books.length; i++) { %>
+        <% for(var i=0; i < drafts.length; i++) { %>
+        <% if(drafts[i].admin_revert) { %>
         <tr>
-          <td>Cell 1</td>
-          <td>Cell 2</td>
-          <td>Cell 3</td>
-          <td>Cell 4</td> 
+          <td><%= drafts[i].book_title %></td>
+          <td><%= drafts[i].date %></td>
+          <td><%= drafts[i].admin_revert_msg %></td>
+          <td><a class="btn btn-outline-primary" role="button" href="/author/<%= drafts[i]._id %>">View</a></td> 
         </tr>
+        <% } %>
         <% } %>
       </tbody>
     </table>

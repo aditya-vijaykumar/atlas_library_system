@@ -79,6 +79,9 @@ const DraftBookSchema = new mongoose.Schema({
     type: Boolean,
     default : false
   },
+  admin_product_id : {
+    type : Number
+  },
   admin_revert :{
     type: Boolean, 
     default : false

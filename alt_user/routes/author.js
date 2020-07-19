@@ -136,24 +136,28 @@ router.post('/resendlink', (req, res) => {
 });
 
 router.get('/profile', ensureAuthenticated, (req, res) => {
-    AuthorProfile.findOne({ email : req.session.user.email }, function (err, user) {
-        if (!user) {
+    AuthorProfile.findOne({ email : req.session.user.email })
+        .then(user =>{
+            res.render('authorProfile', { user: req.session.user, profile : user });
+        })
+        .catch(err => {
+            console.error(err);
             req.flash('error_msg', 'Unable to access author profile.');
-            return res.redirect('/author/dashboard');
-        }
-        res.render('authorProfile', { user: req.session.user, profile : user });
-    });
+            res.redirect('/author/dashboard');
+        });
 });
 
 
 router.get('/updateprofile', ensureAuthenticated, (req, res) => {
-    AuthorProfile.findOne({ email : req.session.user.email }, function (err, user) {
-        if (!user) {
+    AuthorProfile.findOne({ email : req.session.user.email })
+        .then(user =>{
+            res.render('updateauthorprofile', { user: req.session.user, profile : user });
+        })
+        .catch(err => {
+            console.error(err);
             req.flash('error_msg', 'Unable to access author profile.');
-            return res.redirect('/author/dashboard');
-        }
-        res.render('updateauthorprofile', { user: req.session.user, profile : user });
-    });
+            res.redirect('/author/dashboard');
+        });
 });
 
 router.get('/book', ensureAuthenticated, (req, res) => {

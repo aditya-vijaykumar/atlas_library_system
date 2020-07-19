@@ -31,7 +31,7 @@ let headers = {
 // Browse Books Page
 router.get('/browse', secured, (req, res) => {
     books.find().then(data => {
-        res.render('browse', { data });
+        res.render('browse', { data, user : req.session.user });
     });
 });
 
@@ -138,19 +138,15 @@ router.get('/ebook/:id', secured, (req, res) => {
 
 // Account page
 router.get('/account', secured, (req, res) => {
-    const email = req.user._json.email;
-    User.findOne({ email: email })
-        .then(returndata => {
-            transaction.find({ email: email })
-                .then(txlog => {
-                    res.render('account', { user: returndata, txlog: txlog })
-                })
-        })
-        .catch(error => {
-            console.log(error);
-            req.flash('error_tx', 'Invalid request, please try again later.');
-            res.redirect('/dashboard');
-        });
+    transaction.find({ email: req.session.user.email })
+    .then(txlog => {
+        res.render('account', { user: req.session.user, txlog: txlog })
+    })
+    .catch(error => {
+        console.log(error);
+        req.flash('error_tx', 'Invalid request, please try again later.');
+        res.redirect('/dashboard');
+    });  
 });
 
 // Redirect page

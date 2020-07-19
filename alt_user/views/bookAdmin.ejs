@@ -17,35 +17,26 @@
       </div>
   </div>
 </nav>
-<% include ./partials/messages %>
-<div class="jumbotron mt-3">
-  <h1>Hello </h1>
-  <p>This section allows you to have a look at all the books sent for approval as well as all the books
-    approved.</p>
-</div>
-
-<section style="margin: 16px 0px;">
-  <h3>Books Pending for Approval</h3>
-  <div class="table-responsive bg-secondary">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name of the Book</th>
-          <th>Author</th>
-          <th>Date</th>
-          <th>Option</th>
-        </tr> 
-      </thead>
-      <tbody>
-        <% for(var i=0; i < data.length; i++) { %>
-        <tr>
-          <td><%= data[i].book_title %></td>
-          <td><%= data[i].book_authors %></td>
-          <td><%= data[i].date %></td>
-          <td><a class="btn btn-outline-primary" role="button" href="/admin/book/<%= data[i].admin_product_id %>">View</a></td>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
+<ol class="breadcrumb" style="margin-top: 15px;">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active">Browse Library/ Book</li>
+  </ol>
+  <!-- This is the book details -->
+<div class="row">
+  <div class="col-2"></div>
+  <div class="jumbotron col-8">
+    <h1 class="display-4"><%= data.book_title %></h1>
+    <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
+    <div class=""><img style="height: 450px; width: auto; display: block;" 
+      src= "http://localhost:3000/uploads/<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
+    <p class="lead mt-3"><%= data.book_desc %></p>
+    <hr class="my-4">
+    <div class="card-footer mb-3">
+      Book Pages: <%= data.book_pages %>
+   </div>
+   <div class="card-footer">
+    Catrgory : <%= data.genres %>
+ </div>
   </div>
-</section>
+  <div class="col-2"></div>
+</div>

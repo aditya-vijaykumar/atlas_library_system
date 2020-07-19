@@ -138,6 +138,22 @@ router.get('/review', ensureAdmin, (req, res) => {
     .catch(err => console.error(err));
 });
 
+router.get('/approved', ensureAdmin, (req, res) => {
+    DraftBook.find({ admin_approved : true})
+    .then(data => {
+        res.render('adminApproved', { data : data})
+    })
+    .catch(err => console.error(err));
+});
+
+router.get('/rejected', ensureAdmin, (req, res) => {
+    DraftBook.find({ admin_revert : true})
+    .then(data => {
+        res.render('adminReject', { data : data})
+    })
+    .catch(err => console.error(err));
+});
+
 router.get('/:bookid', ensureAdmin, (req, res) => {
     DraftBook.findOne({ _id : req.params.bookid})
     .then(data => {
@@ -151,6 +167,18 @@ router.get('/pdf/:bookid', (req, res) => {
     DraftBook.findOne({ _id : req.params.bookid})
     .then(data => res.send({location : data.book_url}))
     .catch(err => console.error(err));
+});
+
+router.get('/book/:id', ensureAdmin, (req, res) => {
+    Books.findOne({ product_id: req.params.id })
+        .then(data => {
+            res.render('bookAdmin', { data: data});
+        })
+        .catch(error => {
+            console.log(error);
+            req.flash('error_tx', 'Invalid request, please try again later.');
+            res.redirect('/admin/dashboard');
+        });
 });
 
 router.post('/reject', ensureAdmin, (req,res) => {
@@ -208,14 +236,15 @@ router.post('/approve', ensureAdmin, (req,res) => {
             fs.copy(book.image_url, 'uploads' + image_url, err => {
                 if (err) return console.error(err)
                 console.log('successfully copied file!')
+                fs.remove(book.image_url, err => {
+                    if (err) return console.error(err)
+                    console.log('successfully deleted copy of image!');
+                });
               });
-            fs.remove(book.image_url, err => {
-                if (err) return console.error(err)
-                console.log('successfully deleted copy of image!');
-            });
             book.image_url = image_url;
             book.admin_approved = true;
             book.admin_approve_request = false;
+            book.admin_product_id = product_id;
             book.save()
             .then( done => {
                 req.flash('success_msg', 'Your request has been successfully processed.');
