@@ -24,6 +24,26 @@
     <h1 class="display-3">Hello, <%= user.name %></h1>
     <h2 class="display-6">Welcome to ALT Author family.</h2>
     <hr class="my-4">
+    <% if(count > 0) { %>
+    <h4 class="display-6" style="align-self: center;">All your active and available books will appear here.</h4>
+    <% } %>
     <div class="row">
+      <% for(var i=0; i < count; i++) { %>
+        <div class="card mb-3 col-4" style="height: 570px;">
+            <h3 class="card-header" id="title"><%= data[i].book_title%></h3>
+            <div class="card-body">
+              <h5 class="card-title" id="author"><%= data[i].book_authors%></h5>
+              <h6 class="card-subtitle text-muted">Active since: <%= data[i].date%></h6>
+            </div>
+            <img style="height: 300px; width: 199px; display: block; align-self: center;" 
+                src= "<%= data[i].image_url%>" alt="Card image" id="img">
+            <div class="card-body" style="align-self: center;">
+              <a href="/app/book/<%= data[i].product_id%>" class="btn btn-primary">View</a>
+            </div>
+            <div class="card-footer text-muted">
+               Book Pages: <%= data[i].book_pages%>
+            </div>
+          </div>
+          <% } %>
     </div>
   </div>

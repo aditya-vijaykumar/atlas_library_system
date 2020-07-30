@@ -38,7 +38,7 @@ contract BookAccess {
              userCounter++;
              emit NewUser(userCounter, User);
         }
-        userBookAccess[User][BookID] = now + (_days * 1 days);
+        userBookAccess[User][BookID] = block.timestamp + (_days * 1 days);
         bookAccessCounter++;
         emit AccessGranted(User, BookID);
         return true;
@@ -46,13 +46,13 @@ contract BookAccess {
     
     function getUserAccess(address User, uint256 BookID) public view returns(bool) {
         bool access = false;
-        if(now < userBookAccess[User][BookID]){
+        if(block.timestamp < userBookAccess[User][BookID]){
             access = true;
         }
         return access;
     }
     
-    function getDetails() public view onlyOwner returns (uint256 _userCounter, uint256 _bookAccessCounter)  {
+    function getDetails() public view returns (uint256 _userCounter, uint256 _bookAccessCounter)  {
         return (userCounter, bookAccessCounter);
     }
     

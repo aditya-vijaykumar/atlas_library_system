@@ -29,7 +29,7 @@
     <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
     <h3 class="display-5 mb-3"><a href="/<%= data.author_username%>"><i class="fa fa-0.5x fa-user" aria-hidden="true"></i>&nbsp;@<%= data.author_username %></a></h3>
     <div class=""><img style="height: 450px; width: auto; display: block;" 
-      src= "http://localhost:3000/<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
+      src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
     <p class="lead mt-3"><%= data.book_desc %></p>
     <hr class="my-4">
     <div class="card-footer mb-3">
@@ -111,4 +111,4 @@
   <div class="col-2"></div>
 </div>
 <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-<script src="/static/javascripts/internalBook.js"></script>
+<script src="/static/javascripts/adminBook.js"></script>

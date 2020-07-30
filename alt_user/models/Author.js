@@ -35,7 +35,7 @@ const AuthorSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  collection: 'demo-author'
+  collection: 'authors'
 });
 
 const DraftBookSchema = new mongoose.Schema({
@@ -57,6 +57,9 @@ const DraftBookSchema = new mongoose.Schema({
   image_url: {
     type: String
   },
+  image_key: {
+    type: String
+  },
   author_email: {
     type: String
   },
@@ -64,6 +67,9 @@ const DraftBookSchema = new mongoose.Schema({
     type: String
   },
   book_url : {
+    type: String
+  },
+  book_key : {
     type: String
   },
   book_location :{
@@ -118,7 +124,7 @@ const TokenSchema = new mongoose.Schema({
     expires: 43200 
   }
 }, {
-  collection: 'authortoken'
+  collection: 'authortokens'
 });
 
 const AuthorProfileSchema = new mongoose.Schema({
@@ -152,7 +158,7 @@ const AuthorProfileSchema = new mongoose.Schema({
       default: Date.now
     }
   }, {
-    collection: 'authordata1'
+    collection: 'authorprofiles'
   });
 
 const Author = mongoose.model('Author', AuthorSchema);

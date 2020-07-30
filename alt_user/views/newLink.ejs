@@ -12,7 +12,7 @@
     <div class="card card-body">
       <h2 class="text-center mb-3">  Resend Email Verification Link</h2>
       <% include ./partials/messages %>
-      <form action="/author/resendtoken" method="POST">
+      <form action="/author/resendlink" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
           <input
@@ -26,7 +26,7 @@
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
       </form>
       <p class="lead mt-4">
-        No Account? <a href="/author/register">Register</a>
+        Note - This will work only if you have already requested for an author's account and failed to confirm your email in the specified time.
       </p>
     </div>
   </div>

@@ -6,9 +6,6 @@ $(document).ready(function () {
         var location;
         $.get(intapi, function (retdata) {
             location = retdata.location;
-            console.log(location);
-            location = location.replace("uploads\\temp\\",'/uploads/temp/');
-            console.log(location);
             $('#loading').hide();
             getPDF(location);
         })

@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  collection: 'userdata'
+  collection: 'users'
 });
 
 const TransactSchema = new mongoose.Schema({
@@ -46,7 +46,7 @@ const TransactSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  collection: 'transacts'
+  collection: 'transactions'
 });
 
 const RentalSchema = new mongoose.Schema({
@@ -93,7 +93,7 @@ const RentalSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  collection: 'rental-new'
+  collection: 'rentals'
 });
 
 const BookSchema = new mongoose.Schema({

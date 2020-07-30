@@ -1,44 +1,19 @@
 $(document).ready(function () {
-    $('div.mainbook').hide();
-    const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x58c08716a36d33bb25a91161ace368a1c5dafd23/getUserAccess/';
-    const internalapi = 'http://localhost:3000/app/geteth'; 
-    const internal = 'http://localhost:3000/app/thepdf'; 
-    let bookid = window.location.pathname.replace('/app/ebook/', '');
-
-    $.get(internalapi, function (retdata) {
-        let account = retdata.ethaddress;
-        $.getJSON(ethapi + account + '/' + bookid, function (retdata) {
-            console.log(retdata.data[0].bool);
-            if (retdata.success) {
-                if (!retdata.data[0].bool) {
-                    $('#showbook').attr("onClick", "javascript:void(0)");
-                    $('#showbook').attr("class", "btn btn-warning disabled");
-                    $('#showbook').html("You don't have access");
-                } else {
-                    $('#showbook').attr("class", "btn btn-success");
-                    $('#showbook').html('Click to load book');
-                    $('div.mainbook').show();
-                    $('#showbook').hide();
-                    setTimeout(intcall, 3000);
-                }
-            }
-        });
-
-    });
-
-
+    setTimeout(intcall, 3000);
     function intcall() {
-        const intapi = 'http://localhost:3000/app/pdf';
-        var callurl = intapi + '/' + bookid;
-        $.get(callurl, function (retdata) {
+        var book_id = window.location.pathname.replace("/author/",'');
+        console.log(book_id);
+        const intapi = 'http://localhost:3000/author/pdf/'+book_id;
+        var location;
+        $.get(intapi, function (retdata) {
+            location = retdata.location;
             $('#loading').hide();
-            getPDF(callurl);
+            getPDF(location);
         })
     }
 });
 
 function getPDF(url) {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js'
     let pdfDoc = null,
         pageNum = 1,
         pageIsRendering = false,

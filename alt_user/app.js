@@ -15,13 +15,14 @@ require('./config/local')(passport);
 
 // DB Config
 const db = 'mongodb://localhost:27017/test';
+const dbonline = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
-    { useUnifiedTopology: true, useNewUrlParser: true }
-  )
+    dbonline,
+    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex : true, useFindAndModify: false }
+  ) 
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
@@ -35,7 +36,6 @@ app.use(express.urlencoded({ extended: true }));
 //public folder
 app.use('/static', express.static('public'));
 app.use('/uploads', express.static('uploads'));
-
 
 // Express session Have to change
 app.use(

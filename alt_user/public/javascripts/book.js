@@ -22,7 +22,7 @@ $(document).ready(function () {
               $('input[name=token]').val(altcost);
               $('input[name=days2]').val(days);
               $('input#token2').html(altcost);
-              if((altcost*10000)<balance) {
+              if((altcost*10000)<=balance) {
                 $('#balance').show();
                 $('#balance2').hide();
                 $('span.balance').html((balance/10000));

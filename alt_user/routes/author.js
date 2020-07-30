@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
 const sgMail = require('@sendgrid/mail');
+const fs = require('fs-extra');
 require("dotenv").config();
 
 //Mongoose data models
@@ -19,10 +20,9 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //Guarded Route functions
 const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
-const { route } = require('.');
 
 //Multer Uploads
-const { upload, uploadDrafts } = require('../config/upload');
+const { uploadDrafts } = require('../config/aws');
 
 //Various Routes
 router.get('/confirmation/:user/:token', (req, res) => {
@@ -42,12 +42,26 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                 });
                                 newAuthorProfile.save()
                                     .then(profile => console.log('Created new profile after verifying email id.'))
-                                    .catch(err => console.error(err));
+                                    .catch(err => {
+                                        console.error(err);
+                                        req.flash(
+                                            'error_msg',
+                                            'There was an error in verifying the email, please try after a few minutes.'
+                                        );
+                                        res.redirect('/');
+                                    });
 
                                 //Updating user profile permissions
                                 User.findOneAndUpdate({email : user.email}, {role : "author"})
                                 .then(done => console.log('user permission upgraded'))
-                                .catch(err => console.error(err));
+                                .catch(err => {
+                                    console.error(err);
+                                    req.flash(
+                                        'error_msg',
+                                        'There was an error in verifying the email, please try after a few minutes.'
+                                    );
+                                    res.redirect('/');
+                                });
 
                                 //sending success message to user
                                 req.flash(
@@ -62,7 +76,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                     'error_msg',
                                     'There was an error in verifying the email, please try after a few minutes.'
                                 );
-                                res.redirect('/author/login');
+                                res.redirect('/');
                             })
                     } else {
                         req.flash(
@@ -77,16 +91,16 @@ router.get('/confirmation/:user/:token', (req, res) => {
                         'error_msg',
                         'Could not verify your account, please contact our support.'
                     );
-                    res.redirect('/author/login');
+                    res.redirect('/');
                 });
         })
         .catch(err => {
             req.flash(
                 'error_msg',
-                'Could not verify your account. Looks like the email verification link has expired. Please request a new link.'
+                'Could not verify your account. Looks like the email verification link has expired. Please request a new link. Details are specified in the previous mail.'
             );
-            res.redirect('/author/login');
-        })
+            res.redirect('/');
+        });
 });
 
 router.get('/resendlink', (req, res) => {
@@ -94,7 +108,8 @@ router.get('/resendlink', (req, res) => {
 });
 
 router.post('/resendlink', (req, res) => {
-    Author.findOne({ email: req.body.email }, function (err, user) {
+    Author.findOne({ email: req.body.email })
+    .then(user => {
         if (!user) {
             req.flash(
                 'error_msg',
@@ -102,36 +117,56 @@ router.post('/resendlink', (req, res) => {
             );
             res.redirect('/author/resendlink');
         }
-        if (user.isVerified) {
+        else if (user.isVerified) {
             req.flash(
                 'error_msg',
                 'The account has already been verified, please login to continue.'
             );
             res.redirect('/author/resendlink');
-        }
+        }   
+        else {
 
-        // Create a verification token, save it, and send email
-        const token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+            // Create a verification token, save it, and send email
+            const token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
 
-        // Save the token
-        token.save(function (err) {
-            if (err) { return res.status(500).send({ msg: err.message }); }
-
+            // Save the token
+            token.save()
+            .then(token => {
             // Send the email
-            const msg = {
-                to: user.email,
-                from: 'aditya.devsandbox@gmail.com',
-                subject: 'Account Verification Link',
-                html: '<strong>Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/confirmation\/' + token._userId + '\/' + token.token + '.\n</strong><br>Please note this link expires in 12 hours.',
-            };
-            sgMail.send(msg);
-            req.flash(
-                'success_msg',
-                'A new link has been generated and sent, please check your email and verify.'
-            );
-            res.redirect('/author/login');
-        });
+                const msg = {
+                    to: user.email,
+                    from: 'aditya.devsandbox@gmail.com',
+                    subject: 'Account Verification Link',
+                    html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
+                 '.\n</strong><br>Please note this link expires in 12 hours.' +
+                 '.\n<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/resendlink\/',
+          };
+                sgMail.send(msg);
 
+                req.flash(
+                    'success_msg',
+                    'A new link has been generated and sent, please check your email and verify.'
+                );
+                res.redirect('/');
+
+            }).catch(err => {
+                console.error(err);
+                req.flash(
+                    'error_msg',
+                    'There was an error please try again later.'
+                );
+                res.redirect('/author/resendlink');
+            });
+
+        }      
+
+    }).catch(err => {
+        console.error(err);
+        req.flash(
+            'error_msg',
+            'There was an error please try again later.'
+        );
+        res.redirect('/author/resendlink');
     });
 });
 
@@ -169,6 +204,9 @@ router.get('/book', ensureAuthenticated, (req, res) => {
         .then(books => {
             res.render('authorBookTable', { user: req.session.user, books : books, drafts : drafts })
         })
+        .catch(err => {
+            console.error(err);
+        })
     })
     .catch(err => console.error(err));   
 });
@@ -178,7 +216,14 @@ router.get('/account', ensureAuthenticated, (req, res) => {
 
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('authorDashboard', { user: req.session.user });
+    Books.find({ author_email: req.session.user.email })
+    .then(data => {
+      res.render('authorDashboard', {user: req.session.user, data: data, count: data.length});
+    })
+    .catch(error => {
+      console.log(error);
+      res.render('authorDashboard', { user: req.session.user });
+    });
 });
 
 router.get('/about', ensureAuthenticated, (req, res) => {
@@ -186,16 +231,22 @@ router.get('/about', ensureAuthenticated, (req, res) => {
 });
 
 router.get('/newdraft', ensureAuthenticated, (req, res) => {
-    AuthorProfile.findOne({ email : req.session.user.email }, function (err, user) {
+    AuthorProfile.findOne({ email : req.session.user.email })
+    .then(user => {
         if (!user) {
             req.flash('error_msg', 'Unable to process your request.');
-            return res.redirect('/author/dashboard');
+            res.redirect('/author/dashboard');
         }
         res.render('authorNewDraft', { user: req.session.user, profile : user });
+    })
+    .catch(err => {
+        console.error(err);
+        req.flash('error_msg', 'Unable to process your request.');
+        res.redirect('/author/dashboard');
     });
 }); 
 
-router.post('/updateprofile', upload.single('profileImage'), ensureAuthenticated, (req, res) => {
+router.post('/updateprofile', uploadDrafts.single('profileImage'), ensureAuthenticated, (req, res) => {
     if (req.file) {
         console.log('Uploading file...');
         AuthorProfile.findOne({ email: req.session.user.email })
@@ -207,17 +258,32 @@ router.post('/updateprofile', upload.single('profileImage'), ensureAuthenticated
                 profile.location = req.body.location;
                 profile.twitter = req.body.twitter;
                 profile.website = req.body.website;
-                profile.profilePicture = req.file.path;
-
+                if (typeof profile.profilePicture !== 'undefined' && profile.profilePicture !== null){
+                    
+                    //Add function to delete file from aws and then upload new one                    
+                    profile.profilePicture = req.file.location;  
+                 }
+                 else if (typeof profile.profilePicture == 'undefined' || profile.profilePicture == null){
+                     //Very first upload, and hence update it directly
+                    profile.profilePicture = req.file.location;
+                 }
                 profile.save()
                     .then(data => {
                         console.log('Successfully updated profile');
                         req.flash('success_msg', 'Profile has been successfully updated');
                         res.redirect("/author/dashboard");
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => {
+                        console.error(err);
+                        req.flash('error_msg', 'Unable to process your request.');
+                        res.redirect('/author/dashboard');
+                    });
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                req.flash('error_msg', 'Unable to process your request.');
+                res.redirect('/author/dashboard');
+            });
     }
     else {
         AuthorProfile.findOne({ email: req.session.user.email })
@@ -235,10 +301,29 @@ router.post('/updateprofile', upload.single('profileImage'), ensureAuthenticated
                             req.flash('success_msg', 'Profile has been successfully updated');
                             res.redirect("/author/dashboard");
                         })
-                        .catch(err => console.error(err));
+                        .catch(err => {
+                            console.error(err);
+                            req.flash('error_msg', 'Unable to process your request.');
+                            res.redirect('/author/dashboard');
+                        });
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                req.flash('error_msg', 'Unable to process your request.');
+                res.redirect('/author/dashboard');
+            });
     }
+});
+
+router.get('/pdf/:id', ensureAuthenticated, (req, res) => {
+    let bookid = req.params.id;
+    DraftBook.findById(bookid)
+    .then(data =>{
+        if(data.author_email ==  req.session.user.email) {
+            res.send({location : data.book_url})
+        }
+    })
+    .catch(err => console.error(err));
 });
 
 router.post('/bookapproval', ensureAuthenticated, uploadDrafts.fields([{
@@ -254,35 +339,59 @@ router.post('/bookapproval', ensureAuthenticated, uploadDrafts.fields([{
             book_pages : req.body.pages, 
             book_title : req.body.title, 
             genres : req.body.genre, 
-            image_url : req.files.coverimage[0].path,
+            image_url : req.files.coverimage[0].location,
+            image_key : req.files.coverimage[0].key,
             author_email : req.session.user.email,
             author_username : req.session.user.username,
-            book_url : req.files.bookpdf[0].path,
+            book_url : req.files.bookpdf[0].location,
+            book_key : req.files.bookpdf[0].key,
             book_location : req.body.title.replace(/\s/g, ''),
             book_rental_price : req.body.rental,
             admin_approve_request : true
         });
-        console.log('\n This is image' + req.files.coverimage[0].path);
-        console.log('\n This is pdf' + req.files.bookpdf[0].path);
+        console.log('\n This is Book Pdf key' + req.files.bookpdf[0].key);
+        console.log('\n This is Coverf Image Link' + req.files.coverimage[0].location);
+
         newDraftBook.save()
         .then(draft =>{
             req.flash('success_msg', 'The draft book has been successfully saved and sent for approval.');
             res.redirect('/author/book');
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            req.flash('error_msg', 'Unable to process your request.');
+            res.redirect('/author/dashboard');
+        });
     }
     else {
         req.flash('error_msg', 'Cannot send draft for approval without cover image and/or book pdf.');
         res.redirect('/author/book');
-
     }
 });
 
 router.get('/:bookid', ensureAuthenticated, (req, res) => {
-    DraftBook.findOne({_id : req.params.bookid})
-    .then(data => {
-        res.render('authorBook', {data : data});
-    })
+    let id = req.params.bookid;
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+        DraftBook.findById(id)
+        .then(data => {
+            if (data.author_email == req.session.user.email) {
+                res.render('authorBook', {data : data});
+            }
+            if(data.author_email != req.session.user.email) {
+                req.flash('error_msg', 'You do not have access to view this book details.');
+                res.redirect('/author/dashboard');
+            }            
+        })
+        .catch(err => {
+            console.error(err);
+            req.flash('error_msg', 'Unable to process your request.');
+            res.redirect('/author/dashboard');
+        });
+    }
+    else {
+        req.flash('error_msg', 'Unable to process your request.');
+        res.redirect('/author/dashboard');
+    }
 })
 
 module.exports = router;

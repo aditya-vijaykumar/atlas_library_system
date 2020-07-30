@@ -27,15 +27,21 @@
   <div class="jumbotron col-8">
     <h1 class="display-4"><%= data.book_title %></h1>
     <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
-    <div class=""><img style="height: 450px; width: auto; display: block;" 
-      src= "http://localhost:3000/uploads/<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
-    <p class="lead mt-3"><%= data.book_desc %></p>
+    <% if(data.admin_revert) { %>
+      <h3>Book Reverted!</h3>
+      <p>This Book has been reverted by the admin and therefore, some data might be unavailable.</p>
+      <p class="lead mt-3"><strong>Admin Revert Message :</strong> <%= data.admin_revert_msg %></p>
+      <% } if(!data.admin_revert) { %>
+        <div class=""><img style="height: 450px; width: auto; display: block;" 
+          src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
+        <% } %>    
+    <p class="lead mt-3"><strong>Description :</strong> <%= data.book_desc %></p>
     <hr class="my-4">
     <div class="card-footer mb-3">
       Book Pages: <%= data.book_pages %>
    </div>
    <div class="card-footer">
-    Catrgory : <%= data.genres %>
+    Category : <%= data.genres %>
  </div>
   </div>
   <div class="col-2"></div>
