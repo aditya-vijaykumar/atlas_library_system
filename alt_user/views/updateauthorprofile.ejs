@@ -24,7 +24,7 @@
                                 <h5 class="mb-4">Please crosscheck all fields before submitting.</h5>
 
 
-                                <form method="post" action="assets/contact.php" id="contactform" autocomplete="off">
+                                <form method="post" enctype="multipart/form-data" action="/author/updateprofile"  autocomplete="off">
                                     <span class="input">
                                         <input class="input_field" type="text" id="fullName" name="fullName"
                                             value="<%= profile.fullName %>">

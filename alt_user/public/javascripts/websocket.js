@@ -48,7 +48,7 @@ function initWS(key) {
                 if (data.type == 'event') {
                     console.log('Event:', data);
                     $(document).ready(function () {
-                        if (data.event_name == 'AccessGranted') { window.location.replace("https://atlas.adityavijaykumar.me/ashboard"); }
+                        if (data.event_name == 'AccessGranted') { window.location.replace("https://atlas.adityavijaykumar.me/dashboard"); }
                         if (data.event_name == 'UpdateBalance') { window.location.replace("https://atlas.adityavijaykumar.me/app/account"); }
                     });
                 }

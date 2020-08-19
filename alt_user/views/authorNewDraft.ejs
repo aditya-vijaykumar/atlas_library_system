@@ -39,7 +39,7 @@
                                     </p>
                                 </div>
 
-                                <form method="post" action="assets/contact.php" id="contactform" autocomplete="off">
+                                <form method="post" action="/author/bookapproval" enctype="multipart/form-data" autocomplete="off">
                                     <span class="input">
                                         <input class="input_field" type="text" id="author" name="author" value="">
                                         <label class="input_label">
@@ -50,7 +50,7 @@
                                         <div class="col-xl-6 col-lg-12 col-sm-6">
                                             <span class="input input--filled">
                                                 <input class="input_field" type="email" id="Email" name="Email"
-                                                    value="aditya.devsandbox@gmail.com" readonly
+                                                    value="<%= user.email%>" readonly
                                                     aria-describedby="emailHelp">
                                                 <label class="input_label">
                                                     <span class="input__label-content">Email of the Author</span>
@@ -62,7 +62,7 @@
                                         <div class="col-xl-6 col-lg-12 col-sm-6">
                                             <span class="input input--filled">
                                                 <input class="input_field" type="text" id="username" name="username"
-                                                    value="aditya.vijaykumar" readonly>
+                                                    value="<%= profile.username%>" readonly>
                                                 <label class="input_label">
                                                     <span class="input__label-content">Username of the Author</span>
                                                 </label>
