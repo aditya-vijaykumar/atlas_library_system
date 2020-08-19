@@ -1,48 +1,163 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/dashboard">Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/dashboard">Home</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/app/browse">Browse</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/app/account">Account</a></li>
-              <li class="nav-item active" role="presentation"><a class="nav-link" href="/about">About</a></li>
-              <% if (user.role == 'author'){ %>
-              <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                href="/author/dashboard">Switch to Author</a></li>
-              <% } %>
-              <% if (user.role == 'user'){ %>
-                <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                  href="/author-signup">Upgrade to Author</a></li>
-                <% } %>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/users/logout">Logout</a></li>
-          </ul>
-      </div>
-  </div>
-</nav>
-  <ol class="breadcrumb" style="margin-top: 15px;">
-    <li class="breadcrumb-item"><a href="#">About</a></li>
-    <li class="breadcrumb-item active">Atlas Library</li>
-  </ol>
-  <div class="jumbotron mt-3">
-    <h1 class="display-3">Hello, <%= user.displayName %></h1>
-    <h2 class="display-4"> We are Atlas Library System.</h2>
-    <hr class="my-4">
-    <p style="text-align: center;"><img src="/static/images/LogoBig.png" style="height: 360px; width: auto; border-radius: 10px;"></p>
-    <h3 class="display-5"> Our Purpose.</h3>
-    <p class="lead">The purpose of this DeFi app is to help all users rent or buy books through an easy to use platform that ensures transparent and fair payment to authors.</p>
-    <h3 class="display-5"> Tech under the hood.</h3>
-    <p class="lead">All the transactions happen on the Goerli Test Network with our custom ERC20 token - Atlas Library Token or ALT. The status of the book rental is also stored on the chain to ensure transparency. We are powered by BlockVigil's powerful EthVigil API.</p>
-  </div>
-  
+<% include ./includes/head-one %>
 
-  <div class="jumbotron mt-3">
-    <blockquote class="blockquote text-right">
-      <p class="mb-0">Blockchain technologies will change transactions in a broad way.</p>
-      <footer class="blockquote-footer">Brad Garlinghouse,<cite title="Source Title"> CEO, Ripple</cite></footer>
-    </blockquote>
+<body>
+  <div id="page" class="theia-exception">
+    <% include ./includes/home-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>About Atlas Library System</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+
+      <div class="container margin_120_95">
+        <div class="main_title_2">
+          <span><em></em></span>
+          <h2>Why choose Atlas Library System</h2>
+          <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <a class="box_feat" href="#">
+              <i class="pe-7s-diamond"></i>
+              <h3>Qualified teachers</h3>
+              <p>Id mea congue dictas, nec et summo mazim impedit. Vim te audiam impetus interpretaris,
+                cum no alii option, cu sit mazim libris.</p>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <a class="box_feat" href="#">
+              <i class="pe-7s-display2"></i>
+              <h3>Equiped class rooms</h3>
+              <p>Id mea congue dictas, nec et summo mazim impedit. Vim te audiam impetus interpretaris,
+                cum no alii option, cu sit mazim libris. </p>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <a class="box_feat" href="#">
+              <i class="pe-7s-science"></i>
+              <h3>Advanced teaching</h3>
+              <p>Id mea congue dictas, nec et summo mazim impedit. Vim te audiam impetus interpretaris,
+                cum no alii option, cu sit mazim libris.</p>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <a class="box_feat" href="#">
+              <i class="pe-7s-rocket"></i>
+              <h3>Adavanced study plans</h3>
+              <p>Id mea congue dictas, nec et summo mazim impedit. Vim te audiam impetus interpretaris,
+                cum no alii option, cu sit mazim libris. </p>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <a class="box_feat" href="#">
+              <i class="pe-7s-target"></i>
+              <h3>Focus on target</h3>
+              <p>Id mea congue dictas, nec et summo mazim impedit. Vim te audiam impetus interpretaris,
+                cum no alii option, cu sit mazim libris.</p>
+            </a>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <a class="box_feat" href="#">
+              <i class="pe-7s-graph1"></i>
+              <h3>focus on success</h3>
+              <p>Id mea congue dictas, nec et summo mazim impedit. Vim te audiam impetus interpretaris,
+                cum no alii option, cu sit mazim libris. </p>
+            </a>
+          </div>
+        </div>
+        <!--/row-->
+      </div>
+      <!-- /container -->
+
+      <div class="bg_color_1">
+        <div class="container margin_120_95">
+          <div class="main_title_2">
+            <span><em></em></span>
+            <h2>The Origins and Story</h2>
+            <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-lg-6 wow" data-wow-offset="150">
+              <figure class="block-reveal">
+                <div class="block-horizzontal"></div>
+                <img src="http://via.placeholder.com/800x533/ccc/fff/course_1.jpg" class="img-fluid" alt="">
+              </figure>
+            </div>
+            <div class="col-lg-5">
+              <p>Lorem ipsum dolor sit amet, homero erroribus in cum. Cu eos <strong>scaevola
+                  probatus</strong>. Nam atqui intellegat ei, sed ex graece essent delectus. Autem
+                consul eum ea. Duo cu fabulas nonumes contentiones, nihil voluptaria pro id. Has graeci
+                deterruisset ad, est no primis detracto pertinax, at cum malis vitae facilisis.</p>
+              <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                neglegentur. Eam id legimus torquatos cotidieque, usu decore <strong>percipitur
+                  definitiones</strong> ex, nihil utinam recusabo mel no. Dolores reprehendunt no sit,
+                quo cu viris theophrastus. Sit unum efficiendi cu.</p>
+              <p><em>CEO Marc Schumaker</em></p>
+            </div>
+          </div>
+          <!--/row-->
+        </div>
+        <!--/container-->
+      </div>
+      <!--/bg_color_1-->
+
+      <div class="container margin_120_95">
+        <div class="main_title_2">
+          <span><em></em></span>
+          <h2>Contributors</h2>
+          <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+        </div>
+        <div id="carousel" class="owl-carousel owl-theme">
+          <div class="item">
+            <a href="#0">
+              <div class="title">
+                <h4>Julia Holmes<em>CEO</em></h4>
+              </div><img src="http://via.placeholder.com/350x500/ccc/fff/1_carousel.jpg" alt="">
+            </a>
+          </div>
+          <div class="item">
+            <a href="#0">
+              <div class="title">
+                <h4>Lucas Smith<em>Marketing</em></h4>
+              </div><img src="http://via.placeholder.com/350x500/ccc/fff/2_carousel.jpg" alt="">
+            </a>
+          </div>
+          <div class="item">
+            <a href="#0">
+              <div class="title">
+                <h4>Paul Stephens<em>Business strategist</em></h4>
+              </div><img src="http://via.placeholder.com/350x500/ccc/fff/3_carousel.jpg" alt="">
+            </a>
+          </div>
+          <div class="item">
+            <a href="#0">
+              <div class="title">
+                <h4>Pablo Himenez<em>Customer Service</em></h4>
+              </div><img src="http://via.placeholder.com/350x500/ccc/fff/4_carousel.jpg" alt="">
+            </a>
+          </div>
+          <div class="item">
+            <a href="#0">
+              <div class="title">
+                <h4>Andrew Stuttgart<em>Admissions</em></h4>
+              </div><img src="http://via.placeholder.com/350x500/ccc/fff/5_carousel.jpg" alt="">
+            </a>
+          </div>
+        </div>
+        <!-- /carousel -->
+      </div>
+      <!--/container-->
+    </main>
+    <!--/main-->
+    <% include ./includes/footer-one %>
   </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>

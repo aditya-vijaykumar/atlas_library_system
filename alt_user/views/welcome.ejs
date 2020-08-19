@@ -1,19 +1,123 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/">Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1"></div>
+<% include ./includes/head-one %>
+
+<body>
+  <div id="page">
+    <% include ./includes/home-nav %>
+    <main>
+      <section class="hero_single">
+        <div class="wrapper">
+          <div class="container">
+            <h3><strong>Rent Books</strong><br>on Atlas Library System</h3>
+            <p>A hassle-free <strong>blockchain based, decentralized</strong> library system designed to
+              empower the modern free web.</p>
+          </div>
+          <a href="#first_section" class="btn_explore hidden_tablet"><i class="ti-arrow-down"></i></a>
+        </div>
+      </section>
+      <!-- /hero_single -->
+
+      <div class="features clearfix">
+        <div class="container">
+          <ul>
+            <li><i class="pe-7s-server"></i>
+              <h4>Blockchain Based</h4><span>Ensures absolute transparency</span>
+            </li>
+            <li><i class="pe-7s-safe"></i>
+              <h4>Decentralized Content</h4><span>Decentralized storage systems for modern web</span>
+            </li>
+            <li><i class="pe-7s-cash"></i>
+              <h4>Empower Authors</h4><span>Authors receive 90% of the revenue</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /features -->
+
+      <div class="bg_color_1">
+        <div class="container margin_120_95">
+          <div class="main_title_2">
+            <span><em></em></span>
+            <h2>Tech Under The Hood</h2>
+            <p>Implementing Blockchain requires cutting edge tools and ALS is proudly powered by</p>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <a class="box_news" href="#0">
+                <figure><img src="http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg" alt="">
+
+                </figure>
+
+                <h4>BlockVigil's EthVigil API</h4>
+                <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius
+                  esse ullum vidisse....</p>
+              </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+              <a class="box_news" href="#0">
+                <figure><img src="http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg" alt="">
+
+                </figure>
+
+                <h4>Sia's Skynet</h4>
+                <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius
+                  esse ullum vidisse....</p>
+              </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+              <a class="box_news" href="#0">
+                <figure><img src="http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg" alt="">
+
+                </figure>
+
+                <h4>Passport Auth0</h4>
+                <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius
+                  esse ullum vidisse....</p>
+              </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+              <a class="box_news" href="#0">
+                <figure><img src="http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg" alt="">
+
+                </figure>
+
+                <h4>Upgraded ERC20 Contract</h4>
+                <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius
+                  esse ullum vidisse....</p>
+              </a>
+            </div>
+          </div>
+          <!-- /box_news -->
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /container -->
+
+      <div class="call_section">
+        <div class="container clearfix">
+          <div class="col-lg-5 col-md-6 float-right wow" data-wow-offset="250">
+            <div class="block-reveal">
+              <div class="block-vertical"></div>
+              <div class="box_1">
+                <h3>Be a part of the new web!</h3>
+                <p>Don't worry about having to remember another password. Login to the web app with your Google
+                  account. ALS truly stands by the motto of being hassle-free! </p>
+                <a href="/login" class="btn_1 rounded">Sign Up!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/call_section-->
+    </main>
+    <!-- /main -->
+    <% include ./includes/footer %>
   </div>
-</nav>
-  <div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body text-center">
-      <h1><i class="fab fa-ethereum fa-3x"></i></h1>
-      <p>Create an account or login</p>
-      <% include ./partials/messages %>
-      <a href="/users/login" class="btn btn-primary btn-block">Login</a>
-    </div>
-  </div>
-</div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>

@@ -1,4 +1,4 @@
-const intapi = 'http://localhost:3000/app/getbookid';
+const intapi = 'https://atlas.adityavijaykumar.me/app/getbookid';
 const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x58c08716a36d33bb25a91161ace368a1c5dafd23/getUserAccess/';
 $(document).ready(function () {
     var data;

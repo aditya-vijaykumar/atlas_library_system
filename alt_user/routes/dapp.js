@@ -174,7 +174,7 @@ router.get('/ebook/:id', secured, (req, res) => {
 router.get('/account', secured, (req, res) => {
     transaction.find({ email: req.session.user.email })
         .then(txlog => {
-            res.render('acount', { user: req.session.user, txlog: txlog })
+            res.render('account', { user: req.session.user, txlog: txlog })
         })
         .catch(error => {
             console.log(error);
@@ -199,7 +199,7 @@ router.post('/payment', secured, (req, res) => {
         }
     };
     let method_args = {
-        'amount': (req.body.token * 100),
+        'amount': (req.body.token * 10000),
         'currency': 'INR',
         'receipt': receipt,
         'payment_capture': 1
@@ -209,7 +209,11 @@ router.post('/payment', secured, (req, res) => {
             console.log('\n' + 'Order Id: ' + object.data.id);
             res.redirect('/app/payment/?order=' + object.data.id);
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            req.flash('error_tx', 'Invalid request, please try again later.');
+            res.redirect('/dashboard');
+        });
 })
 
 router.get('/payment', secured, (req, res) => {
@@ -290,7 +294,7 @@ router.post('/payment/confirm', secured, (req, res) => {
 })
 
 // Redirect page
-router.get('/redirect', secured, (req, res) => res.render('redirect'));
+router.get('/redirect', secured, (req, res) => res.render('redirect', { user: req.session.user }));
 
 //Rental transactions
 router.post('/rent', secured, (req, res) => {

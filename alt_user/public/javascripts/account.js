@@ -1,6 +1,6 @@
 const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x5040e5ea53774f0c5b5c873661449ad4cf425ec9/balanceOf/';
 $(document).ready(function () {
-    const internalapi = 'http://localhost:3000/app/geteth';
+    const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
     $.get(internalapi, function (retdata) {
         let account = retdata.ethaddress;
         $.getJSON(ethapi + account, function (retdata) {
@@ -10,13 +10,15 @@ $(document).ready(function () {
             }
         });
     });
-
     $("#tokens").validate({
+        errorElement: 'div',
+        errorClass: "toast",
         rules: {
             ethaddress: {
                 required: true,
                 minlength: 42,
                 maxlength: 42
+
             },
             email: {
                 required: true,

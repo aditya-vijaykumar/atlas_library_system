@@ -48,7 +48,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                             'error_msg',
                                             'There was an error in verifying the email, please try after a few minutes.'
                                         );
-                                        res.redirect('/');
+                                        res.redirect('/login');
                                     });
 
                                 //Updating user profile permissions
@@ -60,7 +60,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                             'error_msg',
                                             'There was an error in verifying the email, please try after a few minutes.'
                                         );
-                                        res.redirect('/');
+                                        res.redirect('/login');
                                     });
 
                                 //sending success message to user
@@ -68,7 +68,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                     'success_msg',
                                     'Email has been verified'
                                 );
-                                res.redirect('/author/login');
+                                res.redirect('/login');
                             })
                             .catch(err => {
                                 console.error(err);
@@ -76,14 +76,14 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                     'error_msg',
                                     'There was an error in verifying the email, please try after a few minutes.'
                                 );
-                                res.redirect('/');
+                                res.redirect('/login');
                             })
                     } else {
                         req.flash(
                             'success_msg',
                             'The Email has already been verified, login to continue.'
                         );
-                        res.redirect('/author/login');
+                        res.redirect('/login');
                     }
                 })
                 .catch(err => {
@@ -91,7 +91,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
                         'error_msg',
                         'Could not verify your account, please contact our support.'
                     );
-                    res.redirect('/');
+                    res.redirect('/login');
                 });
         })
         .catch(err => {
@@ -99,7 +99,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
                 'error_msg',
                 'Could not verify your account. Looks like the email verification link has expired. Please request a new link. Details are specified in the previous mail.'
             );
-            res.redirect('/');
+            res.redirect('/login');
         });
 });
 
@@ -137,9 +137,9 @@ router.post('/resendlink', (req, res) => {
                             to: user.email,
                             from: 'aditya.devsandbox@gmail.com',
                             subject: 'Account Verification Link',
-                            html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
+                            html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
                                 '.\n</strong><br>Please note this link expires in 12 hours.' +
-                                '.\n<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/resendlink\/',
+                                '.\n<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + '\/author\/resendlink\/',
                         };
                         sgMail.send(msg);
 

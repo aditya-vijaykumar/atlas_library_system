@@ -1,23 +1,71 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/">Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1"></div>
+<% include ./includes/head-one %>
+
+<body>
+  <div id="page">
+    <% include ./includes/home-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Atlas Library System</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+
+      <div class="bg_color_1">
+        <div class="container margin_60_95">
+          <div class="main_title_2">
+            <span><em></em></span>
+            <h2>Author Profile</h2>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 wow" data-wow-offset="150">
+            </div>
+            <div class="col-lg-6">
+              <div class="profile">
+                <figure><img src="<%= profile.profilePicture%>" alt="Teacher" class="rounded-circle" width="150">
+                </figure>
+
+                <ul class="author-profile">
+                  <li>
+                    <h4><%= profile.fullName%></h4>
+                  </li>
+                  <li>
+                    <h6><a href="/<%= profile.username%>" class="text-secondary"><i
+                          class="icon-user-1">@<%= profile.username%></i></a></h6>
+                  </li>
+                  <li>
+                    <h6><%= profile.bio%></h6>
+                  </li>
+                  <li>
+                    <h6><a href="#"><i class="icon-location-5"></i></a><%= profile.location%></h6>
+                  </li>
+                  <li>
+                    <h6><a href="https://www.twitter.com/<%= profile.twitter%>"><i
+                          class="icon-twitter">&nbsp;<%= profile.twitter%></i></a></h6>
+                  </li>
+                  <li>
+                    <h6><a href="http://<%= profile.website%>" class="text-info"><i
+                          class="icon-link-5">&nbsp;<%= profile.website%></i></a></h6>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--/row-->
+        </div>
+        <!--/container-->
+      </div>
+      <!--/bg_color_1-->
+
+    </main>
+    <!--/main-->
+    <% include ./includes/footer %>
   </div>
-</nav>
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <img src="<%= profile.profilePicture%>" id="profilePic" class="mt-3 rounded-circle img-fluid text-center" alt="your profile image"
-      style="max-width: 10rem; height: auto; margin: 0 auto;">
-      <h1 class="text-center mb-1 mt-3"><%= profile.fullName%></h1>
-      <h5 class="text-center mb-3"><a href="http://localhost:3000/<%= profile.username%>" class="text-muted"><i class="fa fa-0.5x fa-user" aria-hidden="true"></i>&nbsp;@<%= profile.username%></a></h5>
-      <h5 class="text-center mb-3"><%= profile.bio%></h5>
-      <h4 class="text-center mb-3"><i class="fa fa-0.5x fa-map-marker" aria-hidden="true"></i>&nbsp;<%= profile.location%></h4>
-      <h4 class="text-center mb-3"><a href="https://www.twitter.com/<%= profile.twitter%>" target="_blank" class="text-info"><i class="fab fa-twitter" aria-hidden="true"></i>&nbsp;<%= profile.twitter%></a></h4>
-      <h4 class="text-center mb-3"><a href="http://<%= profile.website%>" target="_blank" class=""><i class="fa fa-0.5x fa-link" aria-hidden="true"></i>&nbsp;<%= profile.website%></a></h4>
-    </div>
-  </div>
-</div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>

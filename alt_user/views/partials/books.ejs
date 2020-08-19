@@ -1,24 +1,30 @@
 <% for(var i=0; i < data.length; i++) { %>
+<div class="col-xl-4 col-lg-6 col-md-6">
+  <div class="box_grid wow">
+    <figure class="block-reveal">
+      <div class="block-horizzontal"></div>
 
-<div class="card mb-3 col-4" style="height: 840px;">
-  <h3 class="card-header"><%= data[i].book_title %></h3>
-  <div class="card-body">
-    <h5 class="card-title"><%= data[i].book_authors %></h5>
-    <h6 class="card-subtitle text-muted"><%= data[i].genres %></h6>
-  </div>
-  <img style="height: 450px; width: 100%; display: block;" src="<%= data[i].image_url %>" alt="Card image">
-  <div class="card-body">
-    <p class="card-text" name="desc" id="desc"><%= data[i].book_desc %></p>
-  </div>
-  <div class="card-body">
-    <a href="/app/book/<%= data[i].product_id %>" class="btn btn-primary">Read More</a>
-  </div>
-  <div class="card-footer text-muted">
-    Book Pages: <%= data[i].book_pages %>
+      <a href="/app/book/<%= data[i].product_id %>"><img src="<%= data[i].image_url %>" class="img-fluid"
+          alt="Book Cover Image"></a>
+      <div class="preview"><span>Preview Book</span></div>
+    </figure>
+    <div class="wrapper">
+      <h3><%= data[i].book_title %></h3>
+      <h6 class=""><i class="icon-user-5"></i> <%= data[i].book_authors %></h6>
+      <p name="desc" id="desc"><%= data[i].book_desc %></p>
+      <p>Book Pages: <i class="icon-book-3"></i> <%= data[i].book_pages %></p>
+      <hr>
+
+      <div class="text-center mt-1 mb-1">
+        <a href=" /app/book/<%= data[i].product_id %>" class="btn btn-primary
+          ">Read More</a>
+      </div>
+    </div>
   </div>
 </div>
-
+<!-- /box_grid -->
 <% } %>
+
 <% if (data.length<=0) { %>
 <div class="breadcrumb"> There are no results to be displayed.</div>
 <% } %>

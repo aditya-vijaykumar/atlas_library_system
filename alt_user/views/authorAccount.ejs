@@ -1,79 +1,126 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-    <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
-      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-        class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navcol-1">
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
-        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button" href="/dashboard">Switch to
-            User</a></li>
-        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/users/logout">Logout</a>
-        </li>
-      </ul>
+<% include ./includes/head-two %>
+
+<body>
+  <div id="page" class="theia-exception">
+    <% include ./includes/author-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Account</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+      <div class="container margin_60_35">
+        <% include ./partials/messages %>
+        <div class="row">
+          <aside class="col-lg-6" id="sidebar">
+            <div class="profile">
+              <h4>Profile Details</h4>
+              <ul>
+                <li>Name <span class="float-right"><%= user.name %></span> </li>
+                <li>Email <span class="float-right"><%= user.email %></span> </li>
+
+              </ul>
+
+            </div>
+            <div class="profile">
+              <h4>Income Details</h4>
+              <ul>
+                <li>Token Balance <span class="float-right">&#9830; <span id="balance"></span> ALT</span></li>
+                <li>Eth Address <span class="float-right"><%= user.ethaddress%></span> </li>
+              </ul>
+
+            </div>
+          </aside>
+          <!--/aside -->
+
+          <div class="col-lg-6">
+            <div class="box_teacher">
+              <div class="indent_title_in">
+                <i class="pe-7s-wallet"></i>
+                <h3>Payment</h3>
+                <p>Ensure you cross check before proceeding.</p>
+              </div>
+              <p class="nopadding">Request for payment in ALT tokens. It will be instantly processed if
+                you have sufficient balance. </p>
+              <p class="nopadding">You cannot modify the Ethaddress or email.</p>
+              <div id="message-contact"></div>
+              <form action="/payment" method="POST" id="transfer" autocomplete="off">
+
+                <span class="input">
+                  <input class="input_field" type="text" id="ethaddress" name="ethaddress" value="<%= user.ethaddress%>"
+                    readonly>
+                  <label class="input_label">
+                    <span class="input__label-content">Ethaddress</span>
+                  </label>
+                </span>
+
+                <span class="input">
+                  <input class="input_field" type="text" id="email" name="email" value="<%= user.email %>" readonly>
+                  <label class="input_label">
+                    <span class="input__label-content">Email</span>
+                  </label>
+                </span>
+                <span class="input">
+                  <input class="input_field" type="number" id="token" name="token" min="0" step="0.01">
+                  <label class="input_label">
+                    <span class="input__label-content">Token Amount</span>
+                  </label>
+                </span>
+                <span class="input">
+                  <input class="input_field" type="number" id="token2" name="token2" min="0" step="0.01">
+                  <label class="input_label">
+                    <span class="input__label-content">Confirm Token Amount</span>
+                  </label>
+                </span>
+                <div class="mt-4" style="position:relative;">
+                  <!-- <button type="submit" class="btn_1 full-width">Submit Payment Request</button> -->
+                  <input type="submit" class="btn_1 full-width" value="Submit Payment Request" id="submit-contact">
+                </div>
+              </form>
+
+
+              <!--wrapper_indent -->
+
+              <!--wrapper_indent -->
+            </div>
+          </div>
+          <!-- /col -->
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /container -->
+    </main>
+    <!--/main-->
+
+    <% include ./includes/footer-two %>
+  </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+  <script src="/static/javascripts/authorAccount.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="/users/logout">Logout</a>
+      </div>
     </div>
   </div>
-</nav>
-<div class="jumbotron mt-3">
-  <h1 class="display-5">Hello, <%= user.name %></h1>
 </div>
-
-<div class="row">
-  <div class="card border-primary mb-3 col-6 px-2 py-2">
-    <div class="card-header">Account details</div>
-    <div class="card-body">
-      <h4 class="card-title">Name: <%= user.name %> </h4>
-      <h4 class="card-title">Email: <%= user.email %> </h4>
-    </div>
-    <div class="card-header">Ethereum Account details</div>
-    <div class="card-body">
-      <h4 class="card-title">Ethereum address:</h4>
-      <h5><%= user.ethaddress%></h5>
-      <h4 class="card-title">Token Balance:</h4>
-      <h5> &#9830; <span id="balance"></span> ALT</h5>
-    </div>
-
-  </div>
-
-  <div class="card border-primary col-6 px-3 py-4">
-    <form action="/payment" method="POST" id="transfer">
-      <fieldset>
-        <legend>Payment for Authors</legend>
-        <div class="form-group">
-          <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before proceeding.</label>
-          <label for="staticEmail" class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="email">Email address</label>
-            <input class="form-control" id="email" name="email" type="text" placeholder="Email Address">
-            <small id="emailHelp" class="form-text text-muted">We'll email the author payment reciept.</small>
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="ethaddress">Author's Ethereum address</label>
-            <input class="form-control" id="ethaddress" name="ethaddress" type="text"
-              placeholder="Author's Ethereum address">
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <label for="token">Amount</label>
-          <input type="number" class="form-control" name="token" id="token" placeholder="Amount" min="0" step="0.01">
-        </div>
-        <div class="form-group">
-          <label for="token2">Confirm Amount</label>
-          <input type="number" class="form-control" name="token2" id="token2" placeholder="Confirm Amount" min="0"
-            step="0.01">
-        </div>
-        <button type="submit" class="btn btn-primary">Purchase</button>
-      </fieldset>
-    </form>
-  </div>
-</div>
-<script src="/static/javascripts/authorAccount.js"></script>

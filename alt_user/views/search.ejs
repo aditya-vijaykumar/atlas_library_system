@@ -1,77 +1,157 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-    <a class="navbar-brand" href="/dashboard">Atlas Library System</a><button data-toggle="collapse"
-      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-        class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navcol-1">
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/dashboard">Home</a></li>
-        <li class="nav-item active" role="presentation"><a class="nav-link" href="/app/browse">Browse</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/app/account">Account</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/about">About</a></li>
-        <% if (user.role == 'author'){ %>
-        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-            href="/author/dashboard">Switch to Author</a></li>
-        <% } %>
-        <% if (user.role == 'user'){ %>
-        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button" href="/author-signup">Upgrade
-            to Author</a></li>
-        <% } %>
-        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/users/logout">Logout</a>
-        </li>
-      </ul>
+<% include ./includes/head-one %>
+
+<body>
+  <div id="page">
+    <% include ./includes/user-nav %>
+    <div class="search-overlay-menu" style="margin: 0rem;">
+      <span class="search-overlay-close"><span class="closebt"><i class="ti-close"></i></span></span>
+      <form role="search" id="searchform" action="/app/browse/search/1/">
+        <input value="" name="search" type="search" placeholder="Search..." />
+        <button type="submit"><i class="icon_search"></i>
+        </button>
+      </form>
     </div>
+    <main>
+      <section id="hero_in" class="courses">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Browse Collection of Books</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-10">
+            <ol class="breadcrumb" style="margin-top: 15px;">
+              <li class="breadcrumb-item">Home</li>
+              <li class="breadcrumb-item active">Search Library</li>
+            </ol>
+          </div>
+
+
+          <div class="col-1 mt-4">
+            <ul id="top_menu" style="margin-left: 1rem;">
+              <li><a href="#0" class="search-overlay-menu-btn" style="color: #1b1464;">Search</a></li>
+            </ul>
+          </div>
+          <div class="col-offset-1"></div>
+        </div>
+        <div class="">
+          <ol class="breadcrumb" style="margin-top: 15px;">
+            <p class="mb-1">Showing Search results for "<%=searchVal%>"</p>
+          </ol>
+        </div>
+      </div>
+      <!-- /container -->
+
+      <div class="container margin_30_95">
+        <div class="row">
+          <% include ./partials/books %>
+        </div>
+        <!-- /row -->
+        <div class="row">
+
+          <div class="col-lg-12 text-center">
+            <div class="btn-group mr-2 open" role="group" aria-label="pagination">
+              <% if (pages > 1) { %>
+              <% if (currentPage == 1 && pages > 1) { %>
+              <a href="/app/browse/search/<%= parseInt(currentPage) + 1 %>/?search=<%=searchVal%>"
+                class="btn_1 rounded add_top_30"> <span>
+                  Page <%=  parseInt(currentPage) + 1 %>
+                  <i class="icon ion-ios-arrow-forward"></i>
+                </span>
+              </a>
+
+              <% } else if (currentPage < pages) { %>
+              <a href="/app/browse/search/<%= parseInt(currentPage) - 1 %>/?search=<%=searchVal%>"
+                class="btn_1 rounded add_top_30"><span>
+                  <i class="icon ion-ios-arrow-back"></i>
+                  Page <%= parseInt(currentPage) - 1 %>
+                </span>
+              </a>
+              <a href="/app/browse/search/<%= parseInt(currentPage) + 1 %>/?search=<%=searchVal%>"
+                class="btn_1 rounded add_top_30"><span>
+                  Page <%= parseInt(currentPage) + 1 %>
+                  <i class="icon ion-ios-arrow-forward"></i>
+                </span>
+              </a>
+
+              <% } else if (currentPage == pages && pages > 1) { %>
+              <a href="/app/browse/search/<%= parseInt(currentPage) - 1 %>/?search=<%=searchVal%>"
+                class="btn_1 rounded add_top_30"><span>
+                  <i class="icon ion-ios-arrow-back"></i>Page
+                  <%=parseInt(currentPage) - 1 %>
+                </span>
+              </a>
+              <% } %>
+
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="btn-toolbar" role="toolbar" aria-label="Pagination for the books">
+        </div>
+        <!-- /container -->
+        <div class="bg_color_1">
+          <div class="container margin_60_35">
+            <div class="row">
+              <div class="col-md-4">
+                <a href="#0" class="boxed_list">
+                  <i class="pe-7s-help2"></i>
+                  <h4>Need Help? Contact us</h4>
+                  <p>Cum appareat maiestatis interpretaris et, et sit.</p>
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a href="#0" class="boxed_list">
+                  <i class="pe-7s-wallet"></i>
+                  <h4>Payments and Refunds</h4>
+                  <p>Qui ea nemore eruditi, magna prima possit eu mei.</p>
+                </a>
+              </div>
+              <div class="col-md-4">
+                <a href="#0" class="boxed_list">
+                  <i class="pe-7s-note2"></i>
+                  <h4>Quality Standards</h4>
+                  <p>Hinc vituperata sed ut, pro laudem nonumes ex.</p>
+                </a>
+              </div>
+            </div>
+            <!-- /row -->
+          </div>
+          <!-- /container -->
+        </div>
+        <!-- /bg_color_1 -->
+    </main>
+    <!--/main-->
+    <!--/main-->
+    <% include ./includes/footer-one %>
   </div>
-</nav>
-<% include ./partials/messages %>
-<ol class="breadcrumb" style="margin-top: 15px;">
-  <li class="breadcrumb-item"><a href="#">Home</a></li>
-  <li class="breadcrumb-item active">Browse Library</li>
-</ol>
-<div class="container mt-3 mb-3 align-items-center breadcrumb">
-  <form class="form-inline my-2 my-lg-0" action="/app/browse/search/1/">
-    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search">
-    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</div>
-
-
-<div class="row align-items-center">
-  <% include ./partials/books %>
-</div>
-<!-- PAGINATION -->
-<div class="btn-toolbar" role="toolbar" aria-label="Pagination for the books">
-  <div class="btn-group mr-2" role="group" aria-label="pagination">
-    <% if (pages > 1) { %>
-    <% if (currentPage == 1 && pages > 1) { %>
-    <a href="/app/browse/search/<%= parseInt(currentPage) + 1 %>/?search=<%=searchVal%>" class="btn btn-primary"> <span>
-        Page <%=  parseInt(currentPage) + 1 %>
-        <i class="icon ion-ios-arrow-forward"></i>
-      </span>
-    </a>
-
-    <% } else if (currentPage < pages) { %>
-    <a href="/app/browse/search/<%= parseInt(currentPage) - 1 %>/?search=<%=searchVal%>" class="btn btn-primary"><span>
-        <i class="icon ion-ios-arrow-back"></i>
-        Page <%= parseInt(currentPage) - 1 %>
-      </span>
-    </a>
-    <a href="/app/browse/search/<%= parseInt(currentPage) + 1 %>/?search=<%=searchVal%>" class="btn btn-primary"><span>
-        Page <%= parseInt(currentPage) + 1 %>
-        <i class="icon ion-ios-arrow-forward"></i>
-      </span>
-    </a>
-
-    <% } else if (currentPage == pages && pages > 1) { %>
-    <a href="/app/browse/search/<%= parseInt(currentPage) - 1 %>/?search=<%=searchVal%>" class="btn btn-primary"><span>
-        <i class="icon ion-ios-arrow-back"></i>Page
-        <%=parseInt(currentPage) - 1 %>
-      </span>
-    </a>
-    <% } %>
-
-    <% } %>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="/users/logout">Logout</a>
+      </div>
+    </div>
   </div>
 </div>
 

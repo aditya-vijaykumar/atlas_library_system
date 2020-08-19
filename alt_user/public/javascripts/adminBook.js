@@ -1,8 +1,8 @@
 $(document).ready(function () {
     setTimeout(intcall, 3000);
     function intcall() {
-        var book_id = window.location.pathname.replace("/admin/",'');
-        const intapi = 'http://localhost:3000/admin/pdf/'+book_id;
+        var book_id = window.location.pathname.replace("/admin/", '');
+        const intapi = 'https://atlas.adityavijaykumar.me/admin/pdf/' + book_id;
         var location;
         $.get(intapi, function (retdata) {
             location = retdata.location;

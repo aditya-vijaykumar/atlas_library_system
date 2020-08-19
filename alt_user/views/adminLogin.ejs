@@ -1,45 +1,56 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/">Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1"></div>
+<% include ./includes/head-one %>
+
+<body id="login_bg">
+  <nav id="menu" class="fake_menu"></nav>
+
+  <div id="preloader">
+    <div data-loader="circle-side"></div>
   </div>
-</nav>
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> ALT Admin Login</h1>
-      <% include ./partials/messages %>
+  <!-- End Preload -->
+
+  <div id="login">
+    <aside>
+      <figure>
+        <a href="/"><img src="/static/img/logo.png" width="149" height="42" data-retina="true" alt=""></a>
+      </figure>
+      <div class="access_social text-center">
+        <h3>ALS Admin</h3>
+        <h5>Forgot Password</h5>
+        <% include ./partials/messages %>
+      </div>
       <form action="/admin/login" method="POST">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="form-control"
-            placeholder="Enter Email"
-          >
+          <span class="input">
+            <input class="input_field" type="email" autocomplete="off" name="email">
+            <label class="input_label">
+              <span class="input__label-content">Admin email</span>
+            </label>
+          </span>
+
+          <span class="input">
+            <input class="input_field" type="password" autocomplete="new-password" name="password">
+            <label class="input_label">
+              <span class="input__label-content">Admin password</span>
+            </label>
+          </span>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Enter Password"
-          >
+        <button type="submit" class="btn_1 rounded full-width add_top_30">Login</button>
+        <div class="text-center add_top_10"><strong><a href="/admin/forgot">Forgot Password</a></strong>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>
-      <div class="row mt-3">
-        <div class="col-md-6">
-          <a href="/admin/forgot" class="btn btn-outline-warning" >Forgot Password?</a>
-        </div>
-      </div>      
-    </div>
+      <div class="copy">© 2020 Atlas Library System</div>
+    </aside>
   </div>
-</div>
+  <!-- /login -->
+
+
+
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+
+</body>
+
+<!-- /.modal -->

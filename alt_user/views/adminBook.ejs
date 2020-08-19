@@ -1,114 +1,146 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/admin/logout">Logout</a></li>
-          </ul>
-      </div>
-  </div>
-</nav>
-<ol class="breadcrumb" style="margin-top: 15px;">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Review / <%= data.book_location%></li>
-  </ol>
-  <!-- This is the book details -->
-<div class="row">
-  <div class="col-2"></div>
-  <div class="jumbotron col-8">
-    <h1 class="display-4"><%= data.book_title %></h1>
-    <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
-    <h3 class="display-5 mb-3"><a href="/<%= data.author_username%>"><i class="fa fa-0.5x fa-user" aria-hidden="true"></i>&nbsp;@<%= data.author_username %></a></h3>
-    <div class=""><img style="height: 450px; width: auto; display: block;" 
-      src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
-    <p class="lead mt-3"><%= data.book_desc %></p>
-    <hr class="my-4">
-    <div class="card-footer mb-3">
-      Book Pages: <%= data.book_pages %>
-   </div>
-   <div class="card-footer mb-3">
-    Catrgory : <%= data.genres %>
- </div>
- <div class="card-footer mb-3">
-  Rental Price : <%= data.book_rental_price %>
-</div>
-<div class="card-footer mb-3">
-  Date : <%= data.date %>
-</div>
-  </div>
-  <div class="col-2"></div>
-</div>
+<% include ./includes/head-three %>
+<link rel="stylesheet" href="/static/css/ebook.css">
 
-<div class="row">
-  <div class="col-2"></div>
-  <div class="jumbotron col-8">
-    <h2 class="display-5 mb-3">E-Book</h2>
-    <div class="mainbook">
-      <div class="err"></div>
-    <div class="top-bar">
-      <button class="new-btn btn-primary" id="prev-page">
-        <i class="fas fa-arrow-circle-left"></i> Prev Page
-      </button>
-      <button class="new-btn btn-primary" id="next-page">
-        Next Page <i class="fas fa-arrow-circle-right"></i>
-      </button>
-      <span class="page-info">
-        Page <span id="page-num"></span> of <span id="page-count"></span>
-      </span>
-    </div>
-    <p id="loading"><strong>Please wait while the PDF loads...</strong></p>
+<body class="fixed-nav sticky-footer" id="page-top">
 
-    <canvas id="pdf-render" width="860px"></canvas>
-    </div>
-  </div>
-  
-  <div class="col-2"></div>
-</div>
+  <% include ./includes/admin-nav %>
 
-<div class="row">
-  <div class="col-2"></div>
-  <div class="jumbotron col-8">
-    <h1 class="display-4 mb-3">Approval By Admin</h1>
-    <h2 class="display-5 mb-3"><%= data.book_title %></h2>
-    <div class="card border-primary col-10 px-3 py-4">
-    <form action="/admin/approve" method="POST">
-      <fieldset>
-      <div class="form-group">
-        <fieldset>
-          <label class="control-label" for="bookid">Book Entry Id</label>
-          <input class="form-control" id="bookid" name="bookid" type="text" value="<%= data._id %>" readonly>
-        </fieldset>
-      </div>
-        <div class="form-group">
-        <fieldset>
-          <label class="control-label" for="revertMessage">Revert Message</label><textarea class="form-control" name="revertMessage" rows="4"
-          placeholder="Please specify the reason for rejecting the book."></textarea>
-        </fieldset>
-      </div>
-      <div class="form-group">
-        <div class="form-row justify-content-end">
-            <div class="col-auto">
-                <button class="btn btn-success" formaction="/admin/approve" type="submit">Approve</button>
-            </div>
-            <div class="col-auto">
-              <button class="btn btn-danger" formaction="/admin/reject" type="submit">Reject</button>
-          </div>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Books</li>
+        <li class="breadcrumb-item active"><%= data.book_location%></li>
+      </ol>
+      <div class="box_general">
+        <div class="header_box">
+          <h2 class="d-inline-block"><%= data.book_authors %></h2> <br>
+          <h2 class="d-inline-block"><a href="/<%= data.author_username%>"><i class="fa fa-0.5x fa-user"
+                aria-hidden="true"></i>&nbsp;@<%= data.author_username %></a></h2>
         </div>
+        <div class="list_general" style="margin-bottom: 3rem;">
+          <!-- /box_highlight -->
+          <h2><%= data.book_title %></h2>
+          <div class="grid" style="margin-top: 1rem;">
+            <ul class="magnific-gallery">
+              <li>
+                <figure>
+                  <img src="<%= data.image_url %>" alt="">
+                  <figcaption>
+                    <div class="caption-content">
+                      <a href="<%= data.image_url %>" title="<%= data.book_title %>" data-effect="mfp-zoom-in">
+                        <i class="pe-7s-albums"></i>
+                        <p><%= data.book_title %></p>
+                      </a>
+                    </div>
+                  </figcaption>
+                </figure>
+              </li>
+
+            </ul>
+          </div>
+          <p><%= data.book_desc %></p>
+          <div class="row">
+            <div class="col-lg-6">
+              <ul class="bullets">
+                <li>Book Pages: <%= data.book_pages %></li>
+                <li>Category and Genre : <%= data.genres %></li>
+                <li>Price : <%= data.book_rental_price %> tokens per Day</li>
+                <li>Date : <%= data.date %></li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+
+            </div>
+          </div>
+          <!-- /row -->
+          <div class="box_general padding_bottom mt-3">
+            <div class="header_box version_2">
+              <h2><i class="fa fa-book"></i>Preview the book</h2>
+            </div>
+            <div class="mainbook">
+              <div class="err"></div>
+              <div class="top-bar">
+                <button class="new-btn btn-primary" id="prev-page">
+                  <i class="fas fa-arrow-circle-left"></i> Prev Page
+                </button>
+                <button class="new-btn btn-primary" id="next-page">
+                  Next Page <i class="fas fa-arrow-circle-right"></i>
+                </button>
+                <span class="page-info">
+                  Page <span id="page-num"></span> of <span id="page-count"></span>
+                </span>
+              </div>
+              <p id="loading"><strong>Please wait while the PDF loads...</strong></p>
+
+              <canvas id="pdf-render" width="860px"></canvas>
+            </div>
+
+          </div>
+          <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+              <h2><i class="fa fa-file-text"></i>Book Approval by Admin</h2>
+            </div>
+            <h4><%= data.book_title %></h4>
+            <form action="/admin/approve" method="POST">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Book Entry ID <a href="#0" data-toggle="tooltip" data-placement="top"
+                        title="You cannot modify this"><i class="fa fa-fw fa-question-circle"></i></a></label>
+                    <input type="text" class="form-control" name="bookid" id="bookid" value="<%= data._id %>" readonly>
+                  </div>
+                </div>
+              </div>
+              <!-- /row-->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Revert Message</label>
+                    <textarea rows="5" class="form-control" style="height:100px;" name="revertMessage"
+                      id="revertMessage" placeholder="Please provide a reason for rejection"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-md-12">
+
+                  <button class="btn_1 medium" style="background-color: #5cb85c;" formaction="/admin/approve"
+                    type="submit">Approve</button>
+                  <button class="btn_1 medium" style="background-color: #d9534f;" formaction="/admin/reject"
+                    type="submit">Reject</button>
+                </div>
+
+              </div>
+            </form>
+            <!-- /row-->
+
+          </div>
+
+
+        </div>
+      </div>
+      <!-- /box_general-->
+
     </div>
-      </fieldset>
-    </form>
+    <!-- /container-fluid-->
   </div>
-  </div>
-  <div class="col-2"></div>
-</div>
-<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-<script src="/static/javascripts/adminBook.js"></script>
+  <!-- /container-wrapper-->
+
+  <% include ./includes/footer-three %>
+  <!-- Page level plugin JavaScript-->
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/static/vendor/jquery.selectbox-0.2.js"></script>
+  <script src="/static/vendor/retina-replace.min.js"></script>
+  <script src="/static/vendor/jquery.magnific-popup.min.js"></script>
+  <!-- Book Preview -->
+  <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+  <script src="/static/javascripts/adminBook.js"></script>
+
+</body>

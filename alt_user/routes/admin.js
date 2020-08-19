@@ -69,7 +69,7 @@ router.post('/forgot', (req, res) => {
                         subject: 'Password Reset Link',
                         text: 'You are receiving this mail because we recieved a request to reset the password for your account.\n\n' +
                             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                            '\nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/admin\/reset\/' + token + '\n\n' +
+                            '\nhttp:\/\/' + req.hostname + '\/admin\/reset\/' + token + '\n\n' +
                             'If you did not request this, please ignore this email and your password will remain unchanged.\n' +
                             'Please note this link will expire in 60 minutes.\n' +
                             'Regards,\n Team Atlas.\n',
@@ -251,7 +251,7 @@ router.post('/reject', ensureAdmin, (req, res) => {
                 const paramsTwo = {
                     Bucket: process.env.BUCKET_NAME,
                     Key: book.image_key
-                };                
+                };
                 s3.deleteObject(paramsOne, function (err, data) {
                     if (err) console.log(err);
                     else
@@ -293,70 +293,70 @@ router.post('/approve', ensureAdmin, (req, res) => {
                 console.log('found the book');
                 const file = "./docs/" + book.book_key;
                 downloadPDF(book.book_url, file)
-                .then(resolve => {
-                    uploadFile(file)
-                    .then(link => {
-                        let book_url = link.slice(6, link.length);
-                        console.log('Sia link' + link);
-                        console.log('\n book link' + book_url);
+                    .then(resolve => {
+                        uploadFile(file)
+                            .then(link => {
+                                let book_url = link.slice(6, link.length);
+                                console.log('Sia link' + link);
+                                console.log('\n book link' + book_url);
 
-                        let product_id = Date.now();
-                        let image_url = book.image_url;
+                                let product_id = Date.now();
+                                let image_url = book.image_url;
 
-                        const newBook = new Books({
-                            book_authors: book.book_authors,
-                            book_desc: book.book_desc,
-                            book_pages: book.book_pages,
-                            book_title: book.book_title,
-                            genres: book.genres,
-                            image_url,
-                            product_id,
-                            book_url,
-                            book_location: book.book_location,
-                            author_email: book.author_email,
-                            book_rental: book.book_rental,
-                            author_ethaddress: book.author_ethaddress
-                        });
+                                const newBook = new Books({
+                                    book_authors: book.book_authors,
+                                    book_desc: book.book_desc,
+                                    book_pages: book.book_pages,
+                                    book_title: book.book_title,
+                                    genres: book.genres,
+                                    image_url,
+                                    product_id,
+                                    book_url,
+                                    book_location: book.book_location,
+                                    author_email: book.author_email,
+                                    book_rental: book.book_rental,
+                                    author_ethaddress: book.author_ethaddress
+                                });
 
-                        newBook.save()
-                            .then(book => {
-                                console.log('Saved Book in the database.');
+                                newBook.save()
+                                    .then(book => {
+                                        console.log('Saved Book in the database.');
+                                    })
+                                    .catch(err => console.error(err));
+
+                                const params = {
+                                    Bucket: process.env.BUCKET_NAME,
+                                    Key: book.book_key
+                                };
+
+                                s3.deleteObject(params, function (err, data) {
+                                    if (err) console.log(err);
+                                    else
+                                        console.log(
+                                            "Successfully deleted file from bucket");
+                                    console.log(data);
+                                });
+
+                                fs.remove(file, err => {
+                                    if (err) return console.error(err)
+                                    console.log('success, fs deleted file!');
+                                });
+
+                                book.admin_approved = true;
+                                book.admin_approve_request = false;
+                                book.admin_product_id = product_id;
+                                book.save()
+                                    .then(done => {
+                                        req.flash('success_msg', 'Your request has been successfully processed.');
+                                        res.redirect('/admin/review');
+                                    })
+                                    .catch(err => console.error(err));
+
                             })
                             .catch(err => console.error(err));
-
-                        const params = {
-                            Bucket: process.env.BUCKET_NAME,
-                            Key: book.book_key
-                        };
-
-                        s3.deleteObject(params, function (err, data) {
-                            if (err) console.log(err);
-                            else
-                                console.log(
-                                    "Successfully deleted file from bucket");
-                            console.log(data);
-                        });
-
-                        fs.remove(file, err => {
-                            if (err) return console.error(err)
-                            console.log('success, fs deleted file!');
-                        });
-
-                        book.admin_approved = true;
-                        book.admin_approve_request = false;
-                        book.admin_product_id = product_id;
-                        book.save()
-                            .then(done => {
-                                req.flash('success_msg', 'Your request has been successfully processed.');
-                                res.redirect('/admin/review');
-                            })
-                            .catch(err => console.error(err));
-
                     })
                     .catch(err => console.error(err));
-                })
-                .catch(err => console.error(err));
-                
+
             })
             .catch(err => {
                 req.flash('error_msg', 'There was some error in processing your request.');
@@ -375,21 +375,21 @@ async function uploadFile(ref) {
     return skylink;
 };
 
-async function downloadPDF (url, path) {  
+async function downloadPDF(url, path) {
     const writer = fs.createWriteStream(path)
-  
+
     const response = await axios({
-      url,
-      method: 'GET',
-      responseType: 'stream'
+        url,
+        method: 'GET',
+        responseType: 'stream'
     })
-  
+
     response.data.pipe(writer)
-  
+
     return new Promise((resolve, reject) => {
-      writer.on('finish', resolve)
-      writer.on('error', reject)
+        writer.on('finish', resolve)
+        writer.on('error', reject)
     })
-  }
+}
 
 module.exports = router;

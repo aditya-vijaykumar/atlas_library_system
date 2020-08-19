@@ -1,9 +1,9 @@
 $(document).ready(function () {
     setTimeout(intcall, 3000);
     function intcall() {
-        var book_id = window.location.pathname.replace("/author/",'');
+        var book_id = window.location.pathname.replace("/author/", '');
         console.log(book_id);
-        const intapi = 'http://localhost:3000/author/pdf/'+book_id;
+        const intapi = 'https://atlas.adityavijaykumar.me/author/pdf/' + book_id;
         var location;
         $.get(intapi, function (retdata) {
             location = retdata.location;

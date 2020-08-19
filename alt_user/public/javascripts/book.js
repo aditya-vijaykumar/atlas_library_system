@@ -1,8 +1,8 @@
 const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x5040e5ea53774f0c5b5c873661449ad4cf425ec9/balanceOf/';
 $(document).ready(function () {
-  const internal = 'http://localhost:3000/app/geteth';
+  const internal = 'https://atlas.adityavijaykumar.me/app/geteth';
   let bookid = window.location.pathname.replace('/app/book/', '');
-  const internalapi = 'http://localhost:3000/app/api/book/' + bookid;
+  const internalapi = 'https://atlas.adityavijaykumar.me/app/api/book/' + bookid;
   $.get(internal, function (retdata) {
     let account = retdata.ethaddress;
     $.get(internalapi, function (data) {
@@ -15,6 +15,7 @@ $(document).ready(function () {
       $('#balance').hide();
       $('#balance2').hide();
       $('#rent').hide();
+      $('#rental').hide();
       $('#getValue').click(function () {
         var days = $("input[name=days]").val();
         if (days > 0) {
@@ -23,17 +24,23 @@ $(document).ready(function () {
           $('span.altcost').html(altcost);
           $('span.inrcost').html(inrcost);
           $('input[name=token]').val(altcost);
+          var token_parent = $('input[name=token]').parent();
+          token_parent.prop("class", "input input--filled");
           $('input[name=days2]').val(days);
+          var days_parent = $('input[name=days2]').parent();
+          days_parent.prop("class", "input input--filled");
           $('input#token2').html(altcost);
           if ((altcost * 10000) <= balance) {
             $('#balance').show();
             $('#balance2').hide();
             $('span.balance').html((balance / 10000));
             $('#rent').show();
+            $('#rental').show();
           } else {
             $('#balance').hide();
             $('#balance2').show();
             $('#rent').hide();
+            $('#rental').hide();
             $('span.balance').html((balance / 10000));
           }
         }

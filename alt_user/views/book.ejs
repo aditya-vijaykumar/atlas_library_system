@@ -1,145 +1,247 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <img src="/static/images/logo.png" style="height: 30px; width: auto;">
-  <a class="navbar-brand" href="/dashboard"> Atlas Library System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<% include ./includes/head-one %>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/dashboard">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/app/browse">Browse <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/app/account">Account</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
-      </li>
-    </ul>
-    <div class="form-inline my-2 my-lg-0">
-      <a href="/users/logout" class="btn btn-secondary">Logout</a>
-    </div>
-  </div>
-</nav>
-<ol class="breadcrumb" style="margin-top: 15px;">
-  <li class="breadcrumb-item"><a href="#">Home</a></li>
-  <li class="breadcrumb-item active">Browse Library/ Book</li>
-</ol>
-<!-- This is the book details -->
-<div class="row">
-  <div class="col-2"></div>
-  <div class="jumbotron col-8">
-    <h1 class="display-4"><%= data.book_title %></h1>
-    <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
-    <div class=""><img style="height: 450px; width: auto; display: block;" src="<%= data.image_url %>"
-        class="rounded mx-auto d-block" alt="Card image"></div>
-    <p class="lead mt-3"><%= data.book_desc %></p>
-    <hr class="my-4">
-    <div class="card-footer mb-3">
-      Book Pages: <%= data.book_pages %>
-    </div>
-    <div class="card-footer">
-      Catrgory : <%= data.genres %>
-    </div>
-  </div>
-  <div class="col-2"></div>
-</div>
-<!-- The form -->
-<div class="row align-items-center">
-  <div class="col-3"></div>
-  <div class="card border-primary col-6 px-3 py-4">
-    <div class="card-body">
-      <h4 class="card-title">Calculate the cost for renting this Book</h4>
-      <div class="alert alert-success alert-dismissible fade show" id="balance" role="alert">
-        You have sufficient balance! Click rent to place an order! <br>
-        Current Balance is
-        <div class="mt-2">
-          <h5> &emsp; &#9830; &ensp; <span class="balance">0.00</span></h5>
-        </div>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alert-danger alert-dismissible fade show" id="balance2" role="alert">
-        You have insufficient balance! <br>
-        Current Balance is
-        <div class="mt-2">
-          <h5> &emsp; &#9830; &ensp; <span class="balance">0.00</span></h5>
-        </div>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <p class="card-text">Cost is <%= data.book_rental %> token for one day.</p>
-      <div>
-        <div class="form-group">
-          <label class="col-form-label" for="Days">Number of Days</label>
-          <input type="number" min="0" step="1" class="form-control" oninput="validity.valid||(value='');"
-            placeholder="14" id="Days" name="days">
-        </div>
-        <div class="form-group">
-          <span class="control-label">Total Cost in ALT</span>
-          <div class="mt-2">
-            <h5> &#9830; &ensp; <span class="altcost">0.0000</span></h5>
+<body>
+  <div id="page" class="theia-exception">
+    <% include ./includes/user-nav %>
+    <main>
+      <section id="hero_in" class="courses">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span><%= data.book_title %></h1>
           </div>
         </div>
-        <div class="form-group">
-          <span class="control-label">Total Cost in rupees</span>
-          <div class="mt-2">
-            <h5> &#8377; &ensp; <span class="inrcost">0.00</span></h5>
+      </section>
+      <!--/hero_in-->
+
+      <div class="bg_color_1">
+        <nav class="secondary_nav sticky_horizontal">
+          <div class="container">
+            <ul class="clearfix">
+              <li><a href="#description" class="active">Description</a></li>
+              <li><a href="#authors">Authors</a></li>
+              <li><a href="#sidebar">Calculate</a></li>
+            </ul>
           </div>
+        </nav>
+        <div class="container margin_60_35">
+          <div class="row">
+            <div class="col-lg-8">
+              <section id="description">
+                <!-- /box_highlight -->
+                <h2>Description</h2>
+                <div class="grid" style="margin-top: 1rem;">
+                  <ul class="magnific-gallery">
+                    <li>
+                      <figure>
+                        <img src="<%= data.image_url %>" alt="">
+                        <figcaption>
+                          <div class="caption-content">
+                            <a href="<%= data.image_url %>" title="Photo title" data-effect="mfp-zoom-in">
+                              <i class="pe-7s-albums"></i>
+                              <p>Your caption</p>
+                            </a>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </li>
+
+                  </ul>
+                </div>
+                <p><%= data.book_desc %></p>
+
+                <div class="row">
+                  <div class="col-lg-9">
+                    <ul class="bullets">
+                      <li>Book Pages: <%= data.book_pages %></li>
+                      <li>Category and Genre : <%= data.genres %></li>
+                      <li>Price : <%= data.book_rental %> tokens per Day</li>
+                    </ul>
+                  </div>
+
+                </div>
+                <!-- /row -->
+              </section>
+              <!-- /section -->
+
+
+              <section id="authors" style="border-bottom: 3px solid #ededed; margin-bottom: 45px;">
+                <div class="intro_title">
+                  <h2>Authors</h2>
+                </div>
+                <div class="row add_top_20 add_bottom_30">
+                  <div class="col-lg-6">
+                    <ul class="list_teachers">
+                      <li>
+                        <a href="#authors">
+                          <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_1_thumb.jpg" alt="">
+                          </figure>
+                          <h5><%= data.book_authors %></h5>
+                          <p>Self-published</p><i class="pe-7s-angle-right-circle"></i>
+                        </a>
+                      </li>
+
+                    </ul>
+                  </div>
+
+                </div>
+                <!-- /row -->
+
+              </section>
+              <!-- /section -->
+              <div class="box_highlight">
+                <ul class="additional_info">
+                  <li><i class="pe-7s-timer"></i>Completely users'
+                    choice.<strong>Rent Duration</strong></li>
+                  <li><i class="pe-7s-user"></i>Directly support the
+                    author.<strong>Support Author</strong></li>
+                  <li><i class="pe-7s-wallet"></i>Starting as low as &#8377;
+                    0.50<strong>Affordable Fee</strong></li>
+                </ul>
+              </div>
+            </div>
+            <!-- /col -->
+            <aside class="col-lg-4" id="sidebar">
+              <div class="profile">
+                <h4>Calculate</h4>
+                <h6>Book costs <%= data.book_rental %> token for one day.</h6>
+                <p class="nopadding">Calculate the cost for renting this Book.</p>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="balance">
+                  <div class="container">
+                    You have sufficient balance! Click rent to place an order! <br>
+                    Current Balance is
+                    <div class="mt-2">
+                      <h5> &emsp; &#9830; &ensp; <span class="balance">0.00</span></h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="balance2">
+                  <div class="container">
+                    You have sufficient balance! Click rent to place an order! <br>
+                    Current Balance is
+                    <div class="mt-2">
+                      <h5> &emsp; &#9830; &ensp; <span class="balance">0.00</span></h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                </div>
+                <div id="message-contact"></div>
+
+
+                <span class="input">
+                  <input class="input_field" type="number" id="days" name="days" min="1" step="1">
+                  <label class="input_label">
+                    <span class="input__label-content">Number of Days</span>
+                  </label>
+                </span>
+                <div class="mt-3 mb-3" style="position:relative;"><input type="submit" value="Calculate"
+                    class="btn_1 full-width" id="getValue"></div>
+
+                <div class="form-group">
+                  <span class="control-label">Total Cost in ALT</span>
+                  <div class="mt-2">
+                    <h5> &#9830; &ensp; <span class="altcost">0.0000</span></h5>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <span class="control-label">Total Cost in rupees</span>
+                  <div class="mt-2">
+                    <h5> &#8377; &ensp; <span class="inrcost">0.00</span></h5>
+                  </div>
+                </div>
+                <div id="rental">
+                  <h4>Rent The Book</h4>
+                  <div class="form-group">
+                    <label for="staticEmail" class="col-form-label">Ensure you cross check
+                      before purchasing.</label>
+                  </div>
+                  <form action="/app/rent" method="POST" autocomplete="off">
+                    <span class="input">
+                      <input class="input_field" type="email" id="email" name="email" value="<%= user.email%>" readonly>
+                      <label class="input_label">
+                        <span class="input__label-content">Email</span>
+                      </label>
+                    </span>
+                    <small id="emailHelp" class="form-text text-muted mb-2">We'll email you the purchase
+                      reciept.</small>
+                    <span class="input">
+                      <input class="input_field" type="text" id="ethaddress" name="ethaddress"
+                        value="<%= user.ethaddress%>" readonly>
+                      <label class="input_label">
+                        <span class="input__label-content">Ethaddress</span>
+                      </label>
+                    </span>
+                    <span class="input">
+                      <input class="input_field" type="text" id="author_ethaddress" name="author_ethaddress"
+                        value="<%= data.author_ethaddress%>" readonly>
+                      <label class="input_label">
+                        <span class="input__label-content">Author's Ethaddress</span>
+                      </label>
+                    </span>
+                    <span class="input">
+                      <input class="input_field" type="number" id="prdid" name="prdid" value="<%= data.product_id %>"
+                        readonly>
+                      <label class="input_label">
+                        <span class="input__label-content">Product ID</span>
+                      </label>
+                    </span>
+                    <span class="input">
+                      <input class="input_field" type="number" id="days2" name="days2" readonly>
+                      <label class="input_label">
+                        <span class="input__label-content">Number of Days</span>
+                      </label>
+                    </span>
+                    <span class="input">
+                      <input class="input_field" type="number" id="token" name="token" readonly>
+                      <label class="input_label">
+                        <span class="input__label-content">Cost (in ALT)</span>
+                      </label>
+                    </span>
+                    <div class="mt-3 mb-3" style="position:relative;"><input type="submit" value="Rent it"
+                        class="btn_1 full-width" id="rent"></div>
+                  </form>
+                </div>
+
+              </div>
+            </aside>
+
+          </div>
+          <!-- /row -->
         </div>
-        <button type="button" id="getValue" class="btn btn-primary">Calculate</button>
+        <!-- /container -->
+      </div>
+      <!-- /bg_color_1 -->
+    </main>
+    <!--/main-->
+    <% include ./includes/footer-one %>
+  </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+  <script src="/static/javascripts/book.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="/users/logout">Logout</a>
       </div>
     </div>
-    <form action="/app/rent" method="POST">
-      <fieldset>
-        <legend>Rent The Book</legend>
-        <div class="form-group">
-          <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before purchasing.</label>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="email">Email address</label>
-            <input class="form-control" id="email" name="email" type="text" value="<%= user.email%>" readonly>
-            <small id="emailHelp" class="form-text text-muted">We'll email you the purchase reciept.</small>
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="ethaddress">Ethereum address</label>
-            <input class="form-control" id="ethaddress" name="ethaddress" type="text" value="<%= user.ethaddress%>"
-              readonly>
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="ethaddress">Author Ethereum address</label>
-            <input class="form-control" id="author_ethaddress" name="author_ethaddress" type="text"
-              value="<%= data.author_ethaddress%>" readonly>
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <label for="prdid">Product ID</label>
-          <input type="number" class="form-control" name="prdid" id="prdid" placeholder="Product ID"
-            value="<%= data.product_id %>" readonly>
-        </div>
-        <div class="form-group">
-          <label for="days2">Number of Days</label>
-          <input type="number" class="form-control" name="days2" id="days2" placeholder="Number of Days" readonly>
-        </div>
-        <div class="form-group">
-          <label for="token2">Cost (in ALT)</label>
-          <input type="number" class="form-control" name="token" id="token" placeholder="Number of Tokens" readonly>
-        </div>
-        <button type="submit" id="rent" class="btn btn-primary">Rent it</button>
-      </fieldset>
-    </form>
   </div>
 </div>
-<script src="/static/javascripts/book.js"></script>

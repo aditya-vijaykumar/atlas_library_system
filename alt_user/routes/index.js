@@ -31,7 +31,10 @@ let headers = { headers: { 'accept': 'application/json', 'Content-Type': 'applic
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Welcome Page
-router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
+router.get('/', (req, res) => res.render('welcome'));
+
+// Login Page
+router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
 // Dashboard Page
 router.get('/dashboard', secured, (req, res) => {
@@ -49,10 +52,10 @@ router.get('/dashboard', secured, (req, res) => {
 });
 
 // About Page
-router.get('/about', secured, (req, res) => res.render('about', { user: req.user }));
+router.get('/about', (req, res) => res.render('about'));
 
 
-router.get('/author-signup', secured, (req, res) => res.render('becomeAuthor', { user: req.session.user }));
+router.get('/author-signup', secured, (req, res) => res.render('become-author', { user: req.session.user }));
 
 router.get('/author-enroll', (req, res) => {
   Author.findOne({ email: req.session.email })
@@ -91,9 +94,9 @@ router.get('/author-enroll', (req, res) => {
                   to: user.email,
                   from: 'aditya.devsandbox@gmail.com',
                   subject: 'Author Account Confirmation',
-                  html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
+                  html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
                     '.\n</strong><br>Please note this link expires in 12 hours.' +
-                    '.\n<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + ':' + req.connection.localPort + '\/author\/resendlink\/',
+                    '.\n<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + '\/author\/resendlink\/',
                 };
                 sgMail.send(msg);
                 req.flash(

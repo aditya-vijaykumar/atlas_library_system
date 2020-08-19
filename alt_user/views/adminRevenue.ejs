@@ -1,71 +1,90 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-    <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
-      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-        class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navcol-1">
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
-        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/admin/logout">Logout</a>
+<% include ./includes/head-three %>
+
+<body class="fixed-nav sticky-footer" id="page-top">
+
+  <% include ./includes/admin-nav %>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
         </li>
-      </ul>
+        <li class="breadcrumb-item active">Revenue</li>
+      </ol>
+      <div class="mt-2 mb-2"><% include ./partials/messages %></div>
+      <!-- /box_general-->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+              <h2><i class="fa fa-money"></i>Revenue Details</h2>
+            </div>
+            <div class="form-group">
+              <h4>Revenue Balance</h4>
+              <h5>&#9830; 0.01 ALT</h5>
+              <h5>&#8377; 1 INR</h5>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+              <h2><i class="fa fa-exchange"></i>Payment for Authors</h2>
+            </div>
+            <form action="/payment" method="POST" id="transfer">
+              <fieldset>
+                <div class="form-group">
+                  <label class="col-sm-8 col-form-label">Ensure you cross check before proceeding.</label>
+                  <label class="col-sm-8 col-form-label">Enter Amount in ALT tokens.</label>
+                  <label class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
+                </div>
+                <div class="form-group">
+                  <label>Author Email address</label>
+                  <input class="form-control" name="email" id="email" type="email">
+                  <small id="emailHelp" class="form-text text-muted">We'll email the author payment reciept.</small>
+                </div>
+                <div class="form-group">
+                  <label>Author's Ethereum address</label>
+                  <input class="form-control" name="ethaddress" id="ethaddress" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Amount</label>
+                  <input class="form-control" name="token" id="token" type="number">
+                </div>
+                <div class="form-group">
+                  <label>Confirm Amount</label>
+                  <input class="form-control" name="token2" id="token2" type="number">
+                </div>
+                <div class="form-group">
+                  <p style="text-align: center;">
+                    <button type="submit" class="btn_1 medium">Make Payment</button></p>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /row-->
+
     </div>
+    <!-- /.container-fluid-->
   </div>
-</nav>
-<div class="jumbotron mt-3">
-  <h1 class="display-5">Hello, <%= user.name %></h1>
-</div>
+  <!-- /container-wrapper-->
 
-<div class="row">
-  <div class="card border-primary mb-3 col-6 px-2 py-2">
-    <div class="card-header">Revenue details</div>
-    <div class="card-body">
-      <h4 class="card-title">Revenue Balance:</h4>
-      <h5> &#9830; <span id="balance"></span> ALT</h5>
-    </div>
+  <% include ./includes/footer-three %>
+  <!-- Page level plugin JavaScript-->
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/static/vendor/jquery.selectbox-0.2.js"></script>
+  <script src="/static/vendor/retina-replace.min.js"></script>
+  <script src="/static/vendor/jquery.magnific-popup.min.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+  <script src="/static/javascripts/adminRevenue.js"></script>
 
-  </div>
 
-  <div class="card border-primary col-6 px-3 py-4">
-    <form action="/payment" method="POST" id="transfer">
-      <fieldset>
-        <legend>Payment for Authors</legend>
-        <div class="form-group">
-          <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before proceeding.</label>
-          <label for="staticEmail" class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="email">Email address</label>
-            <input class="form-control" id="email" name="email" type="text" placeholder="Email Address">
-            <small id="emailHelp" class="form-text text-muted">We'll email the author payment reciept.</small>
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <fieldset>
-            <label class="control-label" for="ethaddress">Author's Ethereum address</label>
-            <input class="form-control" id="ethaddress" name="ethaddress" type="text"
-              placeholder="Author's Ethereum address">
-          </fieldset>
-        </div>
-        <div class="form-group">
-          <label for="token">Amount</label>
-          <input type="number" class="form-control" name="token" id="token" placeholder="Amount" min="0.01"
-            step="0.0001">
-        </div>
-        <div class="form-group">
-          <label for="token2">Confirm Amount</label>
-          <input type="number" class="form-control" name="token2" id="token2" placeholder="Confirm Amount" min="0.01"
-            step="0.0001">
-        </div>
-        <button type="submit" class="btn btn-primary">Make Payment</button>
-      </fieldset>
-    </form>
-  </div>
-</div>
-<script src="/static/javascripts/adminRevenue.js"></script>
+</body>

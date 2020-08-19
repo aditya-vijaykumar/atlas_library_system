@@ -1,0 +1,75 @@
+<% include ./includes/head-one %>
+
+<body id="login_bg">
+    <nav id="menu" class="fake_menu"></nav>
+
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+    <!-- End Preload -->
+
+    <div id="login">
+        <aside>
+            <figure>
+                <a href="/"><img src="/static/img/logo.png" width="149" height="42" data-retina="true" alt=""></a>
+            </figure>
+            <div class="access_social text-center">
+                <h3>ALS Login</h3>
+                <div id="intro">
+                    <img src="/static/img/wizard_intro_icon.svg" alt="">
+                </div>
+                <% include ./partials/messages %>
+            </div>
+
+            <div class="form-group terms" style="text-align: center;">
+                <br> <label>By clicking on the login button, you accept the <a href="#" data-toggle="modal"
+                        data-target="#terms-txt">terms and
+                        conditions</a> </label>
+            </div>
+            <a href="/users/login" class="btn_1 rounded full-width add_top_30">Login with Google</a>
+
+
+            <div class="copy">© 2020 Atlas Library System</div>
+        </aside>
+    </div>
+    <!-- /login -->
+
+
+
+    <!-- COMMON SCRIPTS -->
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/common_scripts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/assets/validate.js"></script>
+
+</body>
+<!-- Modal terms -->
+<div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="termsLabel">Terms and conditions</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>,
+                    mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus,
+                    pro ne quod dicunt sensibus.</p>
+                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
+                    dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
+                    sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum
+                    accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum
+                    sanctus, pro ne quod dicunt sensibus.</p>
+                <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
+                    dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
+                    sensibus.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn_1" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

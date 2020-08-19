@@ -1,52 +1,78 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
-  <div class="container">
-    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-    <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
-      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-        class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navcol-1">
-      <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
-        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/admin/logout">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<% include ./partials/messages %>
-<div class="jumbotron mt-3">
-  <h1>Hello </h1>
-  <p>This section allows you to have a look at all the books sent for approval as well as all the books
-    approved.</p>
-</div>
+<% include ./includes/head-three %>
 
-<section style="margin: 16px 0px;">
-  <h3>Books Pending for Approval</h3>
-  <div class="table-responsive bg-secondary">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name of the Book</th>
-          <th>Author</th>
-          <th>Date</th>
-          <th>Option</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i=0; i < data.length; i++) { %>
-        <tr>
-          <td><%= data[i].book_title %></td>
-          <td><%= data[i].book_authors %></td>
-          <td><%= data[i].date %></td>
-          <td><a class="btn btn-outline-primary" role="button"
-              href="/admin/book/<%= data[i].admin_product_id %>">View</a></td>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
+<body class="fixed-nav sticky-footer" id="page-top">
+
+  <% include ./includes/admin-nav %>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Approved</li>
+      </ol>
+      <div class="mt-2 mb-2"><% include ./partials/messages %></div>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-check"></i> List of all the approved books</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Book Title</th>
+                  <th>Author</th>
+                  <th>Genre</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Book Title</th>
+                  <th>Author</th>
+                  <th>Genre</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Option</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <% for(var i=0; i < data.length; i++) { %>
+                <tr>
+                  <td><%= data[i].book_title %></td>
+                  <td><%= data[i].book_authors %></td>
+                  <td><%= data[i].genres %></td>
+                  <td><%= data[i].date %></td>
+                  <td><%= data[i].book_rental_price %></td>
+                  <td><a class="btn btn-outline-primary" role="button"
+                      href="/admin/book/<%= data[i].admin_product_id %>">View</a></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated just now</div>
+      </div>
+      <!-- /tables-->
+    </div>
+    <!-- /container-fluid-->
   </div>
-</section>
+  <!-- /container-wrapper-->
+
+  <% include ./includes/footer-three %>
+  <!-- Page level plugin JavaScript-->
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/static/vendor/jquery.selectbox-0.2.js"></script>
+  <script src="/static/vendor/retina-replace.min.js"></script>
+  <script src="/static/vendor/jquery.magnific-popup.min.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="/static/js/admin-datatables.js"></script>
+</body>
