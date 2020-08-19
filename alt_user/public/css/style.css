@@ -4366,7 +4366,7 @@ select:-webkit-autofill {
 }
 #confirm p {
   font-size: 16px !important;
-  font-size: 16px !important/16pxrem;
+  font-size: 16px !important;
   margin-bottom: 0;
 }
 
@@ -4684,11 +4684,6 @@ ul.list_teachers li a:hover i {
   font-weight: 400;
 }
 
-.mfp-zoom-in {
-  /* start state */
-  /* animate in */
-  /* animate out */
-}
 .mfp-zoom-in .mfp-with-anim {
   opacity: 0;
   transition: all 0.2s ease-in-out;
@@ -5068,7 +5063,7 @@ ul.list_3 li:before {
   }
   .fc-header-center .fc-header-title h2 {
     font-size: 16px !important;
-    font-size: 16px !important/16pxrem;
+    font-size: 16px !important;
   }
 }
 /*============================================================================================*/

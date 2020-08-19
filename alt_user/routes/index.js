@@ -24,9 +24,9 @@ const Author = models.Author;
 const Token = models.Token;
 
 //api values
-let contract_address = "0xb94960eab249ae05cbdef5c45268c092b0ca15f5";
-let api_key = process.env.ETHVIGIL_API_KEY;
-let rest_api_endpoint = 'https://beta-api.ethvigil.com/v0.1';
+let contract_address = "0xd475d181a3217b84073a5d31762c30fae955c014";
+let api_key = process.env.MATICVIGIL_API_KEY;
+let rest_api_endpoint = 'https://mainnet-api.maticvigil.com/v1.0';
 let headers = { headers: { 'accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': api_key } };
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 

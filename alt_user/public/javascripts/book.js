@@ -1,4 +1,4 @@
-const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x5040e5ea53774f0c5b5c873661449ad4cf425ec9/balanceOf/';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x94d04daebe706ce0e6e982657ce66dd6617cbbc2/balanceOf/';
 $(document).ready(function () {
   const internal = 'https://atlas.adityavijaykumar.me/app/geteth';
   let bookid = window.location.pathname.replace('/app/book/', '');

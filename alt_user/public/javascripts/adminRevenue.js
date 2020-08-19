@@ -1,4 +1,4 @@
-const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x5040e5ea53774f0c5b5c873661449ad4cf425ec9/balanceOf/0xb94960eab249ae05cbdef5c45268c092b0ca15f5';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x94d04daebe706ce0e6e982657ce66dd6617cbbc2/balanceOf/0xd475d181a3217b84073a5d31762c30fae955c014';
 $(document).ready(function () {
     $.getJSON(ethapi, function (retdata) {
         if (retdata.success) {

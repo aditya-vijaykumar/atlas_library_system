@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('div.mainbook').hide();
-    const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x58c08716a36d33bb25a91161ace368a1c5dafd23/getUserAccess/';
+    const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x0770cbb571ad16d17559add131ad5ce5ef47e8fc/getUserAccess/';
     const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
     const internal = 'https://atlas.adityavijaykumar.me/app/thepdf';
     let bookid = window.location.pathname.replace('/app/ebook/', '');

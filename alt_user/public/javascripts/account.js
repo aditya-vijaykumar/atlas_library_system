@@ -1,4 +1,4 @@
-const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x5040e5ea53774f0c5b5c873661449ad4cf425ec9/balanceOf/';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x94d04daebe706ce0e6e982657ce66dd6617cbbc2/balanceOf/';
 $(document).ready(function () {
     const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
     $.get(internalapi, function (retdata) {
@@ -27,7 +27,7 @@ $(document).ready(function () {
             token: {
                 required: true,
                 number: true,
-                min: 0.01
+                min: 1
             },
             token2: {
                 required: true,
@@ -45,12 +45,12 @@ $(document).ready(function () {
                 email: "That is not a valid email id."
             },
             token: {
-                required: "Token purchase value cannot be blank.",
-                min: "It should be a minimum of 0.01."
+                required: "Purchase amount value cannot be blank.",
+                min: "It should be a minimum of ₹1."
             },
             token2: {
-                required: "Please enter the same token value once again.",
-                equalTo: "The token values don't match!"
+                required: "Please enter the same amount value once again.",
+                equalTo: "The amount values don't match!"
             }
         }
     });

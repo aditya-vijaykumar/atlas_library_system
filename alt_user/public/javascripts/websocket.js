@@ -3,7 +3,7 @@ var wsTries = 5;
 var timeout = 1000;
 var wsSessionID;
 
-initWS('b9533a64-642a-413b-8bc1-d05b60c39d59'); //pass the read key.
+initWS('37982ccf-91c4-4c96-b8a1-261708486300'); //pass the read key.
 
 function initWS(key) {
     console.log('tries', wsTries);
@@ -14,8 +14,7 @@ function initWS(key) {
         wsSessionID = null;
         return;
     }
-    var secure = location.protocol == 'https:';
-    wsConnection = new WebSocket('wss://beta.ethvigil.com/ws');
+    wsConnection = new WebSocket('wss://ws.maticvigil.com');
     wsConnection.onopen = function () {
         wsConnection.send(JSON.stringify({
             'command': 'register',

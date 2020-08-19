@@ -21,10 +21,10 @@ const transaction = model.Transactions;
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // api values
-const contract_address = "0xb94960eab249ae05cbdef5c45268c092b0ca15f5";
-const book_address = "0x58c08716a36d33bb25a91161ace368a1c5dafd23";
-const api_key = process.env.ETHVIGIL_API_KEY;
-const rest_api_endpoint = 'https://beta-api.ethvigil.com/v0.1';
+const contract_address = "0xd475d181a3217b84073a5d31762c30fae955c014";
+const book_address = "0x0770cbb571ad16d17559add131ad5ce5ef47e8fc";
+const api_key = process.env.MATICVIGIL_API_KEY;
+const rest_api_endpoint = 'https://mainnet-api.maticvigil.com/v1.0';
 let headers = {
     headers: {
         'accept': 'application/json',
@@ -199,7 +199,7 @@ router.post('/payment', secured, (req, res) => {
         }
     };
     let method_args = {
-        'amount': (req.body.token * 10000),
+        'amount': (req.body.token * 100),
         'currency': 'INR',
         'receipt': receipt,
         'payment_capture': 1
@@ -272,7 +272,7 @@ router.post('/payment/confirm', secured, (req, res) => {
                                 console.log(err);
                             });
                         req.flash('success_tx', 'Your purchase of ' + (token / 10000) + ' fresh ALT tokens is being processed, transaction pending.');
-                        req.flash('link', 'https://goerli.etherscan.io/tx/' + txHash);
+                        req.flash('link', 'https://explorer.matic.network/tx/' + txHash);
                         res.redirect('/app/redirect');
                     }
                     if (!success) {
@@ -354,7 +354,7 @@ router.post('/rent', secured, (req, res) => {
                                 newRental.save()
                                     .then(rental => {
                                         req.flash('success_tx', 'Your rental of book is being processed, transaction pending!');
-                                        req.flash('link', 'https://goerli.etherscan.io/tx/' + txHash);
+                                        req.flash('link', 'https://explorer.matic.network/tx/' + txHash);
                                         res.redirect('/app/redirect');
                                     })
                                     .catch(err => {
@@ -447,7 +447,7 @@ router.post('/purchase', secured, (req, res) => {
                         console.log(err);
                     });
                 req.flash('success_tx', 'Your purchase of ' + (token / 100) + ' fresh ALT tokens is being processed, transaction pending.');
-                req.flash('link', 'https://goerli.etherscan.io/tx/' + txHash);
+                req.flash('link', 'https://explorer.matic.network/tx/' + txHash);
                 res.redirect('/app/redirect');
             }
             if (!success) {
