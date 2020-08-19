@@ -1,2 +1,3 @@
 alt_user/node_modules
 alt_user/.env
+alt_user/config/keys.js

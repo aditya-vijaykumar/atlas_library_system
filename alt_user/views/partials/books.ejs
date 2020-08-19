@@ -1,35 +1,37 @@
 <% for(var i=0; i < data.length; i++) { %>
 
-    <div class="card mb-3 col-4" style="height: 840px;">
-        <h3 class="card-header"><%= data[i].book_title %></h3>
-        <div class="card-body">
-          <h5 class="card-title"><%= data[i].book_authors %></h5>
-          <h6 class="card-subtitle text-muted"><%= data[i].genres %></h6>
-        </div>
-        <img style="height: 450px; width: 100%; display: block;" 
-            src= "<%= data[i].image_url %>" alt="Card image">
-        <div class="card-body">
-          <p class="card-text" name="desc" id="desc"><%= data[i].book_desc %></p>
-        </div>
-        <div class="card-body">
-          <a href="/app/book/<%= data[i].product_id %>" class="btn btn-primary">Read More</a>
-        </div>
-        <div class="card-footer text-muted">
-           Book Pages: <%= data[i].book_pages %>
-        </div>
-      </div>
-      
-      <% } %>
-      <script>
-          $(document).ready(function() {
-            function truncateText(selector, maxLength) {
-                var element = document.querySelector(selector),
-                truncated = element.innerText;
-                if (truncated.length > maxLength) {
-                    truncated = truncated.substr(0,maxLength) + '...';
-                }
-                return truncated;
-            }
-            document.querySelector('p[name=desc]').innerText = truncateText('p[name=desc]', 107);
-          });
-      </script>
+<div class="card mb-3 col-4" style="height: 840px;">
+  <h3 class="card-header"><%= data[i].book_title %></h3>
+  <div class="card-body">
+    <h5 class="card-title"><%= data[i].book_authors %></h5>
+    <h6 class="card-subtitle text-muted"><%= data[i].genres %></h6>
+  </div>
+  <img style="height: 450px; width: 100%; display: block;" src="<%= data[i].image_url %>" alt="Card image">
+  <div class="card-body">
+    <p class="card-text" name="desc" id="desc"><%= data[i].book_desc %></p>
+  </div>
+  <div class="card-body">
+    <a href="/app/book/<%= data[i].product_id %>" class="btn btn-primary">Read More</a>
+  </div>
+  <div class="card-footer text-muted">
+    Book Pages: <%= data[i].book_pages %>
+  </div>
+</div>
+
+<% } %>
+<% if (data.length<=0) { %>
+<div class="breadcrumb"> There are no results to be displayed.</div>
+<% } %>
+<script>
+  $(document).ready(function () {
+    function truncateText(selector, maxLength) {
+      var element = document.querySelector(selector),
+        truncated = element.innerText;
+      if (truncated.length > maxLength) {
+        truncated = truncated.substr(0, maxLength) + '...';
+      }
+      return truncated;
+    }
+    document.querySelector('p[name=desc]').innerText = truncateText('p[name=desc]', 107);
+  });
+</script>

@@ -23,7 +23,7 @@ router.get(
 
 router.get("/logout", (req, res) => {
   lastcheck(req.user._json.email);
-  
+
   req.logOut();
 
   let returnTo = req.protocol + "://" + req.hostname;
@@ -37,7 +37,7 @@ router.get("/logout", (req, res) => {
   }
 
   const logoutURL = new URL(
-    util.format("https://%s/logout", process.env.AUTH0_DOMAIN)
+    util.format("https://%s/v2/logout", process.env.AUTH0_DOMAIN)
   );
   const searchString = querystring.stringify({
     client_id: process.env.AUTH0_CLIENT_ID,
@@ -48,15 +48,15 @@ router.get("/logout", (req, res) => {
   res.redirect(logoutURL);
 });
 
-function lastcheck (email) {
-  User.findOne({email: email})
-  .then(data => {
-    let thisurl = "./docs/"+data.user_id;
-    fsExtra.emptyDir(thisurl, err => {
-      if (err) return console.error(err)
-      console.log('successfully deleted all the files!')
+function lastcheck(email) {
+  User.findOne({ email: email })
+    .then(data => {
+      let thisurl = "./docs/" + data.user_id;
+      fsExtra.emptyDir(thisurl, err => {
+        if (err) return console.error(err)
+        console.log('successfully deleted all the files!')
+      })
     })
-  })
 };
 
 module.exports = router;

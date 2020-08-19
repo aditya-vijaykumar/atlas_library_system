@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navcol-1">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item" role="presentation"><a class="nav-link" href="/dashboard">Home</a></li>
-        <li class="nav-item active" role="presentation"><a class="nav-link" href="/app/browse/">Browse</a></li>
+        <li class="nav-item active" role="presentation"><a class="nav-link" href="/app/browse">Browse</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" href="/app/account">Account</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link" href="/about">About</a></li>
         <% if (user.role == 'author'){ %>
@@ -43,37 +43,35 @@
 <!-- PAGINATION -->
 <div class="btn-toolbar" role="toolbar" aria-label="Pagination for the books">
   <div class="btn-group mr-2" role="group" aria-label="pagination">
-    <% if (pages > 0) { %>
-    <ul class="pagination text-center">
-      <% if (currentPage == 1) { %>
-      <li class="disabled"><a class="btn btn-secondary">First</a></li>
-      <% } else { %>
-      <li><a href="/app/browse/1" class="btn btn-primary">First</a></li>
-      <% } %>
+    <% if (pages > 1) { %>
+    <% if (currentPage == 1 && pages > 1) { %>
+    <a href="/app/browse/search/<%= parseInt(currentPage) + 1 %>/?search=<%=searchVal%>" class="btn btn-primary"> <span>
+        Page <%=  parseInt(currentPage) + 1 %>
+        <i class="icon ion-ios-arrow-forward"></i>
+      </span>
+    </a>
 
-      <% var i = (Number(currentPage) > 5 ? Number(currentPage) - 4 : 1) %>
-      <% if (i !== 1) { %>
-      <li class="disabled"><a class="btn btn-secondary">...</a></li>
-      <% } %>
+    <% } else if (currentPage < pages) { %>
+    <a href="/app/browse/search/<%= parseInt(currentPage) - 1 %>/?search=<%=searchVal%>" class="btn btn-primary"><span>
+        <i class="icon ion-ios-arrow-back"></i>
+        Page <%= parseInt(currentPage) - 1 %>
+      </span>
+    </a>
+    <a href="/app/browse/search/<%= parseInt(currentPage) + 1 %>/?search=<%=searchVal%>" class="btn btn-primary"><span>
+        Page <%= parseInt(currentPage) + 1 %>
+        <i class="icon ion-ios-arrow-forward"></i>
+      </span>
+    </a>
 
-      <% for (; i <= (Number(currentPage) + 4) && i <= pages; i++) { %>
-      <% if (i == currentPage) { %>
-      <li class="active"><a class="btn btn-primary"><%= i %></a></li>
-      <% } else { %>
-      <li><a href="/app/browse/<%= i %>" class="btn btn-primary"><%= i %></a></li>
-      <% } %>
-      <% if (i == Number(currentPage) + 4 && i < pages) { %>
-      <li class="disabled"><a class="btn btn-secondary">...</a></li>
-      <% } %>
-      <% } %>
-      <% if (currentPage == pages) { %>
-      <li class="disabled"><a class="btn btn-secondary">Last</a></li>
-      <% } else { %>
-      <li><a href="/app/browse/<%= pages %>" class="btn btn-primary">Last</a></li>
-      <% } %>
-    </ul>
+    <% } else if (currentPage == pages && pages > 1) { %>
+    <a href="/app/browse/search/<%= parseInt(currentPage) - 1 %>/?search=<%=searchVal%>" class="btn btn-primary"><span>
+        <i class="icon ion-ios-arrow-back"></i>Page
+        <%=parseInt(currentPage) - 1 %>
+      </span>
+    </a>
     <% } %>
 
+    <% } %>
   </div>
 </div>
 

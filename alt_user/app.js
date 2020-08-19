@@ -15,14 +15,14 @@ require('./config/local')(passport);
 
 // DB Config
 const db = 'mongodb://localhost:27017/test';
-const dbonline = require('./config/keys').mongoURI;
+const dbonline = require('./config/dbKeys').mongoURI;
 
 // Connect to MongoDB
 mongoose
   .connect(
     dbonline,
-    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex : true, useFindAndModify: false }
-  ) 
+    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }
+  )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
@@ -54,7 +54,7 @@ app.use(passport.session());
 app.use(flash());
 
 // Global variables
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.success_tx = req.flash('success_tx');
   res.locals.link = req.flash('link');

@@ -12,13 +12,13 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
                 <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                  href="/dashboard">Switch to User</a></li>
+                        href="/dashboard">Switch to User</a></li>
                 <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
                         href="/users/logout">Logout</a></li>
             </ul>
         </div>
     </div>
-  </nav>
+</nav>
 <% include ./partials/messages %>
 <section style="margin: 16px 0px;">
     <div class="row">
@@ -29,10 +29,13 @@
                 <div class="card-body">
                     <h4 class="card-title">Important Disclaimer</h4>
                     <!-- <h6 class="text-muted card-subtitle mb-2">Subtitle</h6> -->
-                    <p class="card-text">Please note submitting this form will not directly upload your Book to the main server. 
-                        It will be stored in a temporary secure location until the admin approves or reverts the book. Only once approved, the files are stored permanently on decentralized servers.</p>
-                        <p class="card-text">
-                        In case the book is reverted, the book cover image and pdf will be automatically deleted. We stronly recommend you to locally store a copy of the files.  </p>
+                    <p class="card-text">Please note submitting this form will not directly upload your Book to the main
+                        server.
+                        It will be stored in a temporary secure location until the admin approves or reverts the book.
+                        Only once approved, the files are stored permanently on decentralized servers.</p>
+                    <p class="card-text">
+                        In case the book is reverted, the book cover image and pdf will be automatically deleted. We
+                        stronly recommend you to locally store a copy of the files. </p>
                     <form action="/author/bookapproval" method="POST" enctype="multipart/form-data">
                         <fieldset>
                             <legend>Upload Book</legend>
@@ -42,18 +45,23 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="author">Name of the Author</label>
-                                <input class="form-control" id="author" name="author" type="text" placeholder="Name of the Author" value="<%= profile.name%>">
+                                <input class="form-control" id="author" name="author" type="text"
+                                    placeholder="Name of the Author" value="<%= profile.name%>">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="Email">Email of the Author</label>
-                                <input class="form-control" id="Email" name="Email" type="text" placeholder="Email of the Author" value="<%= user.email%>" disabled>
-                            </div><div class="form-group">
+                                <input class="form-control" id="Email" name="Email" type="text"
+                                    placeholder="Email of the Author" value="<%= user.email%>" disabled>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label" for="username">Username of the Author</label>
-                                <input class="form-control" id="username" name="username" type="text" placeholder="Username of the Author" value="<%= profile.username%>" disabled>
+                                <input class="form-control" id="username" name="username" type="text"
+                                    placeholder="Username of the Author" value="<%= profile.username%>" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="title">Title of the Book</label>
-                                <input class="form-control" id="title" name="title" type="text" placeholder="Title of the Book">
+                                <input class="form-control" id="title" name="title" type="text"
+                                    placeholder="Title of the Book">
                             </div>
                             <div class="form-group">
                                 <label for="description">Description of the Book</label>
@@ -62,27 +70,30 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="genre">Genres of the Books</label>
-                                <input class="form-control" id="genre" name="genre" type="text" placeholder="Genres of the Books">
+                                <input class="form-control" id="genre" name="genre" type="text"
+                                    placeholder="Genres of the Books">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="pages">Number of Pages</label>
-                                <input class="form-control" id="pages" name="pages" type="number" placeholder="Number of Pages"
-                                    step="1" min="1">
+                                <input class="form-control" id="pages" name="pages" type="number"
+                                    placeholder="Number of Pages" step="1" min="1">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="rental">Rental Rate</label>
-                                <input class="form-control" id="rental" name="rental" type="rental" placeholder="Rental Rate"
-                                    step="0.0001" min="0">
+                                <input class="form-control" id="rental" name="rental" type="number"
+                                    placeholder="Rental Rate" step="0.0001" min="0">
                             </div>
                             <div class="form-group">
-                              <label class="control-label" for="image_url">Upload cover image</label>
-                                  <input type="file" class="form-control-file" id="coverimage" name="coverimage"  accept="image/*">
-                          </div>
+                                <label class="control-label" for="image_url">Upload cover image</label>
+                                <input type="file" class="form-control-file" id="coverimage" name="coverimage"
+                                    accept="image/*">
+                            </div>
                             <div class="form-group">
                                 <label for="bookpdf">Upload PDF version of the Book</label>
                                 <input type="file" class="form-control-file" id="bookpdf" name="bookpdf"
-                                    aria-describedby="fileHelp"  accept="application/pdf">
-                                <small id="fileHelp" class="form-text text-muted">This will be stored in temporary folders and might get deleted unless, you send for approval.</small>
+                                    aria-describedby="fileHelp" accept="application/pdf">
+                                <small id="fileHelp" class="form-text text-muted">This will be stored in temporary
+                                    folders and might get deleted unless, you send for approval.</small>
                             </div>
                         </fieldset>
                         <div class="form-group">

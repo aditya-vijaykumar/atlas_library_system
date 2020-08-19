@@ -1,50 +1,53 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
   <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                href="/dashboard">Switch to User</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/users/logout">Logout</a></li>
-          </ul>
-      </div>
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+    <a class="navbar-brand" href="/author/dashboard">Atlas Library System</a><button data-toggle="collapse"
+      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/dashboard">Home</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/profile">Profile</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/book">Books</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/account">Account</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/author/about">About</a></li>
+        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button" href="/dashboard">Switch to
+            User</a></li>
+        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/users/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 <ol class="breadcrumb" style="margin-top: 15px;">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Browse Library/ Book</li>
-  </ol>
-  <!-- This is the book details -->
+  <li class="breadcrumb-item"><a href="#">Home</a></li>
+  <li class="breadcrumb-item active">Browse Library/ Book</li>
+</ol>
+<!-- This is the book details -->
 <div class="row">
   <div class="col-2"></div>
   <div class="jumbotron col-8">
     <h1 class="display-4"><%= data.book_title %></h1>
     <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
+
     <% if(data.admin_revert) { %>
-      <h3>Book Reverted!</h3>
-      <p>This Book has been reverted by the admin and therefore, some data might be unavailable.</p>
-      <p class="lead mt-3"><strong>Admin Revert Message :</strong> <%= data.admin_revert_msg %></p>
-      <% } if(!data.admin_revert) { %>
-        <div class=""><img style="height: 450px; width: auto; display: block;" 
-          src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
-        <% } %>    
+    <h3>Book Reverted!</h3>
+    <p>This Book has been reverted by the admin and therefore, some data might be unavailable.</p>
+    <p class="lead mt-3"><strong>Admin Revert Message :</strong> <%= data.admin_revert_msg %></p>
+
+    <% } if(!data.admin_revert) { %>
+
+    <div class=""><img style="height: 450px; width: auto; display: block;" src="<%= data.image_url %>"
+        class="rounded mx-auto d-block" alt="Card image"></div>
+    <% } %>
     <p class="lead mt-3"><strong>Description :</strong> <%= data.book_desc %></p>
     <hr class="my-4">
     <div class="card-footer mb-3">
       Book Pages: <%= data.book_pages %>
-   </div>
-   <div class="card-footer">
-    Category : <%= data.genres %>
- </div>
+    </div>
+    <div class="card-footer">
+      Category : <%= data.genres %>
+    </div>
   </div>
   <div class="col-2"></div>
 </div>
@@ -55,23 +58,23 @@
     <h2 class="display-5 mb-3">E-Book</h2>
     <div class="mainbook">
       <div class="err"></div>
-    <div class="top-bar">
-      <button class="new-btn btn-primary" id="prev-page">
-        <i class="fas fa-arrow-circle-left"></i> Prev Page
-      </button>
-      <button class="new-btn btn-primary" id="next-page">
-        Next Page <i class="fas fa-arrow-circle-right"></i>
-      </button>
-      <span class="page-info">
-        Page <span id="page-num"></span> of <span id="page-count"></span>
-      </span>
-    </div>
-    <p id="loading"><strong>Please wait while the PDF loads...</strong></p>
+      <div class="top-bar">
+        <button class="new-btn btn-primary" id="prev-page">
+          <i class="fas fa-arrow-circle-left"></i> Prev Page
+        </button>
+        <button class="new-btn btn-primary" id="next-page">
+          Next Page <i class="fas fa-arrow-circle-right"></i>
+        </button>
+        <span class="page-info">
+          Page <span id="page-num"></span> of <span id="page-count"></span>
+        </span>
+      </div>
+      <p id="loading"><strong>Please wait while the PDF loads...</strong></p>
 
-    <canvas id="pdf-render" width="860px"></canvas>
+      <canvas id="pdf-render" width="860px"></canvas>
     </div>
   </div>
-  
+
   <div class="col-2"></div>
 </div>
 

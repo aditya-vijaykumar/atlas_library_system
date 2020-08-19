@@ -1,0 +1,55 @@
+<nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
+  <div class="container">
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+    <a class="navbar-brand" href="/dashboard">Atlas Library System</a><button data-toggle="collapse"
+      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/dashboard">Home</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/app/browse">Browse</a></li>
+        <li class="nav-item active" role="presentation"><a class="nav-link" href="/app/account">Account</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/about">About</a></li>
+        <% if (user.role == 'author'){ %>
+        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
+            href="/author/dashboard">Switch to Author</a></li>
+        <% } %>
+        <% if (user.role == 'user'){ %>
+        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button" href="/author-signup">Upgrade
+            to Author</a></li>
+        <% } %>
+        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/users/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<% include ./partials/messages %>
+<div class="jumbotron mt-3">
+  <img src="https://s7.gifyu.com/images/loader.gif" class="rounded mx-auto d-block">
+  <h3 class="display-5" style="text-align: center;"> This is a demo version.</h3>
+  <h4 class="text-center">Click on pay now to continue.</h4>
+  <p class="lead" style="text-align: center;">You will redirected to Razor Pay for completing a test payment.<br>
+    You may enter 4111 1111 1111 1111 as the card number followed by any valid details to complete the transaction.</p>
+
+  <form action="/app/payment/confirm" method="POST" class="text-center">
+    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_p6Nltj1flvzfJX" data-amount="50000"
+      data-currency="INR" data-order_id="<%= order_id %>" data-buttontext="Pay Now" data-name="Acme Corp"
+      data-description="Test transaction" data-image="https://example.com/your_logo.jpg"
+      data-prefill.name="Gaurav Kumar" data-prefill.email="gaurav.kumar@example.com" data-prefill.contact="9999999999"
+      data-theme.color="#F37254"></script>
+    <input type="hidden" custom="Hidden Element" name="hidden">
+  </form>
+</div>
+<style>
+  .razorpay-payment-button {
+    background-color: #F15A24;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+</style>

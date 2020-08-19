@@ -1,48 +1,51 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
   <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/admin/logout">Logout</a></li>
-          </ul>
-      </div>
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+    <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
+      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
+        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/admin/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 <ol class="breadcrumb" style="margin-top: 15px;">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Browse Library/ Book</li>
-  </ol>
-  <!-- This is the book details -->
+  <li class="breadcrumb-item"><a href="#">Home</a></li>
+  <li class="breadcrumb-item active">Browse Library/ Book</li>
+</ol>
+<!-- This is the book details -->
 <div class="row">
   <div class="col-2"></div>
   <div class="jumbotron col-8">
     <h1 class="display-4"><%= data.book_title %></h1>
     <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
+
     <% if(data.admin_revert) { %>
-      <h3>Book Reverted!</h3>
-      <p>This Book has been reverted by the admin and therefore, some data might be unavailable.</p>
-      <p class="lead mt-3"><strong>Admin Revert Message :</strong> <%= data.admin_revert_msg %></p>
-      <% } if(!data.admin_revert) { %>
-        <div class=""><img style="height: 450px; width: auto; display: block;" 
-          src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
-        <% } %>    
+    <h3>Book Reverted!</h3>
+    <p>This Book has been reverted by the admin and therefore, some data might be unavailable.</p>
+    <p class="lead mt-3"><strong>Admin Revert Message :</strong> <%= data.admin_revert_msg %></p>
+
+    <% } if(!data.admin_revert) { %>
+    <div class=""><img style="height: 450px; width: auto; display: block;" src="<%= data.image_url %>"
+        class="rounded mx-auto d-block" alt="Card image"></div>
+    <% } %>
+
     <p class="lead mt-3"><strong>Description :</strong> <%= data.book_desc %></p>
     <hr class="my-4">
     <div class="card-footer mb-3">
       Book Pages: <%= data.book_pages %>
-   </div>
-   <div class="card-footer">
-    Category : <%= data.genres %>
- </div>
+    </div>
+    <div class="card-footer">
+      Category : <%= data.genres %>
+    </div>
   </div>
   <div class="col-2"></div>
 </div>

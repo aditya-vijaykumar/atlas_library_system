@@ -1,38 +1,39 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
   <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/dashboard">Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item active" role="presentation"><a class="nav-link" href="/dashboard">Home</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/app/browse">Browse</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/app/account">Account</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/about">About</a></li>
-              <% if (user.role == 'author'){ %>
-              <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                href="/author/dashboard">Switch to Author</a></li>
-              <% } %>
-              <% if (user.role == 'user'){ %>
-                <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
-                  href="/author-signup">Upgrade to Author</a></li>
-                <% } %>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/users/logout">Logout</a></li>
-          </ul>
-      </div>
-  </div>
-</nav>
-  <% include ./partials/messages %>
-  <div class="jumbotron mt-3">
-    <h1 class="display-3">Hello, <%= user.name %></h1>
-    <h2 class="display-6">Welcome to ALT family.</h2>
-    <p class="lead">**DISCLAIMER** <br>All the data of the books are obtained via open source licenses, purely for demonstration purposes.</p>
-    <hr class="my-4">
-    <h4 class="display-6" style="align-self: center;">All your rented books will appear here.</h4>
-    <div class="row">
-      <% include ./partials/rentals %>
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+    <a class="navbar-brand" href="/dashboard">Atlas Library System</a><button data-toggle="collapse"
+      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item active" role="presentation"><a class="nav-link" href="/dashboard">Home</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/app/browse/">Browse</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/app/account">Account</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/about">About</a></li>
+        <% if (user.role == 'author'){ %>
+        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button"
+            href="/author/dashboard">Switch to Author</a></li>
+        <% } %>
+        <% if (user.role == 'user'){ %>
+        <li class="nav-item" role="presentation"><a class="btn btn-success" role="button" href="/author-signup">Upgrade
+            to Author</a></li>
+        <% } %>
+        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/users/logout">Logout</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <script src="/static/javascripts/dashboard.js"></script>
+</nav>
+<% include ./partials/messages %>
+<div class="jumbotron mt-3">
+  <h1 class="display-3">Hello, <%= user.name %></h1>
+  <h2 class="display-6">Welcome to ALT family.</h2>
+  <p class="lead">**DISCLAIMER** <br>All the data of the books are obtained via open source licenses, purely for
+    demonstration purposes.</p>
+  <hr class="my-4">
+  <h4 class="display-6" style="align-self: center;">All your rented books will appear here.</h4>
+  <div class="row">
+    <% include ./partials/rentals %>
+  </div>
+</div>
+<script src="/static/javascripts/dashboard.js"></script>

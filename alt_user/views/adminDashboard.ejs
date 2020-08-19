@@ -1,32 +1,31 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
   <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/admin/logout">Logout</a></li>
-          </ul>
-      </div>
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+    <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
+      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
+        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/admin/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-  <div class="mt-3"><% include ./partials/messages %></div>  
-  <div class="jumbotron mt-3">
-    <h1 class="display-3">Hello, <%= user.name %></h1>
-    <h3 class="display-6">You are accessing the Admin Portal  of ALT.</h3>
-    <hr class="my-4">
-  </div>
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="card border-primary col-6 px-3 py-4">
-       <h5>Please head over to Review section and review the pending books.</h5>
-    </div>
+<div class="mt-3"><% include ./partials/messages %></div>
+<div class="jumbotron mt-3">
+  <h1 class="display-3">Hello, <%= user.name %></h1>
+  <h3 class="display-6">You are accessing the Admin Portal of ALT.</h3>
+  <hr class="my-4">
 </div>
-  
+<div class="row">
+  <div class="col-3"></div>
+  <div class="card border-primary col-6 px-3 py-4">
+    <h5>Please head over to Review section and review the pending books.</h5>
+  </div>
+</div>

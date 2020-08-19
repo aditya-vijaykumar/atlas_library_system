@@ -1,56 +1,57 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <img src="/static/images/logo.png" style="height: 30px; width: auto;">
-    <a class="navbar-brand" href="/dashboard"> Atlas Library System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/dashboard">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/app/browse">Browse <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/app/account">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-      <div class="form-inline my-2 my-lg-0">
-        <a href="/users/logout" class="btn btn-secondary">Logout</a>
-      </div>
+  <a class="navbar-brand" href="/dashboard"> Atlas Library System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/app/browse">Browse <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/app/account">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <a href="/users/logout" class="btn btn-secondary">Logout</a>
     </div>
+  </div>
 </nav>
 <ol class="breadcrumb" style="margin-top: 15px;">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Browse Library/ Book</li>
-  </ol>
-  <!-- This is the book details -->
+  <li class="breadcrumb-item"><a href="#">Home</a></li>
+  <li class="breadcrumb-item active">Browse Library/ Book</li>
+</ol>
+<!-- This is the book details -->
 <div class="row">
   <div class="col-2"></div>
   <div class="jumbotron col-8">
     <h1 class="display-4"><%= data.book_title %></h1>
     <h2 class="display-5 mb-3"><%= data.book_authors %></h2>
-    <div class=""><img style="height: 450px; width: auto; display: block;" 
-      src= "<%= data.image_url %>" class="rounded mx-auto d-block" alt="Card image"></div>
+    <div class=""><img style="height: 450px; width: auto; display: block;" src="<%= data.image_url %>"
+        class="rounded mx-auto d-block" alt="Card image"></div>
     <p class="lead mt-3"><%= data.book_desc %></p>
     <hr class="my-4">
     <div class="card-footer mb-3">
       Book Pages: <%= data.book_pages %>
-   </div>
-   <div class="card-footer">
-    Catrgory : <%= data.genres %>
- </div>
+    </div>
+    <div class="card-footer">
+      Catrgory : <%= data.genres %>
+    </div>
   </div>
   <div class="col-2"></div>
 </div>
-  <!-- The form -->
-  <div class="row align-items-center">
-      <div class="col-3"></div>
+<!-- The form -->
+<div class="row align-items-center">
+  <div class="col-3"></div>
   <div class="card border-primary col-6 px-3 py-4">
     <div class="card-body">
       <h4 class="card-title">Calculate the cost for renting this Book</h4>
@@ -59,7 +60,7 @@
         Current Balance is
         <div class="mt-2">
           <h5> &emsp; &#9830; &ensp; <span class="balance">0.00</span></h5>
-       </div>
+        </div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -69,73 +70,76 @@
         Current Balance is
         <div class="mt-2">
           <h5> &emsp; &#9830; &ensp; <span class="balance">0.00</span></h5>
-       </div>
+        </div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <p class="card-text">Cost is 0.0100 token for one day.</p>
-      <div>          
-          <div class="form-group">
-            <label class="col-form-label" for="Days">Number of Days</label>
-            <input type="number" min="0" step="1" class="form-control" oninput="validity.valid||(value='');" placeholder="14" id="Days" name="days">
+      <p class="card-text">Cost is <%= data.book_rental %> token for one day.</p>
+      <div>
+        <div class="form-group">
+          <label class="col-form-label" for="Days">Number of Days</label>
+          <input type="number" min="0" step="1" class="form-control" oninput="validity.valid||(value='');"
+            placeholder="14" id="Days" name="days">
+        </div>
+        <div class="form-group">
+          <span class="control-label">Total Cost in ALT</span>
+          <div class="mt-2">
+            <h5> &#9830; &ensp; <span class="altcost">0.0000</span></h5>
           </div>
-          <div class="form-group">
-            <span class="control-label">Total Cost in ALT</span>
-            <div class="mt-2">
-               <h5> &#9830; &ensp; <span class="altcost">0.0000</span></h5>
-            </div>
+        </div>
+        <div class="form-group">
+          <span class="control-label">Total Cost in rupees</span>
+          <div class="mt-2">
+            <h5> &#8377; &ensp; <span class="inrcost">0.00</span></h5>
           </div>
-          <div class="form-group">
-            <span class="control-label">Total Cost in rupees</span>
-            <div class="mt-2">
-               <h5> &#8377; &ensp; <span class="inrcost">0.00</span></h5>
-            </div>
-          </div>
-          <button type="button" id="getValue" class="btn btn-primary">Calculate</button>
+        </div>
+        <button type="button" id="getValue" class="btn btn-primary">Calculate</button>
       </div>
     </div>
     <form action="/app/rent" method="POST">
-        <fieldset>
-          <legend>Rent The Book</legend>
-          <div class="form-group">
-            <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before purchasing.</label>
-          </div>
-          <div class="form-group">
+      <fieldset>
+        <legend>Rent The Book</legend>
+        <div class="form-group">
+          <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before purchasing.</label>
+        </div>
+        <div class="form-group">
           <fieldset>
             <label class="control-label" for="email">Email address</label>
-            <input class="form-control" id="email" name="email" type="text" value= "<%= user.email%>" readonly>
+            <input class="form-control" id="email" name="email" type="text" value="<%= user.email%>" readonly>
             <small id="emailHelp" class="form-text text-muted">We'll email you the purchase reciept.</small>
           </fieldset>
         </div>
-          <div class="form-group">
+        <div class="form-group">
           <fieldset>
             <label class="control-label" for="ethaddress">Ethereum address</label>
-            <input class="form-control" id="ethaddress" name="ethaddress" type="text" value= "<%= user.ethaddress%>" readonly >
+            <input class="form-control" id="ethaddress" name="ethaddress" type="text" value="<%= user.ethaddress%>"
+              readonly>
           </fieldset>
         </div>
         <div class="form-group">
           <fieldset>
             <label class="control-label" for="ethaddress">Author Ethereum address</label>
-            <input class="form-control" id="author_ethaddress" name="author_ethaddress" type="text" value= "<%= data.author_ethaddress%>" readonly >
+            <input class="form-control" id="author_ethaddress" name="author_ethaddress" type="text"
+              value="<%= data.author_ethaddress%>" readonly>
           </fieldset>
         </div>
         <div class="form-group">
           <label for="prdid">Product ID</label>
-          <input type="number" class="form-control" name="prdid" id="prdid" placeholder="Product ID" value="<%= data.product_id %>" readonly>
+          <input type="number" class="form-control" name="prdid" id="prdid" placeholder="Product ID"
+            value="<%= data.product_id %>" readonly>
         </div>
-          <div class="form-group">
-            <label for="days2">Number of Days</label>
-            <input type="number" class="form-control" name="days2" id="days2" placeholder="Number of Days" readonly>
-          </div>
-          <div class="form-group">
-            <label for="token2">Cost (in ALT)</label>
-            <input type="number" class="form-control" name="token" id="token" placeholder="Number of Tokens" readonly>
-          </div>
-          <button type="submit" id="rent" class="btn btn-primary">Rent it</button>
-        </fieldset>
-      </form>
+        <div class="form-group">
+          <label for="days2">Number of Days</label>
+          <input type="number" class="form-control" name="days2" id="days2" placeholder="Number of Days" readonly>
+        </div>
+        <div class="form-group">
+          <label for="token2">Cost (in ALT)</label>
+          <input type="number" class="form-control" name="token" id="token" placeholder="Number of Tokens" readonly>
+        </div>
+        <button type="submit" id="rent" class="btn btn-primary">Rent it</button>
+      </fieldset>
+    </form>
   </div>
 </div>
 <script src="/static/javascripts/book.js"></script>
-  

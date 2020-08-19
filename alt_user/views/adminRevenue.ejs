@@ -1,68 +1,71 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-primary navigation-clean" style="margin: 0px ;">
   <div class="container">
-      <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
-      <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
-          class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-              class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
-          <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
-              <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
-              <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button"
-                      href="/admin/logout">Logout</a></li>
-          </ul>
-      </div>
+    <img src="/static/images/logo.png" style="height: 30px; width: auto;"> &nbsp;
+    <a class="navbar-brand" href="/admin/dashboard">Admin | Atlas Library System</a><button data-toggle="collapse"
+      class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/review">Review</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/approved">Approved</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/rejected">Rejected</a></li>
+        <li class="nav-item" role="presentation"><a class="nav-link" href="/admin/revenue">Revenue</a></li>
+        <li class="nav-item" role="presentation"><a class="btn btn-danger" role="button" href="/admin/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-    <div class="jumbotron mt-3">
-      <h1 class="display-5">Hello, <%= user.name %></h1>
+<div class="jumbotron mt-3">
+  <h1 class="display-5">Hello, <%= user.name %></h1>
+</div>
+
+<div class="row">
+  <div class="card border-primary mb-3 col-6 px-2 py-2">
+    <div class="card-header">Revenue details</div>
+    <div class="card-body">
+      <h4 class="card-title">Revenue Balance:</h4>
+      <h5> &#9830; <span id="balance"></span> ALT</h5>
     </div>
-    
-    <div class="row">
-      <div class="card border-primary mb-3 col-6 px-2 py-2">
-          <div class="card-header">Revenue details</div>
-          <div class="card-body">
-            <h4 class="card-title">Revenue Balance:</h4>
-            <h5> &#9830; <span id="balance"></span> ALT</h5>
-          </div>
-          
+
+  </div>
+
+  <div class="card border-primary col-6 px-3 py-4">
+    <form action="/payment" method="POST" id="transfer">
+      <fieldset>
+        <legend>Payment for Authors</legend>
+        <div class="form-group">
+          <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before proceeding.</label>
+          <label for="staticEmail" class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
         </div>
-  
-        <div class="card border-primary col-6 px-3 py-4">
-          <form action="/payment" method="POST">
-              <fieldset>
-                <legend>Payment for Authors</legend>
-                <div class="form-group">
-                  <label for="staticEmail" class="col-sm-8 col-form-label">Ensure you cross check before proceeding.</label>
-                  <label for="staticEmail" class="col-sm-8 col-form-label">&#8377; 100.00 = &#9830; 1.0000 ALT</label>
-                </div>
-                <div class="form-group">
-                <fieldset>
-                  <label class="control-label" for="email">Email address</label>
-                  <input class="form-control" id="email" name="email" type="text" placeholder= "Email Address">
-                  <small id="emailHelp" class="form-text text-muted">We'll email the author payment reciept.</small>
-                </fieldset>
-              </div>
-                <div class="form-group">
-                <fieldset>
-                  <label class="control-label" for="address">Author's Ethereum address</label>
-                  <input class="form-control" id="address" name="address" type="text" placeholder= "Author's Ethereum address" >
-                </fieldset>
-              </div>
-                <div class="form-group">
-                  <label for="token">Amount</label>
-                  <input type="number" class="form-control" name="token" id="token" placeholder="Amount" min="0" step="0.0001">
-                </div>
-                <div class="form-group">
-                  <label for="token2">Confirm Amount</label>
-                  <input type="number" class="form-control" name="token2" id="token2" placeholder="Confirm Amount" min="0" step="0.0001">
-                </div>
-                <button type="submit" class="btn btn-primary">Purchase</button> 
-              </fieldset>
-            </form>
+        <div class="form-group">
+          <fieldset>
+            <label class="control-label" for="email">Email address</label>
+            <input class="form-control" id="email" name="email" type="text" placeholder="Email Address">
+            <small id="emailHelp" class="form-text text-muted">We'll email the author payment reciept.</small>
+          </fieldset>
         </div>
-    </div>
-    <script src="/static/javascripts/adminRevenue.js"></script>
+        <div class="form-group">
+          <fieldset>
+            <label class="control-label" for="ethaddress">Author's Ethereum address</label>
+            <input class="form-control" id="ethaddress" name="ethaddress" type="text"
+              placeholder="Author's Ethereum address">
+          </fieldset>
+        </div>
+        <div class="form-group">
+          <label for="token">Amount</label>
+          <input type="number" class="form-control" name="token" id="token" placeholder="Amount" min="0.01"
+            step="0.0001">
+        </div>
+        <div class="form-group">
+          <label for="token2">Confirm Amount</label>
+          <input type="number" class="form-control" name="token2" id="token2" placeholder="Confirm Amount" min="0.01"
+            step="0.0001">
+        </div>
+        <button type="submit" class="btn btn-primary">Make Payment</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<script src="/static/javascripts/adminRevenue.js"></script>
