@@ -65,7 +65,7 @@ router.post('/forgot', (req, res) => {
                 .then(update => {
                     const msg = {
                         to: user.email,
-                        from: 'aditya.devsandbox@gmail.com',
+                        from: 'atlas@adityavijaykumar.me',
                         subject: 'Password Reset Link',
                         text: 'You are receiving this mail because we recieved a request to reset the password for your account.\n\n' +
                             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -135,7 +135,7 @@ router.post('/reset/:token', (req, res) => {
                         console.log('Successfully reset account password.');
                         const msg = {
                             to: user.email,
-                            from: 'aditya.devsandbox@gmail.com',
+                            from: 'atlas@adityavijaykumar.me',
                             subject: 'Account Password Reset',
                             text: 'Hello,\n\n' +
                                 'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n',

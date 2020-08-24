@@ -135,7 +135,7 @@ router.post('/resendlink', (req, res) => {
                         // Send the email
                         const msg = {
                             to: user.email,
-                            from: 'aditya.devsandbox@gmail.com',
+                            from: 'atlas@adityavijaykumar.me',
                             subject: 'Account Verification Link',
                             html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
                                 '.\n</strong><br>Please note this link expires in 12 hours.' +

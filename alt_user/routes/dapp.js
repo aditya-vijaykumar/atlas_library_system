@@ -8,12 +8,11 @@ const fs = require('fs');
 const path = require('path');
 
 const { secured } = require('../config/auth');
+const { route } = require('.');
 
 // mongoose data models
 const model = require('../models/User');
-const { route } = require('.');
 const books = model.Books;
-const User = model.User;
 const rental = model.Rentals;
 const transaction = model.Transactions;
 
@@ -365,12 +364,12 @@ router.post('/rent', secured, (req, res) => {
 
                                 const msg = {
                                     to: email,
-                                    from: 'aditya.devsandbox@gmail.com',
-                                    subject: 'Purchase Receipt | Atlas Library System',
-                                    html: '<strong>Hello,\n\n' + 'Thank you for using Atlas Library System.</strong> \n\n This is an auto generated email regaring your recent book rental purchase. \n\n' +
-                                        '\n<br>You have rented the book:' + book_title + 'for' + days + 'days, at a price of' + cost + 'ALT or' + cost * 100 + 'INR.' +
+                                    from: 'atlas@adityavijaykumar.me',
+                                    subject: 'Rental Receipt | Atlas Library System',
+                                    html: '<strong>Hello,<br>' + 'Thank you for using Atlas Library System.</strong> <br> \n\n This is an auto generated email regarding your recent book rental order. \n\n' +
+                                        '\n<br>You have rented the book: ' + book_title + 'for ' + days + ' days, at a price of ' + cost + ' ALT or ' + cost * 100 + ' INR.' +
                                         '\n<br><br>You can access the book by logging into your account on the website.' +
-                                        '\n<br><br>Regards, \n\n Team Atlas Library System',
+                                        '\n<br><br>Regards, <br>\n\n Team Atlas Library System',
                                 };
                                 sgMail.send(msg);
 

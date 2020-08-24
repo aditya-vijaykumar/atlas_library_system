@@ -13,7 +13,6 @@ const { secured } = require('../config/auth');
 
 // Load mongoose data models
 const model = require('../models/User');
-const books = model.Books;
 const User = model.User;
 const rental = model.Rentals;
 const transaction = model.Transactions;
@@ -31,7 +30,7 @@ let headers = { headers: { 'accept': 'application/json', 'Content-Type': 'applic
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Welcome Page
-router.get('/', (req, res) => res.render('welcome'));
+router.get('/', (req, res) => res.render('home'));
 
 // Login Page
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
@@ -57,7 +56,7 @@ router.get('/about', (req, res) => res.render('about'));
 
 router.get('/author-signup', secured, (req, res) => res.render('become-author', { user: req.session.user }));
 
-router.get('/author-enroll', (req, res) => {
+router.get('/author-enroll', secured, (req, res) => {
   Author.findOne({ email: req.session.email })
     .then(author => {
       if (author) {
@@ -92,11 +91,11 @@ router.get('/author-enroll', (req, res) => {
               .then(token => {
                 const msg = {
                   to: user.email,
-                  from: 'aditya.devsandbox@gmail.com',
+                  from: 'atlas@adityavijaykumar.me',
                   subject: 'Author Account Confirmation',
-                  html: '<strong>Hello,\n\n' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
-                    '.\n</strong><br>Please note this link expires in 12 hours.' +
-                    '.\n<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + '\/author\/resendlink\/',
+                  html: '<strong>Hello,<br>' + 'Please verify your author account upgrade request by clicking the link: \nhttp:\/\/' + req.hostname + '\/author\/confirmation\/' + token._userId + '\/' + token.token +
+                    '.\n</strong><br> Please note this link expires in 12 hours.' +
+                    '<br><br>In case you failed to verify within 12 hours, you can request a new link by visiting : \nhttp:\/\/' + req.hostname + '\/author\/resendlink\/',
                 };
                 sgMail.send(msg);
                 req.flash(
@@ -198,7 +197,13 @@ router.get("/callback", (req, res, next) => {
                       req.session.user = user;
                       res.redirect(returnTo || "/dashboard");
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                      console.log(err)
+                      req.flash(
+                        'error_msg',
+                        'There was an error during the registration, please inform the admin.');
+                      res.redirect('/dashboard');
+                    });
                   let Type = 'Credit';
                   let token = 0.1;
                   const newTransaction = new transaction({
@@ -219,15 +224,30 @@ router.get("/callback", (req, res, next) => {
                 }
                 //upon unsuccesful address registration on the blockchain
                 if (!success) {
-                  console.log('Error! Unsuccessfull in generating and storing new account');
+                  req.flash(
+                    'error_msg',
+                    'There was an error during the registration, please inform the admin.');
+                  res.redirect('/dashboard');
                 }
               })
               //unsuccessful api call 
               .catch((error) => {
                 console.log(error);
+                req.flash(
+                  'error_msg',
+                  'There was an error during the registration, please inform the admin.');
+                res.redirect('/dashboard');
+
                 console.log('Error in connecting to the smart contract');
               });
           }
+        })
+        .catch(err => {
+          console.error(err);
+          req.flash(
+            'error_msg',
+            'There was an error during the registration, please inform the admin.');
+          res.redirect('/dashboard');
         });
     });
   })(req, res, next);
@@ -241,13 +261,13 @@ router.get('/:username', (req, res) => {
       }
       if (!user) {
         req.flash('error_msg', 'Unable to access author profile.');
-        res.redirect('/');
+        res.redirect('/login');
       }
     })
     .catch(err => {
       console.log(err);
       req.flash('error_msg', 'Author profile does not exist.');
-      res.redirect('/');
+      res.redirect('/login');
     });
 });
 

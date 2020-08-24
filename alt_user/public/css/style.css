@@ -784,7 +784,7 @@ ul#top_menu li a.btn_1:hover {
   border-bottom: 5px solid #ffc107;
 }
 #hero_in.general:before {
-  background: url(../img/Artboard81.png) center center no-repeat;
+  background: url(../img/Artboard1.png) center center no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -1295,7 +1295,7 @@ video {
   }
 }
 .hero_single:before {
-  background: url(../img/Artboard81.png) center center no-repeat fixed;
+  background: url(../img/Artboard1.png) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2619,8 +2619,8 @@ a.box_feat h3 {
   z-index: 9;
 }
 #carousel .item .title h4 {
-  background-color: #662d91;
-  background-color: #662d91;
+  background-color: #233a87;
+  background-color: #233a87;
   display: inline-block;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -3700,7 +3700,7 @@ section#reviews {
 #login_bg,
 #register_bg,
 #admission_bg {
-  background: url(../img/Artboard8.png) center center no-repeat fixed;
+  background: url(../img/Artboard3.png) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -3710,7 +3710,7 @@ section#reviews {
 }
 
 #register_bg {
-  background: url(../img/Artboard8.png) center center no-repeat fixed;
+  background: url(../img/Artboard3.png) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -3718,7 +3718,7 @@ section#reviews {
 }
 
 #admission_bg {
-  background: url(../img/Artboard8.png) center center no-repeat fixed;
+  background: url(../img/Artboard3.png) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -5134,7 +5134,7 @@ ul.list_3 li:before {
 }
 
 .call_section {
-  background: url(../img/ArtboardOne.jpg) center center no-repeat fixed;
+  background: url(../img/Artboard2.jpg) center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
