@@ -1,8 +1,5 @@
 /*
 Theme Name: Udema
-Theme URI: http://www.ansonika.com/udema/
-Author: Ansonika
-Author URI: http://themeforest.net/user/Ansonika/
 
 [Table of contents] 
 
@@ -795,7 +792,7 @@ ul#top_menu li a.btn_1:hover {
   background-color: rgba(35, 58, 135);
 }
 #hero_in.courses:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_courses.jpg)
+  background: url(https://via.placeholder.com/1600x1067/ccc/fff/bg_courses.jpg)
     center center no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -807,7 +804,7 @@ ul#top_menu li a.btn_1:hover {
   background-color: rgba(35, 58, 135);
 }
 #hero_in.contacts:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_contacts.jpg)
+  background: url(https://via.placeholder.com/1600x1067/ccc/fff/bg_contacts.jpg)
     center center no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1264,7 +1261,7 @@ video {
 @media (max-width: 1024px) {
   #hero_video {
     background: #662d91
-      url(http://via.placeholder.com/1600x1067/ccc/fff/bg_home_fallback_video.jpg);
+      url(https://via.placeholder.com/1600x1067/ccc/fff/bg_home_fallback_video.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -1372,7 +1369,7 @@ video {
   }
 }
 .hero_single.version_2:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/home_section_1.jpg)
+  background: url(https://via.placeholder.com/1600x1067/ccc/fff/home_section_1.jpg)
     center center no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
