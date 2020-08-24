@@ -28,17 +28,16 @@ $(document).ready(function () {
 
 
     function intcall() {
-        const intapi = 'https://atlas.adityavijaykumar.me/app/pdf';
-        var callurl = intapi + '/' + bookid;
-        $.get(callurl, function (retdata) {
-            $('#loading').hide();
-            getPDF(callurl);
-        })
+        let bookid = window.location.pathname.replace('/app/ebook/', '');
+        const intapi = 'https://atlas.adityavijaykumar.me/app/pdf/';
+        var callurl = intapi + bookid;
+        $('#loading').hide();
+        getPDF(callurl);
     }
 });
 
 function getPDF(url) {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js'
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/static/javascripts/pdf.worker.js'
     let pdfDoc = null,
         pageNum = 1,
         pageIsRendering = false,

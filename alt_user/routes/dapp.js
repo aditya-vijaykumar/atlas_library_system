@@ -367,7 +367,7 @@ router.post('/rent', secured, (req, res) => {
                                     from: 'atlas@adityavijaykumar.me',
                                     subject: 'Rental Receipt | Atlas Library System',
                                     html: '<strong>Hello,<br>' + 'Thank you for using Atlas Library System.</strong> <br> \n\n This is an auto generated email regarding your recent book rental order. \n\n' +
-                                        '\n<br>You have rented the book: ' + book_title + 'for ' + days + ' days, at a price of ' + cost + ' ALT or ' + cost * 100 + ' INR.' +
+                                        '\n<br>You have rented the book: ' + book_title + ' for ' + days + ' days, at a price of ' + cost + ' ALT or ' + cost * 100 + ' INR.' +
                                         '\n<br><br>You can access the book by logging into your account on the website.' +
                                         '\n<br><br>Regards, <br>\n\n Team Atlas Library System',
                                 };
