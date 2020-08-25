@@ -15,12 +15,16 @@ const UserSchema = new mongoose.Schema({
   user_id: {
     type: Number
   },
+  role: {
+    type: String,
+    default: "user"
+  },
   date: {
     type: Date,
     default: Date.now
   }
 }, {
-  collection: 'userdata'
+  collection: 'users'
 });
 
 const TransactSchema = new mongoose.Schema({
@@ -42,7 +46,7 @@ const TransactSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  collection: 'transacts'
+  collection: 'transactions'
 });
 
 const RentalSchema = new mongoose.Schema({
@@ -89,7 +93,7 @@ const RentalSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  collection: 'rental-new'
+  collection: 'rentals'
 });
 
 const BookSchema = new mongoose.Schema({
@@ -114,11 +118,22 @@ const BookSchema = new mongoose.Schema({
   product_id: {
     type: Number
   },
-  book_url : {
+  book_url: {
     type: String
   },
-  book_location :{
+  book_location: {
     type: String
+  },
+  author_email: {
+    type: String
+  },
+  book_rental: {
+    type: Number,
+    default: 0.01
+  },
+  author_ethaddress: {
+    type: String,
+    default: "0xaec6c58eb29b121b8795a1f3d267da9cc45d5ed3"
   }
 }, {
   collection: 'newbooks'
@@ -131,7 +146,7 @@ const Books = mongoose.model('books', BookSchema);
 
 module.exports = {
   User,
-  Books, 
+  Books,
   Transactions,
   Rentals
 }

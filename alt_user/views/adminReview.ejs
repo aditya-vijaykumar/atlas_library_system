@@ -1,0 +1,83 @@
+<% include ./includes/head-three %>
+
+<body class="fixed-nav sticky-footer" id="page-top">
+
+  <% include ./includes/admin-nav %>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Books</li>
+      </ol>
+      <div class="mt-2 mb-2"><% include ./partials/messages %></div>
+      <div class="box_general">
+        <div class="header_box">
+          <h2 class="d-inline-block">Books Awaiting Approval</h2>
+        </div>
+        <% if( data.length <= 0 ) { %>
+        <div class="list-general">
+          <h6 style="padding-bottom: 3rem;">There are no pending approvals.</h6>
+        </div>
+        <% } if( data.length > 0 ) { %>
+        <div class="list_general">
+          <ul>
+            <% for(var i=0; i < data.length; i++) { %>
+            <li>
+              <figure><img src="img/course_1.jpg" alt=""></figure>
+              <h4><%= data[i].book_title %> <i class="pending">Pending</i></h4>
+              <ul class="course_list">
+                <li><strong>Request date</strong> <%= data[i].date %></li>
+                <li><strong>Author</strong> <%= data[i].book_authors %></li>
+                <li><strong>Genre</strong> <%= data[i].genres %></li>
+                <li><strong>Price</strong><%= data[i].book_rental_price %> ALT</li>
+              </ul>
+              <h6>Book description</h6>
+              <p><%= data[i].book_desc %> </p>
+              <ul class="buttons">
+                <li><a href="/admin/<%= data[i]._id %>" class="btn_1 gray approve"><i
+                      class="fa fa-fw fa-check-circle-o"></i>
+                    Approve</a></li>
+                <li><a href="/admin/<%= data[i]._id %>" class="btn_1 gray delete"><i
+                      class="fa fa-fw fa-times-circle-o"></i>
+                    Reject</a></li>
+              </ul>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <% } %>
+      </div>
+      <!-- /box_general-->
+      <nav aria-label="...">
+        <ul class="pagination pagination-sm add_bottom_30">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /pagination-->
+    </div>
+    <!-- /container-fluid-->
+  </div>
+  <!-- /container-wrapper-->
+
+  <% include ./includes/footer-three %>
+  <!-- Page level plugin JavaScript-->
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/static/vendor/jquery.selectbox-0.2.js"></script>
+  <script src="/static/vendor/retina-replace.min.js"></script>
+  <script src="/static/vendor/jquery.magnific-popup.min.js"></script>
+
+</body>

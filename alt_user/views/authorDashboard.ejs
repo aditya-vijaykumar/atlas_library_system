@@ -1,0 +1,108 @@
+<% include ./includes/head-two %>
+
+<body>
+  <div id="page" class="theia-exception">
+    <% include ./includes/author-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Hello <%= user.name %></h1>
+            <h3 class="fadeInUp animated" style="color: #fff;">Welcome to the ALS Author Family</h3>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+      <div class="container margin_60_35">
+        <% include ./partials/messages %>
+        <div class="row">
+          <aside class="col-lg-1" id="sidebar">
+          </aside>
+          <!--/aside -->
+
+          <div class="col-lg-10">
+            <div class="box_teacher">
+              <div class="indent_title_in">
+                <i class="pe-7s-bookmarks"></i>
+                <h3>Published Books</h3>
+                <p>All your published and active books will appear here!</p>
+              </div>
+              <div class="container margin_60_35">
+                <div class="row">
+                  <% for(var i=0; i < count; i++) { %>
+                  <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="box_grid wow">
+                      <figure class="block-reveal">
+                        <div class="block-horizzontal"></div>
+                        <a href="/app/book/<%= data[i].product_id%>">
+                          <img src="<%= data[i].image_url%>" class="img-fluid" alt=""></a>
+                        <div class="preview"><span>Preview Book</span></div>
+                      </figure>
+                      <div class="wrapper">
+                        <small><%= data[i].book_authors%></small>
+                        <h3><%= data[i].book_title%></h3>
+                        <div class="open">
+                          <a href="/app/book/<%= data[i].product_id%>" id="link<%= [i] %>" class="btn btn-primary
+                                    ">View</a>
+                        </div>
+                        <ul>
+                          <li> <i class="icon_clock_alt"></i>Active Since: <%= data[i].date%></li>
+                          <li> <i class="icon-book-3"></i>Pages: <%= data[i].book_pages%></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /box_grid -->
+                  <% } %>
+                  <!-- /box_grid -->
+                </div>
+              </div>
+              <!-- /row -->
+            </div>
+
+            <hr class="styled_2">
+            <div class="wrapper_indent">
+              <h5>Disclaimer</h5>
+              <p>Presently, all the details of the books that are available on Atlas Library System are
+                obtained from Open Source licenses, purely for demonstration purposes.
+                While the PDFs that are rendered have been custom designed for this project and is
+                intellectual property of Atlas Library System.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- /col -->
+      </div>
+      <!-- /row -->
+
+      <!-- /container -->
+    </main>
+    <!--/main-->
+
+    <% include ./includes/footer-two %>
+  </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="/users/logout">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>

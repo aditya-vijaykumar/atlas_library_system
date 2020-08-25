@@ -1,0 +1,84 @@
+<% include ./includes/head-one %>
+
+<body>
+  <div id="page" class="theia-exception">
+    <% include ./includes/user-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Payment Page</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+
+      <div class="bg_color_1">
+        <div class="container margin_60_95">
+          <div class="main_title_2">
+            <span><em></em></span>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 wow text-center" data-wow-offset="150">
+              <figure class="block-reveal">
+                <div class="block-horizzontal"></div>
+                <img src="https://s7.gifyu.com/images/loader.gif" class="img-fluid rounded" alt="">
+              </figure>
+              <h3 class="display-5" style="text-align: center;"> This is a demo version.</h3>
+              <h4>Click on pay now to continue.</h4>
+              <p class="lead" style="text-align: center;">You will redirected to Razor Pay for completing
+                a test payment.<br>
+                You may enter 4111 1111 1111 1111 as the card number followed by any valid details to
+                complete the transaction.</p>
+              <form action="/app/payment/confirm" method="POST" class="text-center">
+                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_p6Nltj1flvzfJX"
+                  data-amount="50000" data-currency="INR" data-order_id="<%= order_id %>" data-buttontext="Pay Now"
+                  data-name="Atlas Library System" data-description="Test transaction"
+                  data-image="https://siasky.net/PAP9RUA97ciMqEfa2vNZTbfJeqBUYV52YhAKHv_xGZPxQg"
+                  data-prefill.name="<%= user.name %>" data-prefill.email="<%= user.email %>"
+                  data-prefill.contact="9999999999" data-theme.color="#ffc107"></script>
+                <input type="hidden" custom="Hidden Element" name="hidden">
+              </form>
+
+
+            </div>
+            <div class="col-lg-2"></div>
+
+          </div>
+          <!--/row-->
+        </div>
+        <!--/container-->
+      </div>
+      <!--/bg_color_1-->
+
+    </main>
+    <!--/main-->
+
+    <% include ./includes/footer-one %>
+  </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="/users/logout">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,15 +11,17 @@ const app = express();
 
 // Passport Config
 require('./config/auth0')(passport);
+require('./config/local')(passport);
 
 // DB Config
 const db = 'mongodb://localhost:27017/test';
+const dbonline = require('./config/dbKeys').mongoURI;
 
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
-    { useUnifiedTopology: true, useNewUrlParser: true }
+    dbonline,
+    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
@@ -33,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //public folder
 app.use('/static', express.static('public'));
-
+app.use('/uploads', express.static('uploads'));
 
 // Express session Have to change
 app.use(
@@ -52,7 +54,7 @@ app.use(passport.session());
 app.use(flash());
 
 // Global variables
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.success_tx = req.flash('success_tx');
   res.locals.link = req.flash('link');
@@ -72,6 +74,8 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
 app.use('/app', require('./routes/dapp.js'));
+app.use('/author', require('./routes/author.js'));
+app.use('/admin', require('./routes/admin.js'));
 
 const PORT = process.env.PORT || 3000;
 

@@ -1,17 +1,31 @@
 <% for(var i=0; i < count; i++) { %>
-    <div class="card mb-3 col-4" style="height: 570px;">
-        <h3 class="card-header" id="title"><%= data[i].book_title%></h3>
-        <div class="card-body">
-          <h5 class="card-title" id="author"><%= data[i].book_authors%></h5>
-          <h6 class="card-subtitle text-muted">Rented on: <%= data[i].date%> <br> Days: <%= data[i].days%> </h6>
-        </div>
-        <img style="height: 300px; width: 199px; display: block; align-self: center;" 
-            src= "<%= data[i].image_url%>" alt="Card image" id="img">
-        <div class="card-body" style="align-self: center;">
-          <a href="/app/ebook/<%= data[i].product_id%>" id="link<%= [i] %>" class="btn btn-primary">Read</a>
-        </div>
-        <div class="card-footer text-muted">
-           Book Pages: <%= data[i].book_pages%>
-        </div>
+<div class="col-xl-4 col-lg-6 col-md-6">
+  <div class="box_grid wow">
+    <figure class="block-reveal">
+      <div class="block-horizzontal"></div>
+      <img src="<%= data[i].image_url%>" class="img-fluid" alt="">
+      <div class="preview"><span>Preview Book</span></div>
+    </figure>
+    <div class="wrapper">
+      <small><%= data[i].book_authors%></small>
+      <h3><%= data[i].book_title%></h3>
+      <p>Rented on: <%= data[i].date%></p>
+      <div class="open">
+        <a href="/app/ebook/<%= data[i].product_id%>" id="link<%= [i] %>" class="btn btn-primary
+                ">Read</a>
       </div>
-      <% } %>
+      <ul>
+        <li>Rented for: <i class="icon_clock_alt"></i> <%= data[i].days%> Days</li>
+        <li>Pages: <i class="icon-book-3"></i><%= data[i].book_pages%></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /box_grid -->
+<% } %>
+
+<% if(count <= 0) { %>
+<div class="col-lg-12">
+  <h6>You haven't rented any books yet, head over to the Browse section and rent a few!</h6>
+</div>
+<% } %>

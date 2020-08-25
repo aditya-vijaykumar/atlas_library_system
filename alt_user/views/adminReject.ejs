@@ -1,0 +1,78 @@
+<% include ./includes/head-three %>
+
+<body class="fixed-nav sticky-footer" id="page-top">
+
+  <% include ./includes/admin-nav %>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Rejected</li>
+      </ol>
+      <div class="mt-2 mb-2"><% include ./partials/messages %></div>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-times"></i> List of all the rejected books</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Book Title</th>
+                  <th>Author</th>
+                  <th>Genre</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Book Title</th>
+                  <th>Author</th>
+                  <th>Genre</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Option</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <% for(var i=0; i < data.length; i++) { %>
+                <tr>
+                  <td><%= data[i].book_title %></td>
+                  <td><%= data[i].book_authors %></td>
+                  <td><%= data[i].genres %></td>
+                  <td><%= data[i].date %></td>
+                  <td><%= data[i].book_rental_price %></td>
+                  <td><a class="btn btn-outline-primary" role="button"
+                      href="/admin/book/<%= data[i].admin_product_id %>">View</a></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated just now</div>
+      </div>
+      <!-- /tables-->
+    </div>
+    <!-- /container-fluid-->
+  </div>
+  <!-- /container-wrapper-->
+
+  <% include ./includes/footer-three %>
+  <!-- Page level plugin JavaScript-->
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/static/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/static/vendor/jquery.selectbox-0.2.js"></script>
+  <script src="/static/vendor/retina-replace.min.js"></script>
+  <script src="/static/vendor/jquery.magnific-popup.min.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="/static/js/admin-datatables.js"></script>
+</body>

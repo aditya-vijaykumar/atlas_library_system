@@ -1,7 +1,8 @@
 $(document).ready(function () {
     $('div.mainbook').hide();
-    const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x58c08716a36d33bb25a91161ace368a1c5dafd23/getUserAccess/';
-    const internalapi = 'http://localhost:3000/app/geteth'; 
+    const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x0770cbb571ad16d17559add131ad5ce5ef47e8fc/getUserAccess/';
+    const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
+    const internal = 'https://atlas.adityavijaykumar.me/app/thepdf';
     let bookid = window.location.pathname.replace('/app/ebook/', '');
 
     $.get(internalapi, function (retdata) {
@@ -27,25 +28,16 @@ $(document).ready(function () {
 
 
     function intcall() {
-        const intapi = 'http://localhost:3000/app/altload';
-        var location;
-        var user_id;
-        var callurl = intapi + '/' + bookid;
-        console.log('The Book ID is: ' + bookid);
-        $.get(callurl, function (retdata) {
-            location = retdata.location;
-            user_id = retdata.user_id;
-            console.log(location);
-            console.log(user_id);
-            const url = "/static/temp/" + user_id + '/' + location + ".pdf";
-            console.log(url);
-            $('#loading').hide();
-            getPDF(url);
-        })
+        let bookid = window.location.pathname.replace('/app/ebook/', '');
+        const intapi = 'https://atlas.adityavijaykumar.me/app/pdf/';
+        var callurl = intapi + bookid;
+        $('#loading').hide();
+        getPDF(callurl);
     }
 });
 
 function getPDF(url) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/static/javascripts/pdf.worker.js'
     let pdfDoc = null,
         pageNum = 1,
         pageIsRendering = false,

@@ -1,0 +1,71 @@
+<% include ./includes/head-one %>
+
+<body>
+  <div id="page">
+    <% include ./includes/home-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Atlas Library System</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+
+      <div class="bg_color_1">
+        <div class="container margin_60_95">
+          <div class="main_title_2">
+            <span><em></em></span>
+            <h2>Author Profile</h2>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 wow" data-wow-offset="150">
+            </div>
+            <div class="col-lg-6">
+              <div class="profile">
+                <figure><img src="<%= profile.profilePicture%>" alt="Teacher" class="rounded-circle" width="150">
+                </figure>
+
+                <ul class="author-profile">
+                  <li>
+                    <h4><%= profile.fullName%></h4>
+                  </li>
+                  <li>
+                    <h6><a href="/<%= profile.username%>" class="text-secondary"><i
+                          class="icon-user-1">@<%= profile.username%></i></a></h6>
+                  </li>
+                  <li>
+                    <h6><%= profile.bio%></h6>
+                  </li>
+                  <li>
+                    <h6><a href="#"><i class="icon-location-5"></i></a><%= profile.location%></h6>
+                  </li>
+                  <li>
+                    <h6><a href="https://www.twitter.com/<%= profile.twitter%>"><i
+                          class="icon-twitter">&nbsp;<%= profile.twitter%></i></a></h6>
+                  </li>
+                  <li>
+                    <h6><a href="http://<%= profile.website%>" class="text-info"><i
+                          class="icon-link-5">&nbsp;<%= profile.website%></i></a></h6>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--/row-->
+        </div>
+        <!--/container-->
+      </div>
+      <!--/bg_color_1-->
+
+    </main>
+    <!--/main-->
+    <% include ./includes/footer %>
+  </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>

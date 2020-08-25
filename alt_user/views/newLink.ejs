@@ -1,0 +1,64 @@
+<% include ./includes/head-one %>
+
+<body>
+  <div id="page">
+    <% include ./includes/home-nav %>
+    <main>
+      <section id="hero_in" class="general">
+        <div class="wrapper">
+          <div class="container">
+            <h1 class="fadeInUp"><span></span>Atlas Library System</h1>
+          </div>
+        </div>
+      </section>
+      <!--/hero_in-->
+
+      <div class="bg_color_1">
+        <div class="container margin_60_95">
+          <div class="main_title_2">
+            <span><em></em></span>
+            <h2>Request for new link</h2>
+            <p>Now anyone can upload their books!</p>
+          </div>
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+              <p>Lorem ipsum dolor sit amet, homero erroribus in cum. Cu eos <strong>scaevola
+                  probatus</strong>. Nam atqui intellegat ei, sed ex graece essent delectus. Autem
+                consul eum ea. Duo cu fabulas nonumes contentiones, nihil voluptaria pro id. Has graeci
+                deterruisset ad, est no primis detracto pertinax, at cum malis vitae facilisis.</p>
+
+              <form action="/author/resendlink" method="POST" autocomplete="off">
+                <span class="input">
+                  <input class="input_field" type="email" id="email" name="email">
+                  <label class="input_label">
+                    <span class="input__label-content">Your email</span>
+                  </label>
+                </span>
+                <span class="input">
+                  <input class="input_field" type="text" id="verify_contact" name="verify_contact">
+                  <label class="input_label">
+                    <span class="input__label-content">Are you human? 3 + 1 =</span>
+                  </label>
+                </span>
+                <div class="mt-3" style="position:relative;"><input type="submit" value="Request Now"
+                    class="btn_1 full-width" id="submit-contact"></div>
+              </form>
+            </div>
+          </div>
+          <!--/row-->
+        </div>
+        <!--/container-->
+      </div>
+      <!--/bg_color_1-->
+
+    </main>
+    <!-- /main -->
+    <% include ./includes/footer %>
+  </div>
+  <!-- COMMON SCRIPTS -->
+  <script src="/static/js/jquery-2.2.4.min.js"></script>
+  <script src="/static/js/common_scripts.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/assets/validate.js"></script>
+</body>
