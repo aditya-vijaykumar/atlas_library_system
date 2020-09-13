@@ -54,6 +54,7 @@ function lastcheck(email) {
         console.log('successfully deleted all the files!')
       })
     })
+    .catch(err => console.error(err));
 };
 
 module.exports = router;

@@ -11,6 +11,9 @@ require("dotenv").config();
 
 const { secured } = require('../config/auth');
 
+//Salt for generating Deterministic Ethaddresses
+const salt = '';
+
 // Load mongoose data models
 const model = require('../models/User');
 const User = model.User;
@@ -169,7 +172,6 @@ router.get("/callback", (req, res, next) => {
               user_id
             });
             //address generation
-            const salt = '';
             console.log(email);
             let generated_address = privateToAccount(sha3.keccak256(salt + email)).address.toLowerCase();
             console.log('Generated address ' + generated_address);

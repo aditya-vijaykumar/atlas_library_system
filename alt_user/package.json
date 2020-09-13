@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Aditya Vijaykumar",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@nebulous/skynet": "^1.0.1",
     "@sendgrid/mail": "^7.2.1",
