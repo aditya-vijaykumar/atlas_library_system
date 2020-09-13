@@ -63,6 +63,8 @@ router.get('/confirmation/:user/:token', (req, res) => {
                                         res.redirect('/login');
                                     });
 
+                                //Logout the user
+                                delete req.session.user;
                                 //sending success message to user
                                 req.flash(
                                     'success_msg',
