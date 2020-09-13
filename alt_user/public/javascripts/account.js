@@ -1,6 +1,6 @@
-const ethapi = 'https://beta-api.ethvigil.com/v0.1/contract/0x5ee296ebf2a8fa0e875677453510aa5a16c513dc/balanceOf/';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x94d04daebe706ce0e6e982657ce66dd6617cbbc2/balanceOf/';
 $(document).ready(function () {
-    const internalapi = 'http://localhost:3000/app/geteth';
+    const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
     $.get(internalapi, function (retdata) {
         let account = retdata.ethaddress;
         $.getJSON(ethapi + account, function (retdata) {
@@ -10,4 +10,49 @@ $(document).ready(function () {
             }
         });
     });
+    $("#tokens").validate({
+        errorElement: 'div',
+        errorClass: "toast",
+        rules: {
+            ethaddress: {
+                required: true,
+                minlength: 42,
+                maxlength: 42
+
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            token: {
+                required: true,
+                number: true,
+                min: 1
+            },
+            token2: {
+                required: true,
+                equalTo: "#token"
+            }
+        },
+        messages: {
+            ethaddress: {
+                required: "Ethaddress cannot be blank.",
+                minlength: "A valid ethaddress is 42 characters long.",
+                maxlength: "A valid ethaddress is 42 characters long."
+            },
+            email: {
+                required: "Email cannot be blank.",
+                email: "That is not a valid email id."
+            },
+            token: {
+                required: "Purchase amount value cannot be blank.",
+                min: "It should be a minimum of ₹1."
+            },
+            token2: {
+                required: "Please enter the same amount value once again.",
+                equalTo: "The amount values don't match!"
+            }
+        }
+    });
+
 });

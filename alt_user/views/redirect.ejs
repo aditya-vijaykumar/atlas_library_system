@@ -1,36 +1,73 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <img src="/static/images/logo.png" style="height: 30px; width: auto;">
-    <a class="navbar-brand" href="/dashboard">Atlas Library System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<% include ./includes/head-one %>
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/dashboard">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app/browse">Browse</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app/account">Account</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-            <a href="/users/logout" class="btn btn-secondary">Logout</a>
+<body>
+    <div id="page" class="theia-exception">
+        <% include ./includes/user-nav %>
+        <main>
+            <section id="hero_in" class="general">
+                <div class="wrapper">
+                    <div class="container">
+                        <h1 class="fadeInUp"><span></span>Redirect Page</h1>
+                    </div>
+                </div>
+            </section>
+            <!--/hero_in-->
+
+            <div class="bg_color_1">
+
+                <div class="container margin_60_95">
+                    <% include ./partials/messages %>
+                    <div class="main_title_2">
+                        <span><em></em></span>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6 wow text-center" data-wow-offset="150">
+                            <figure class="block-reveal">
+                                <div class="block-horizzontal"></div>
+                                <img src="https://s7.gifyu.com/images/loader.gif" class="img-fluid rounded" alt="">
+                            </figure>
+                            <h3 class="display-5" style="text-align: center;"> You'll be automatically redirected.</h3>
+                            <p class="lead" style="text-align: center;">Waiting for the transaction block to get mined.
+                                <br>This can take a while sometimes.</p>
+                        </div>
+                        <div class="col-lg-3"></div>
+
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/container-->
+            </div>
+            <!--/bg_color_1-->
+
+        </main>
+        <!--/main-->
+
+        <% include ./includes/footer-one %>
+    </div>
+    <!-- COMMON SCRIPTS -->
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/common_scripts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/assets/validate.js"></script>
+    <script src="/static/javascripts/websocket.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/users/logout">Logout</a>
+            </div>
         </div>
     </div>
-</nav>
-<% include ./partials/messages %>
-
-<div class="jumbotron mt-3">
-    <img src="https://s7.gifyu.com/images/loader.gif" class="rounded mx-auto d-block">
-    <h3 class="display-5" style="text-align: center;"> You'll be automatically redirected.</h3>
-    <p class="lead" style="text-align: center;">Waiting for the transaction block to get mined. <br>This can take a while sometimes.</p>
 </div>
-<script src="/static/javascripts/websocket.js"></script>

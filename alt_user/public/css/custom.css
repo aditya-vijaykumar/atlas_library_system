@@ -1,0 +1,69 @@
+/*============================================================================================*/
+/* Your custom styles below */
+/*============================================================================================*/
+
+.open {
+  text-align: center;
+  margin: 1rem;
+}
+
+ul.author-profile li {
+  border-top: none;
+  padding: 12px 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.margin_60_95 {
+  padding-top: 60px;
+  padding-bottom: 95px;
+}
+@media (max-width: 991px) {
+  .margin_60_95 {
+    padding-top: 30px;
+    padding-bottom: 35px;
+  }
+}
+@media (max-width: 575px) {
+  .margin_60_95 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+}
+
+@media (min-width: 992px) {
+  .hidden_desktop {
+    display: none !important;
+  }
+}
+
+.author-button {
+  padding: 1rem 1rem;
+  background-color: #fcc107;
+  border-radius: 1rem;
+  color: #333;
+}
+
+.razorpay-payment-button {
+  border: none;
+  color: #fff;
+  background: #f15a24;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  padding: 15px 30px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+}

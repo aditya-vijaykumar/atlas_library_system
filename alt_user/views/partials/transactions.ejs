@@ -1,7 +1,10 @@
 <% for(var i=0; i < txlog.length; i++) { %>
-  <div class="mb-4">
-    <h5 class="card-title"><strong> <%= txlog[i].Type%> :</strong> &#9830; <%= txlog[i].token%> ALT</h4>
-      <h5><strong>Date:</strong> <%= txlog[i].date %></h5>
-      <h5><strong>Proof:</strong> <a href="https://goerli.etherscan.io/tx/<%= txlog[i].TxHash%>" target="_blank" class="button button-prinary">Click Here</a></h5>
-  </div>
+<tr>
+  <td><%= txlog[i].Type%></td>
+  <td>&#9830; <%= txlog[i].token%> ALT</td>
+  <td><%= txlog[i].date %></td>
+  <td><a href="https://explorer.matic.network/tx/<%= txlog[i].TxHash%>" target="_blank"
+      class="button button-prinary">Proof</a></td>
+</tr>
+
 <% } %>

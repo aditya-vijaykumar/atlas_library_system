@@ -1,0 +1,65 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
+    <a class="navbar-brand" href="/admin/dashboard"><img src="/static/img/logo_2x.png" data-retina="true" alt=""
+            width="149" height="42"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="/admin/dashboard">
+                    <i class="fa fa-fw fa-dashboard"></i>
+                    <span class="nav-link-text">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Books">
+                <a class="nav-link" href="/admin/review">
+                    <i class="fa fa-fw fa-th-list"></i>
+                    <span class="nav-link-text">Books <span class="badge badge-pill badge-primary">6 New</span></span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Approved">
+                <a class="nav-link" href="/admin/approved">
+                    <i class="fa fa-fw fa-check"></i>
+                    <span class="nav-link-text">Approved</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Rejected">
+                <a class="nav-link" href="/admin/rejected">
+                    <i class="fa fa-fw fa-times"></i>
+                    <span class="nav-link-text">Rejected</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Revenue">
+                <a class="nav-link" href="/admin/revenue">
+                    <i class="fa fa-fw fa-money"></i>
+                    <span class="nav-link-text">Revenue</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Logout">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>
+                    <span class="nav-link-text">Logout</span>
+                </a>
+            </li>
+
+        </ul>
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-fw fa-angle-left"></i>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- /Navigation-->

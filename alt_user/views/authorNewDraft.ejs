@@ -1,0 +1,165 @@
+<% include ./includes/head-two %>
+
+<body>
+    <div id="page" class="theia-exception">
+        <% include ./includes/author-nav %>
+
+        <main>
+            <section id="hero_in" class="general">
+                <div class="wrapper">
+                    <div class="container">
+                        <h1 class="fadeInUp"><span></span>New Draft Book</h1>
+                    </div>
+                </div>
+            </section>
+            <!--/hero_in-->
+
+            <div class="bg_color_1">
+                <% include ./partials/messages %>
+                <div class="container margin_60_95">
+                    <div class="row">
+                        <div class="col-lg-3 wow" data-wow-offset="150">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="profile">
+
+                                <div class="">
+                                    <h4>
+                                        Important Disclaimer
+                                    </h4>
+                                    <p>
+                                        Please note submitting this form will not directly upload your Book to the main
+                                        server. It will be stored in a temporary secure location until the admin
+                                        approves or reverts the book. Only once approved, the files are stored
+                                        permanently on decentralized servers.
+                                    </p>
+                                    <p>
+                                        In case the book is reverted, the book cover image and pdf will be automatically
+                                        deleted. We strongly recommend you to locally store a copy of the files.
+                                    </p>
+                                </div>
+
+                                <form method="post" action="/author/bookapproval" enctype="multipart/form-data"
+                                    autocomplete="off">
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="author" name="author"
+                                            value="<%= user.name %>">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Name of the Author</span>
+                                        </label>
+                                    </span>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-12 col-sm-6">
+                                            <span class="input input--filled">
+                                                <input class="input_field" type="email" id="Email" name="Email"
+                                                    value="<%= user.email%>" readonly aria-describedby="emailHelp">
+                                                <label class="input_label">
+                                                    <span class="input__label-content">Email of the Author</span>
+                                                </label>
+                                            </span>
+                                            <small id="emailHelp" class="form-text text-muted">You cannot edit
+                                                email or username.</small>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-12 col-sm-6">
+                                            <span class="input input--filled">
+                                                <input class="input_field" type="text" id="username" name="username"
+                                                    value="<%= profile.username%>" readonly>
+                                                <label class="input_label">
+                                                    <span class="input__label-content">Username of the Author</span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!-- /row -->
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="title" name="title">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Title of the Book</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <textarea class="input_field" id="description" name="description"
+                                            style="height:120px;"></textarea>
+                                        <label class="input_label">
+                                            <span class="input__label-content">Description of the Book</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="genre" name="genre">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Genres of the Book</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="number" id="pages" name="pages" step="1"
+                                            min="1">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Number of Pages</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="number" id="rental" name="rental" step="0.0001"
+                                            min="0">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Rental Rate</span>
+                                        </label>
+                                    </span>
+                                    <div class="input">
+                                        <label class="control-label" for="image_url">Upload cover image</label>
+                                        <input type="file" class="form-control-file" id="coverimage" name="coverimage"
+                                            accept="image/*">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="bookpdf">Upload PDF version of the Book</label>
+                                        <input type="file" class="form-control-file" id="bookpdf" name="bookpdf"
+                                            aria-describedby="fileHelp" accept="application/pdf">
+                                    </div>
+                                    <span class="input">
+                                        <input class="input_field" type="number" id="verify_contact"
+                                            name="verify_contact">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Are you human? 3 + 1 =</span>
+                                        </label>
+                                    </span>
+                                    <div class="mt-3" style="position:relative;">
+                                        <button type="submit" class="btn_1 full-width">Send for approval</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/container-->
+            </div>
+            <!--/bg_color_1-->
+
+        </main>
+        <!--/main-->
+
+        <% include ./includes/footer-two %>
+    </div>
+    <!-- COMMON SCRIPTS -->
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/common_scripts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/assets/validate.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/users/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

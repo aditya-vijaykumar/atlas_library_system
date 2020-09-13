@@ -1,0 +1,137 @@
+<% include ./includes/head-two %>
+
+<body>
+    <div id="page" class="theia-exception">
+        <% include ./includes/author-nav %>
+        <main>
+            <section id="hero_in" class="general">
+                <div class="wrapper">
+                    <div class="container">
+                        <h1 class="fadeInUp"><span></span>Update your profile</h1>
+                    </div>
+                </div>
+            </section>
+            <!--/hero_in-->
+
+            <div class="bg_color_1">
+                <% include ./partials/messages %>
+                <div class="container margin_60_95">
+                    <div class="row">
+                        <div class="col-lg-3 wow" data-wow-offset="150">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="profile">
+                                <h5 class="mb-4">Please crosscheck all fields before submitting.</h5>
+
+
+                                <form method="post" enctype="multipart/form-data" action="/author/updateprofile"  autocomplete="off">
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="fullName" name="fullName"
+                                            value="<%= profile.fullName %>">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Full Name</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="Email" name="Email" readonly
+                                            value="<%= profile.email %>">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Email</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="username" name="username"
+                                            value="<%= profile.username %>" aria-describedby="usernameHelp">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Username</span>
+                                        </label>
+                                    </span>
+                                    <small id="usernameHelp" class="form-text text-muted">Username has to be
+                                        lowercase, alphanumeric with
+                                        '.' or '_' as the only special characters.</small>
+                                    <span class="input">
+                                        <textarea class="input_field" id="bio" name="bio"
+                                            style="height:120px;"><%= profile.bio %></textarea>
+                                        <label class="input_label">
+                                            <span class="input__label-content">Tell us a bit about yourself...</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="location" name="location"
+                                            value="<%= profile.location %>">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Location</span>
+                                        </label>
+                                    </span>
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="twitter" name="twitter"
+                                            aria-describedby="twitterHelp" value="<%= profile.twitter %>">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Your Twitter Handle</span>
+                                        </label>
+                                    </span>
+                                    <small id="twitterHelp" class="form-text text-muted">Please mention only your
+                                        twitter account
+                                        username and not the entire url.</small>
+                                    <span class="input">
+                                        <input class="input_field" type="text" id="website" name="website"
+                                            value="<%= profile.website %>">
+                                        <label class="input_label">
+                                            <span class="input__label-content">Website</span>
+                                        </label>
+                                    </span>
+                                    <div class="form-group">
+                                        <label for="">Your Profile Pic</label>
+                                        <figure><img src="<%= profile.profilePicture%>" alt="Profile Image"
+                                                class="rounded-circle" id="profilePic"
+                                                style="max-width: 10rem; height: auto;"></figure>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileImage">Upload a profile photo</label>
+                                        <input type="file" class="form-control-file" accept="image/*" id="profileImage"
+                                            name="profileImage">
+                                    </div>
+
+                                    <div class="mt-5" style="position:relative;">
+                                        <button type="submit" class="btn_1 full-width">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/container-->
+            </div>
+            <!--/bg_color_1-->
+
+        </main>
+        <!--/main-->
+
+        <% include ./includes/footer-two %>
+    </div>
+    <!-- COMMON SCRIPTS -->
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/common_scripts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/assets/validate.js"></script>
+    <script src="/static/javascripts/authorProfile.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/users/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

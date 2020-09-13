@@ -1,0 +1,78 @@
+<% include ./includes/head-one %>
+
+<body>
+    <div id="page" class="theia-exception">
+        <% include ./includes/user-nav %>
+        <main>
+            <section id="hero_in" class="general">
+                <div class="wrapper">
+                    <div class="container">
+                        <h1 class="fadeInUp"><span></span>Enabling Author Account</h1>
+                    </div>
+                </div>
+            </section>
+            <!--/hero_in-->
+
+            <div class="bg_color_1">
+                <% include ./partials/messages %>
+                <div class="container margin_120_95">
+                    <div class="main_title_2">
+                        <span><em></em></span>
+                        <h2>Become an Author</h2>
+                        <p>Now anyone can upload their books!</p>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-lg-6 wow" data-wow-offset="150">
+                            <figure class="block-reveal">
+                                <div class="block-horizzontal"></div>
+                                <img src="/static/img/Artboard4.png" class="img-fluid" alt="join-als-author-family">
+                            </figure>
+                        </div>
+                        <div class="col-lg-5">
+                            <h3 class="display-5"> Are you sure you want to upgrade to Author's account?</h3>
+                            <p>With an author's account you can upload books and make money when users rent it.
+                                <br>Click on the button below if you wish to do so, and we will email you a confirmation
+                                link to complete the process.</p>
+                            <a href="/dashboard" class="btn_1 rounded" style="background-color: #dc3545">Back to
+                                Dashboard</a>
+                            <a href="/author-enroll" class="btn_1 rounded" style="background-color: #27c24c">Sign
+                                Up!</a>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/container-->
+            </div>
+            <!--/bg_color_1-->
+
+        </main>
+        <!--/main-->
+        <% include ./includes/footer-one %>
+    </div>
+    <!-- COMMON SCRIPTS -->
+    <script src="/static/js/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/common_scripts.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/assets/validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="/static/javascripts/account.js"></script>
+</body>
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/users/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
