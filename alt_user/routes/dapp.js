@@ -20,8 +20,8 @@ const transaction = model.Transactions;
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // api values
-const contract_address = "0xd475d181a3217b84073a5d31762c30fae955c014";
-const book_address = "0x0770cbb571ad16d17559add131ad5ce5ef47e8fc";
+const contract_address = "";
+const book_address = "";
 const api_key = process.env.MATICVIGIL_API_KEY;
 const rest_api_endpoint = 'https://mainnet-api.maticvigil.com/v1.0';
 let headers = {

@@ -3,7 +3,7 @@ var wsTries = 5;
 var timeout = 1000;
 var wsSessionID;
 
-initWS('37982ccf-91c4-4c96-b8a1-261708486300'); //pass the read key.
+initWS(''); //pass the read key.
 
 function initWS(key) {
     console.log('tries', wsTries);
@@ -48,8 +48,8 @@ function initWS(key) {
                 if (data.type == 'event') {
                     console.log('Event:', data);
                     $(document).ready(function () {
-                        if (data.event_name == 'AccessGranted') { window.location.replace("https://atlas.adityavijaykumar.me/dashboard"); }
-                        if (data.event_name == 'UpdateBalance') { window.location.replace("https://atlas.adityavijaykumar.me/app/account"); }
+                        if (data.event_name == 'AccessGranted') { window.location.replace("<url>/dashboard"); }
+                        if (data.event_name == 'UpdateBalance') { window.location.replace("<url>/app/account"); }
                     });
                 }
                 return;

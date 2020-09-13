@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $('div.mainbook').hide();
-    const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x0770cbb571ad16d17559add131ad5ce5ef47e8fc/getUserAccess/';
-    const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
-    const internal = 'https://atlas.adityavijaykumar.me/app/thepdf';
+    const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/<BookAccessContract>/getUserAccess/';
+    const internalapi = '<url>/app/geteth';
+    const internal = '<url>/app/thepdf';
     let bookid = window.location.pathname.replace('/app/ebook/', '');
 
     $.get(internalapi, function (retdata) {

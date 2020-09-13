@@ -1,6 +1,6 @@
-const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0xd475d181a3217b84073a5d31762c30fae955c014/getAuthorBalance/';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/<PrimaryContract>/getAuthorBalance/';
 $(document).ready(function () {
-    const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
+    const internalapi = '<url>/app/geteth';
     $.get(internalapi, function (retdata) {
         let account = retdata.ethaddress;
         $.getJSON(ethapi + account, function (retdata) {

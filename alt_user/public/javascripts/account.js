@@ -1,6 +1,6 @@
-const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x94d04daebe706ce0e6e982657ce66dd6617cbbc2/balanceOf/';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/<ERC20Contract>/balanceOf/';
 $(document).ready(function () {
-    const internalapi = 'https://atlas.adityavijaykumar.me/app/geteth';
+    const internalapi = '<url>/app/geteth';
     $.get(internalapi, function (retdata) {
         let account = retdata.ethaddress;
         $.getJSON(ethapi + account, function (retdata) {

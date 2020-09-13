@@ -2,7 +2,7 @@ $(document).ready(function () {
     setTimeout(intcall, 3000);
     function intcall() {
         var book_id = window.location.pathname.replace("/admin/", '');
-        const intapi = 'https://atlas.adityavijaykumar.me/admin/pdf/' + book_id;
+        const intapi = '<url>/admin/pdf/' + book_id;
         var location;
         $.get(intapi, function (retdata) {
             location = retdata.location;

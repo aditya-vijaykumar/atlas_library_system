@@ -3,7 +3,7 @@ $(document).ready(function () {
     function intcall() {
         var book_id = window.location.pathname.replace("/author/", '');
         console.log(book_id);
-        const intapi = 'https://atlas.adityavijaykumar.me/author/pdf/' + book_id;
+        const intapi = '<url>/author/pdf/' + book_id;
         var location;
         $.get(intapi, function (retdata) {
             location = retdata.location;

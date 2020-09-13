@@ -26,7 +26,7 @@ const Author = models.Author;
 const Token = models.Token;
 
 //api values
-let contract_address = "0xd475d181a3217b84073a5d31762c30fae955c014";
+let contract_address = "";
 let api_key = process.env.MATICVIGIL_API_KEY;
 let rest_api_endpoint = 'https://mainnet-api.maticvigil.com/v1.0';
 let headers = { headers: { 'accept': 'application/json', 'Content-Type': 'application/json', 'X-API-KEY': api_key } };

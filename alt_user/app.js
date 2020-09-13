@@ -15,7 +15,7 @@ require('./config/local')(passport);
 
 // DB Config
 const db = 'mongodb://localhost:27017/test';
-const dbonline = require('./config/dbKeys').mongoURI;
+const dbonline = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
 mongoose

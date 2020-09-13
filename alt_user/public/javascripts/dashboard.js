@@ -1,5 +1,5 @@
-const intapi = 'https://atlas.adityavijaykumar.me/app/getbookid';
-const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x0770cbb571ad16d17559add131ad5ce5ef47e8fc/getUserAccess/';
+const intapi = '<url>/app/getbookid';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/<BookAccessContract>/getUserAccess/';
 $(document).ready(function () {
     var data;
     $.get(intapi, function (retdata) {

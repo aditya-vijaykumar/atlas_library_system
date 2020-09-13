@@ -1,4 +1,4 @@
-const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/0x94d04daebe706ce0e6e982657ce66dd6617cbbc2/balanceOf/0xd475d181a3217b84073a5d31762c30fae955c014';
+const ethapi = 'https://mainnet-api.maticvigil.com/v1.0/contract/<ERC20Contract>/balanceOf/<PrimaaryContract>';
 $(document).ready(function () {
     $.getJSON(ethapi, function (retdata) {
         if (retdata.success) {

@@ -8,6 +8,7 @@ This is the nodejs web application code of the project following the standard fi
 - Edit the `/config/keys.js` and include your MongoDB password.
 - Specify a 'salt' of your choice in `/routes/index.js` file at line number `15` . This will be used to deterministically generate the ethaddress.
 - Modify all the javascript files in `/public/javascripts` and `/routes` with the contract addresses of the smart contracts.
+- Pass your MaticVigil websocket read key in the file `/public/javascripts/websocket.js`.
 
 Simply run npm install after doing all of the above and you should have it all working.
 
