@@ -36,7 +36,7 @@
 		navbar: {
 			title: 'MENU'
 		},
-		navbars: [{ position: 'bottom', content: ['<a href="#0">© 2017 Udema</a>'] }]
+		navbars: [{ position: 'bottom', content: ['<a href="#0">© 2020 Atlas Library System </a>'] }]
 	},
 		{
 			// configuration
