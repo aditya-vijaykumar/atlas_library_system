@@ -16,19 +16,19 @@ const AuthorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  role:{
+  role: {
     type: String,
-    default: "author" 
+    default: "author"
   },
-  isVerified: { 
-    type: Boolean, 
-    default: false 
+  isVerified: {
+    type: Boolean,
+    default: false
   },
-  passwordResetToken:{
+  passwordResetToken: {
     type: String
   },
   passwordResetExpires: {
-    type:Date
+    type: Date
   },
   date: {
     type: Date,
@@ -66,37 +66,37 @@ const DraftBookSchema = new mongoose.Schema({
   author_username: {
     type: String
   },
-  book_url : {
+  book_url: {
     type: String
   },
-  book_key : {
+  book_key: {
     type: String
   },
-  book_location :{
+  book_location: {
     type: String
   },
-  book_rental_price : {
-    type : Number
+  book_rental_price: {
+    type: Number
   },
-  author_ethaddress : {
-    type : String
+  author_ethaddress: {
+    type: String
   },
-  admin_approve_request :{
+  admin_approve_request: {
     type: Boolean,
-    default : false
+    default: false
   },
-  admin_product_id : {
-    type : Number
+  admin_product_id: {
+    type: Number
   },
-  admin_revert :{
-    type: Boolean, 
-    default : false
+  admin_revert: {
+    type: Boolean,
+    default: false
   },
-  admin_approved :{
-    type: Boolean, 
-    default : false
+  admin_approved: {
+    type: Boolean,
+    default: false
   },
-  admin_revert_msg : {
+  admin_revert_msg: {
     type: String
   },
   date: {
@@ -108,66 +108,91 @@ const DraftBookSchema = new mongoose.Schema({
 });
 
 const TokenSchema = new mongoose.Schema({
-  _userId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    required: true, 
-    ref: 'demo-author' 
+  _userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'demo-author'
   },
-  token: { 
-    type: String, 
-    required: true 
+  token: {
+    type: String,
+    required: true
   },
-  createdAt: { 
-    type: Date, 
-    required: true, 
-    default: Date.now, 
-    expires: 43200 
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+    expires: 43200
   }
 }, {
   collection: 'authortokens'
 });
 
 const AuthorProfileSchema = new mongoose.Schema({
-    fullName: {
-      type: String
-    },
-    email: {
-      type: String,
-      required: true
-    },
-    username: {
-      type: String
-    },
-    bio: {
-      type: String,
-    },
-    location : {
-        type : String,
-    },
-    twitter : {
-        type : String,
-    },
-    website : {
-        type : String,
-    },
-    profilePicture : {
-        type: String,
-    },
-    date: {
-      type: Date,
-      default: Date.now
-    }
-  }, {
-    collection: 'authorprofiles'
-  });
+  fullName: {
+    type: String
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String
+  },
+  bio: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  twitter: {
+    type: String,
+  },
+  website: {
+    type: String,
+  },
+  profilePicture: {
+    type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+}, {
+  collection: 'authorprofiles'
+});
+
+const WithdrawSchema = new mongoose.Schema({
+  token: {
+    type: Number
+  },
+  Type: {
+    type: String,
+    default: "Debit"
+  },
+  TxHash: {
+    type: String
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+}, {
+  collection: 'withdrawals'
+});
 
 const Author = mongoose.model('Author', AuthorSchema);
 const AuthorProfile = mongoose.model('AuthorProfile', AuthorProfileSchema);
 const Token = mongoose.model('Token', TokenSchema);
 const DraftBook = mongoose.model('DraftBook', DraftBookSchema);
+const Withdrawal = mongoose.model('withdrawals', WithdrawSchema);
 module.exports = {
   Author,
   AuthorProfile,
   Token,
-  DraftBook
+  DraftBook,
+  Withdrawal
 }

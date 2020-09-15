@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
+const axios = require('axios');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs-extra');
 require("dotenv").config();
@@ -11,9 +12,22 @@ const models = require('../models/User');
 const Author = model.Author;
 const AuthorProfile = model.AuthorProfile;
 const DraftBook = model.DraftBook;
+const Withdrawal = model.Withdrawal;
 const Token = model.Token;
 const User = models.User;
 const Books = models.Books;
+
+// api values
+const contract_address = "0xd475d181a3217b84073a5d31762c30fae955c014";
+const api_key = process.env.MATICVIGIL_API_KEY;
+const rest_api_endpoint = 'https://mainnet-api.maticvigil.com/v1.0';
+let headers = {
+    headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-API-KEY': api_key
+    }
+};
 
 //SENDGRID EMAIL API KEY
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -23,6 +37,7 @@ const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
 
 //Multer Uploads
 const { uploadDrafts } = require('../config/aws');
+const { Withdrawals } = require('../models/Author');
 
 //Various Routes
 router.get('/confirmation/:user/:token', (req, res) => {
@@ -65,6 +80,7 @@ router.get('/confirmation/:user/:token', (req, res) => {
 
                                 //Logout the user
                                 delete req.session.user;
+                                req.logOut();
                                 //sending success message to user
                                 req.flash(
                                     'success_msg',
@@ -214,7 +230,16 @@ router.get('/book', ensureAuthenticated, (req, res) => {
         .catch(err => console.error(err));
 });
 router.get('/account', ensureAuthenticated, (req, res) => {
-    res.render('authorAccount', { user: req.session.user });
+
+    Withdrawal.find({ email: req.session.user.email })
+        .then(txlog => {
+            res.render('authorAccount', { user: req.session.user, txlog: txlog })
+        })
+        .catch(error => {
+            console.log(error);
+            req.flash('error_tx', 'Invalid request, please try again later.');
+            res.redirect('/dashboard');
+        });
 });
 
 
@@ -418,6 +443,65 @@ router.get('/:bookid', ensureAuthenticated, (req, res) => {
         req.flash('error_msg', 'Unable to process your request.');
         res.redirect('/author/dashboard');
     }
+})
+
+router.post('/payment', ensureAuthenticated, (req, res) => {
+    const email = req.user._json.email;
+    const token = req.body.token;
+    const ethaddress = req.session.user.ethaddress;
+    let valued = (token * 10000);
+    let method_args = {
+        'Author': ethaddress,
+        'amount': valued
+    };
+    let method_api_endpoint = rest_api_endpoint + '/contract/' + contract_address + '/Redirect';
+    axios.post(method_api_endpoint, method_args, headers)
+        .then((response) => {
+            var success = response.data.success;
+            var txHash = response.data.data[0].txHash;
+            console.log('THE BOOLEAN: ' + success);
+            if (success) {
+                console.log('Success message trigerred');
+                const newWithdrawal = new Withdrawal({
+                    token: token,
+                    TxHash: txHash,
+                    email
+                });
+                newWithdrawal.save()
+                    .then(withdrawal => {
+                        console.log('Successfully recorded withdrawal');
+                    })
+                    .catch(err => {
+                        console.log('Failed to record withdrawal');
+                        console.log(err);
+                    });
+
+                //mail
+                const msg = {
+                    to: email,
+                    from: 'atlas@adityavijaykumar.me',
+                    subject: 'Withdrawal Receipt | Atlas Library System',
+                    html: '<strong>Hello,<br>' + 'Thank you for choosing Atlas Library System for publishing your book.</strong> <br> \n\n This is an auto generated email regarding your recent withdrawal order. \n\n' +
+                        '\n<br>You have withdrawn: ' + token + ' ALT or ' + token * 10000 + ' INR.' +
+                        '\n<br><br>You can access more details by logging into your account on the website.' +
+                        '\n<br><br>Regards, <br>\n\n Team Atlas Library System',
+                };
+                sgMail.send(msg);
+
+                req.flash('success_tx', 'Your withdrawal of ' + (token) + ' ALT tokens is being processed, transaction pending.');
+                req.flash('link', 'https://explorer.matic.network/tx/' + txHash);
+                res.redirect('/app/redirect');
+            }
+            if (!success) {
+                req.flash('error_tx', 'Your withdrawal of ALT tokens failed, please try again later.');
+                res.redirect('/author/dashboard');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            req.flash('error_tx', 'Your withdrawal of ALT tokens failed, please try again later.');
+            res.redirect('/author/dashboard');
+        });
 })
 
 async function usernameCheck(username, email) {

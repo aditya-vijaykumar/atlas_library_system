@@ -47,7 +47,7 @@
                 you have sufficient balance. </p>
               <p class="nopadding">You cannot modify the Ethaddress or email.</p>
               <div id="message-contact"></div>
-              <form action="/payment" method="POST" id="transfer" autocomplete="off">
+              <form action="/author/payment" method="POST" id="transfer" autocomplete="off">
 
                 <span class="input">
                   <input class="input_field" type="text" id="ethaddress" name="ethaddress" value="<%= user.ethaddress%>"
@@ -83,7 +83,28 @@
 
 
               <!--wrapper_indent -->
+              <hr class="styled_2">
+              <div class="indent_title_in">
+                <i class="pe-7s-menu"></i>
+                <h3>Past withdrawals</h3>
+                <p>Click on the proof for Matic Explorer page.</p>
+              </div>
+              <div class="wrapper_indent">
 
+                <table class="table table-responsive table-striped add_bottom_30">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Token Value</th>
+                      <th>Date</th>
+                      <th>Proof</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% include ./partials/withdrawals %>
+                  </tbody>
+                </table>
+              </div>
               <!--wrapper_indent -->
             </div>
           </div>

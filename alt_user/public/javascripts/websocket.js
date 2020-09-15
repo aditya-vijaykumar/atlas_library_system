@@ -50,6 +50,7 @@ function initWS(key) {
                     $(document).ready(function () {
                         if (data.event_name == 'AccessGranted') { window.location.replace("https://atlas.adityavijaykumar.me/dashboard"); }
                         if (data.event_name == 'UpdateBalance') { window.location.replace("https://atlas.adityavijaykumar.me/app/account"); }
+                        if (data.event_name == 'WithdrawEarnings') { window.location.replace("https://atlas.adityavijaykumar.me/author/account"); }
                     });
                 }
                 return;
